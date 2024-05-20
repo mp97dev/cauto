@@ -1,3 +1,4 @@
+# UI
 - PAGINA LOGIN
 	- ruoli: 
 		- visitatore
@@ -46,33 +47,35 @@
 	-> preventivi memorizzati x 20 gg, entro la data si può pagare acconto
 		-> data consegna = 1 mese + (10 gg x n. optional) 
 		
-DATI DA SALVARE:
-	- macchine:
-		- modelli raggruppati per marca:
-			- nome univoco
-			- descrizione
-			- dimensioni (altezza, lunghezza, pesp, vol. bagagliaio)
-			- motore + alimentazione (benzina, diesel, etc.)
-			- immagini (div. punti di vista e colori)
-			- possibili optional
-				- colore
-				- ruota di scorta
-				- ruotino di scorta
-				- vetri oscurati
-				- interni in pelle
-				- ruote con dimensione maggiore
-	- sedi:
-		- nome
-		- indirizzo
-		- ordini
-	- preventivi
-		- modello
-		- optional scelti
-		- valutazione usato 
-			si -> preventivo gestito dal personale
-			no -> continua
-		- sconto
-		- acquisto
-			si -> luogo ritiro -> data consegna
-			no -> sta in memoria x 20gg
-	
+# DATI DA SALVARE:
+- macchine:
+	- modelli raggruppati per marca:
+		- nome univoco
+		- descrizione
+		- dimensioni (altezza, lunghezza, pesp, vol. bagagliaio)
+		- motore + alimentazione (benzina, diesel, etc.)
+		- immagini (div. punti di vista e colori)
+		- possibili optional
+			- colore
+			- ruota di scorta
+			- ruotino di scorta
+			- vetri oscurati
+			- interni in pellex
+			- ruote con dimensione maggiore
+- sedi:
+	- nome
+	- indirizzo
+	- ordini
+- preventivi
+	- modello
+	- optional scelti
+	- valutazione usato 
+		si -> preventivo gestito dal personale
+		no -> continua
+	- sconto
+	- acquisto
+		si -> luogo ritiro -> data consegna
+		no -> sta in memoria x 20gg
+# use case
+- Mario
+	- deve poter elaborare un preventivo potendo scegliere modello 
