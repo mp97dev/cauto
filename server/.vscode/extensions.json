@@ -1,0 +1,18 @@
+{
+    "recommendations": [
+        "qiumingge.cpp-check-lint",
+        "aaron-bond.better-comments",
+        "ms-vscode.cpptools"
+    ],
+    "unwantedRecommendations": [
+        "ms-vscode.cpptools-extension-pack",
+        "ms-vscode-remote.remote-containers",
+        "ms-azuretools.vscode-docker",
+        "davidanson.vscode-markdownlint",
+        "github.vscode-pull-request-github",
+        "eamodio.gitlens",
+        "vscodevim.vim",
+        "googlecloudtools.cloudcode",
+        "ms-kubernetes-tools.vscode-kubernetes-tools"
+    ]
+}
