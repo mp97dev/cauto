@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-prospect-page',
+  standalone: true,
+  imports: [],
   templateUrl: './prospect-page.component.html',
-  styleUrls: ['./prospect-page.component.scss']
+  styleUrl: './prospect-page.component.scss'
 })
-export class ProspectPageComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class ProspectPageComponent {
 
 }

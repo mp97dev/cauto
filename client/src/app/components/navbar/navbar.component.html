@@ -1,0 +1,13 @@
+<nav class="w-full p-4 h-fit flex items-center gap-4 bg-purple-800 text-white">
+    <!-- <img src="logo.png" alt="Cauto logo"> -->
+    
+    <a routerLink="/" routerLinkActive="active">Home</a> 
+
+    @if((auth.user | async)?.loggedIn) {
+        <a routerLink="/prospect" routerLinkActive="active"></a> 
+        <a routerLink="/admin/evaluations" routerLinkActive="active"></a> 
+        <a routerLink="/admin/branches" routerLinkActive="active"></a> 
+    }
+
+    <button routerLink="/login" class="bg-white text-purple-800 p-2 rounded-md">login</button>
+</nav>
