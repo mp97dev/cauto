@@ -1,0 +1,17 @@
+[
+    {
+        "password": "password123",
+        "role": "impiegati",
+        "username": "alice"
+    },
+    {
+        "password": "securepassword",
+        "role": "segreteria",
+        "username": "bob"
+    },
+    {
+        "password": "password123",
+        "role": "visit",
+        "username": "alice_visit"
+    }
+]

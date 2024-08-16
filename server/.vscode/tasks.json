@@ -8,7 +8,7 @@
                 "-g",
                 "${workspaceFolder}/main.cpp",
                 "-o",
-                "/opt/eaziu/ethidea",
+                "${workspaceFolder}/o",
                 "-std=c++17",
                 "-lcurl",
                 "-lpqxx",

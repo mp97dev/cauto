@@ -104,18 +104,6 @@ namespace kernel
         return oss.str();
     }
 
-    inline bool validate_datetime(const std::string &s)
-    {
-        // static const std::regex reg("^([0-9]{4}-[0-9]{2}-[0-9]{2})T([0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{1,})Z$", std::regex_constants::icase); // 2023-04-15T8:30:00.000Z
-        static const std::regex reg("^([0-9]{4}-[0-9]{2}-[0-9]{2})([ ]{1})([0-9]{2}:[0-9]{2}:[0-9]{2})$", std::regex_constants::icase); // 2023-04-15 8:30:00
-        return std::regex_match(s, reg);
-    }
-    inline bool validate_date(const std::string &s)
-    {
-        static const std::regex reg("^([0-9]{4}-[0-9]{2}-[0-9]{2})$", std::regex_constants::icase); // 2023-04-15
-        return std::regex_match(s, reg);
-    }
-
     inline void write_file(std::string filename, const std::string &file, const std::string folder_path)
     {
         std::fstream uzer_file;

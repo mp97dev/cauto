@@ -1,0 +1,137 @@
+{
+    "Ford": [
+        {
+            "descrizione": "Compatta e dinamica, perfetta per la città.",
+            "dimensioni": {
+                "altezza": "1476 mm",
+                "lunghezza": "4068 mm",
+                "peso": "1140 kg",
+                "volume_bagagliaio": "292 L"
+            },
+            "immagini": {
+                "colori": [
+                    "fiesta_giallo.jpg",
+                    "fiesta_rosso.jpg",
+                    "fiesta_grigio.jpg"
+                ],
+                "vista_frontale": "fiesta_frontale.jpg",
+                "vista_laterale": "fiesta_laterale.jpg",
+                "vista_posteriore": "fiesta_posteriore.jpg"
+            },
+            "motore": {
+                "alimentazione": "Benzina",
+                "tipo": "1.0L EcoBoost"
+            },
+            "nome_univoco": "Ford Fiesta 2024",
+            "optionals": {
+                "colore": [
+                    "Giallo",
+                    "Rosso",
+                    "Grigio",
+                    "Blu"
+                ],
+                "interni_in_pelle": false,
+                "ruota_di_scorta": true,
+                "ruote_maggiorate": {
+                    "dimensioni_disponibili": [
+                        "16\"",
+                        "17\""
+                    ]
+                },
+                "ruotino_di_scorta": true,
+                "vetri_oscurati": false
+            },
+            "prezzo_base": "21000"
+        }
+    ],
+    "Toyota": [
+        {
+            "descrizione": "Berlina compatta con ottima efficienza energetica e affidabilità.",
+            "dimensioni": {
+                "altezza": "1455 mm",
+                "lunghezza": "4630 mm",
+                "peso": "1315 kg",
+                "volume_bagagliaio": "470 L"
+            },
+            "immagini": {
+                "colori": [
+                    "corolla_rosso.jpg",
+                    "corolla_blu.jpg",
+                    "corolla_bianco.jpg"
+                ],
+                "vista_frontale": "corolla_frontale.jpg",
+                "vista_laterale": "corolla_laterale.jpg",
+                "vista_posteriore": "corolla_posteriore.jpg"
+            },
+            "motore": {
+                "alimentazione": "Ibrida",
+                "tipo": "1.8L 4 cilindri"
+            },
+            "nome_univoco": "Toyota Corolla 2024",
+            "optionals": {
+                "colore": [
+                    "Rosso",
+                    "Blu",
+                    "Bianco",
+                    "Nero"
+                ],
+                "interni_in_pelle": true,
+                "ruota_di_scorta": true,
+                "ruote_maggiorate": {
+                    "dimensioni_disponibili": [
+                        "17\"",
+                        "18\"",
+                        "19\""
+                    ]
+                },
+                "ruotino_di_scorta": true,
+                "vetri_oscurati": true
+            },
+            "prezzo_base": "33000"
+        },
+        {
+            "descrizione": "SUV spazioso con trazione integrale e tecnologia avanzata.",
+            "dimensioni": {
+                "altezza": "1690 mm",
+                "lunghezza": "4600 mm",
+                "peso": "1630 kg",
+                "volume_bagagliaio": "580 L"
+            },
+            "immagini": {
+                "colori": [
+                    "rav4_nero.jpg",
+                    "rav4_argento.jpg",
+                    "rav4_verde.jpg"
+                ],
+                "vista_frontale": "rav4_frontale.jpg",
+                "vista_laterale": "rav4_laterale.jpg",
+                "vista_posteriore": "rav4_posteriore.jpg"
+            },
+            "motore": {
+                "alimentazione": "Ibrida",
+                "tipo": "2.5L 4 cilindri"
+            },
+            "nome_univoco": "Toyota RAV4 2024",
+            "optionals": {
+                "colore": [
+                    "Nero",
+                    "Argento",
+                    "Verde",
+                    "Bianco Perla"
+                ],
+                "interni_in_pelle": true,
+                "ruota_di_scorta": true,
+                "ruote_maggiorate": {
+                    "dimensioni_disponibili": [
+                        "18\"",
+                        "19\"",
+                        "20\""
+                    ]
+                },
+                "ruotino_di_scorta": false,
+                "vetri_oscurati": true
+            },
+            "prezzo_base": "41700"
+        }
+    ]
+}
