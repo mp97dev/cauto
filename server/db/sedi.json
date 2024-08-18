@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nome": "AutoStar Milano",
+        "indirizzo": "Via Roma 123, Milano"
+    },
+    {
+        "id": 2,
+        "nome": "TopCars Torino",
+        "indirizzo": "Corso Vittorio Emanuele 101, Torino"
+    },
+    {
+        "id": 3,
+        "nome": "DriveNow Firenze",
+        "indirizzo": "Piazza della Repubblica 1, Firenze"
+    },
+    {
+        "id": 4,
+        "nome": "LuxuryMotors Roma",
+        "indirizzo": "Via Veneto 50, Roma"
+    },
+    {
+        "id": 5,
+        "nome": "FastAuto Napoli",
+        "indirizzo": "Via Toledo 10, Napoli"
+    },
+    {
+        "id": 6,
+        "nome": "SuperCars Bologna",
+        "indirizzo": "Via Indipendenza 88, Bologna"
+    },
+    {
+        "id": 7,
+        "nome": "AutoElite Venezia",
+        "indirizzo": "Piazza San Marco 5, Venezia"
+    },
+    {
+        "id": 8,
+        "nome": "MotorCity Palermo",
+        "indirizzo": "Via Maqueda 22, Palermo"
+    }
+]

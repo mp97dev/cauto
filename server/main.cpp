@@ -2,12 +2,13 @@
 #include "server.h"
 #include "cauto/user_management/user_management.h"
 #include "cauto/macchine_management/macchine_management.h"
+#include "cauto/sede.h"
 
 #include <functional>
 
 int main(int argc, char *argv[])
 {
-    //* test signup and login
+    //* test signup and login ----------------------------------------------------------------
     // cauto::user_management userManager;
     // bool res = userManager.signup("alice_visit", "password123");
     // std::cout << res << std::endl;
@@ -16,7 +17,7 @@ int main(int argc, char *argv[])
     // res = userManager.login("alice_", "password123");
     // std::cout << res << std::endl;
 
-    //* test creazione rimozione auto
+    //* test creazione rimozione auto --------------------------------------------------------
     // cauto::macchine_management database;
     // database.get_all();
 
@@ -37,5 +38,13 @@ int main(int argc, char *argv[])
     //* rimozione
     // database.remove("Toyota", "Toyota Yaris 2024");
     // database.save();
+
+    //* get sedi ---------------------------------------------------------------------------
+    // cauto::sedi_management db;
+    // db.load_all();
+
+    // for (const auto& c : db.get_all()) {
+    //     std::cout << "ID: " << c.id << "\nNome: " << c.nome << "\nIndirizzo: " << c.indirizzo << "\n\n";
+    // }
 
 }
