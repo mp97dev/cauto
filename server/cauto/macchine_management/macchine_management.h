@@ -12,12 +12,18 @@ namespace cauto
         std::map<std::string, std::vector<cauto::macchina>> marche_auto;
         std::string file_path = "./db/macchine.json";
 
-        void get_all()
+        json get_all_as_json()
         {
             std::ifstream file(file_path);
             json j;
             if (file.is_open())
                 file >> j;
+            return j;
+        }
+
+        void get_all()
+        {
+            json j = get_all_as_json();
 
             for (const auto &[brand, models] : j.items())
             {
@@ -48,21 +54,25 @@ namespace cauto
             file << j.dump(4);
         }
 
-        bool remove(const std::string& brand, const std::string& model_name) {
-        auto it = marche_auto.find(brand);
-        if (it != marche_auto.end()) {
-            auto& models = it->second;
-            auto remove_it = std::remove_if(models.begin(), models.end(),
-                [&model_name](const cauto::macchina& model) {
-                    return model.nome_univoco == model_name;
-                });
+        bool remove(const std::string &brand, const std::string &model_name)
+        {
+            auto it = marche_auto.find(brand);
+            if (it != marche_auto.end())
+            {
+                auto &models = it->second;
+                auto remove_it = std::remove_if(models.begin(), models.end(),
+                                                [&model_name](const cauto::macchina &model)
+                                                {
+                                                    return model.nome_univoco == model_name;
+                                                });
 
-            if (remove_it != models.end()) {
-                models.erase(remove_it, models.end());
-                return true;
+                if (remove_it != models.end())
+                {
+                    models.erase(remove_it, models.end());
+                    return true;
+                }
             }
+            return false;
         }
-        return false;
-    }
     };
 }

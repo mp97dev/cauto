@@ -24,23 +24,26 @@ namespace cauto
 
         int id;
         cauto::macchina macchina;
-        std::vector<std::string> optionals;
+        std::vector<cauto::optional> optionals;
         cauto::usato usato;
         cauto::user utente;
         double sconto;
         double prezzo_finale;
-        std::time_t data_creazione;
+        std::string data_creazione;
         double acconto;
         sede luogo_ritiro;
-        std::time_t data_scadenza;
-        std::time_t data_consegna;
+        std::string data_scadenza;
+        std::string data_consegna;
 
         json toJson() const
         {
+            json opt = json::array();
+            for (cauto::optional o : optionals)
+                opt.push_back(o.toJson());
             return json{
                 {"id", id},
                 {"macchina", macchina.toJson()},
-                {"optionals", optionals},
+                {"optionals", opt},
                 {"oggetto", usato.toJson()},
                 {"sconto", sconto},
                 {"prezzo_finale", prezzo_finale},
@@ -56,7 +59,12 @@ namespace cauto
         {
             id = j.at("id").get<int>();
             macchina.fromJson(j.at("macchina").get<std::string>());
-            optionals = j.at("optionals").get<std::vector<std::string>>();
+            for (const auto &item : j.at("optionals"))
+            {
+                cauto::optional opt;
+                opt.fromJson(item);
+                optionals.push_back(opt);
+            }
             usato.fromJson(j.at("usato").get<std::string>());
             sconto = j.at("sconto").get<double>();
             prezzo_finale = j.at("prezzo_finale").get<double>();

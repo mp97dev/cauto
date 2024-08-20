@@ -23,24 +23,37 @@
                 "tipo": "1.0L EcoBoost"
             },
             "nome_univoco": "Ford Fiesta 2024",
-            "optionals": {
-                "colore": [
-                    "Giallo",
-                    "Rosso",
-                    "Grigio",
-                    "Blu"
-                ],
-                "interni_in_pelle": false,
-                "ruota_di_scorta": true,
-                "ruote_maggiorate": {
-                    "dimensioni_disponibili": [
-                        "16\"",
-                        "17\""
-                    ]
+            "optionals": [
+                {
+                    "nome": "colore",
+                    "opzioni": [
+                        "Rosso",
+                        "Giallo",
+                        "Bianco",
+                        "Grigio"
+                    ],
+                    "prezzo": 1000.0
                 },
-                "ruotino_di_scorta": true,
-                "vetri_oscurati": false
-            },
+                {
+                    "nome": "ruota di scorta",
+                    "opzioni": [],
+                    "prezzo": 300.0
+                },
+                {
+                    "nome": "ruote maggiorate",
+                    "opzioni": [
+                        "17\"",
+                        "18\"",
+                        "19\""
+                    ],
+                    "prezzo": 400.0
+                },
+                {
+                    "nome": "ruotino di scorta",
+                    "opzioni": [],
+                    "prezzo": 150.0
+                }
+            ],
             "prezzo_base": "21000"
         }
     ],
@@ -68,25 +81,47 @@
                 "tipo": "1.8L 4 cilindri"
             },
             "nome_univoco": "Toyota Corolla 2024",
-            "optionals": {
-                "colore": [
-                    "Rosso",
-                    "Blu",
-                    "Bianco",
-                    "Nero"
-                ],
-                "interni_in_pelle": true,
-                "ruota_di_scorta": true,
-                "ruote_maggiorate": {
-                    "dimensioni_disponibili": [
-                        "17\"",
-                        "18\"",
-                        "19\""
-                    ]
+            "optionals": [
+                {
+                    "nome": "colore",
+                    "opzioni": [
+                        "Rosso",
+                        "Blu",
+                        "Bianco",
+                        "Nero"
+                    ],
+                    "prezzo": 200.0
                 },
-                "ruotino_di_scorta": true,
-                "vetri_oscurati": true
-            },
+                {
+                    "nome": "interni in pelle",
+                    "opzioni": [],
+                    "prezzo": 2000.0
+                },
+                {
+                    "nome": "ruota di scorta",
+                    "opzioni": [],
+                    "prezzo": 300.0
+                },
+                {
+                    "nome": "ruote maggiorate",
+                    "opzioni": [
+                        "18\"",
+                        "19\"",
+                        "20\""
+                    ],
+                    "prezzo": 400.0
+                },
+                {
+                    "nome": "vetri oscurati",
+                    "opzioni": [],
+                    "prezzo": 500.0
+                },
+                {
+                    "nome": "ruotino di scorta",
+                    "opzioni": [],
+                    "prezzo": 150.0
+                }
+            ],
             "prezzo_base": "33000"
         },
         {
@@ -112,25 +147,42 @@
                 "tipo": "2.5L 4 cilindri"
             },
             "nome_univoco": "Toyota RAV4 2024",
-            "optionals": {
-                "colore": [
-                    "Nero",
-                    "Argento",
-                    "Verde",
-                    "Bianco Perla"
-                ],
-                "interni_in_pelle": true,
-                "ruota_di_scorta": true,
-                "ruote_maggiorate": {
-                    "dimensioni_disponibili": [
+            "optionals": [
+                {
+                    "nome": "colore",
+                    "opzioni": [
+                        "Nero",
+                        "Argento",
+                        "Verde",
+                        "Bianco Perla"
+                    ],
+                    "prezzo": 200.0
+                },
+                {
+                    "nome": "interni in pelle",
+                    "opzioni": [],
+                    "prezzo": 2000.0
+                },
+                {
+                    "nome": "ruota di scorta",
+                    "opzioni": [],
+                    "prezzo": 300.0
+                },
+                {
+                    "nome": "ruote_maggiorate",
+                    "opzioni": [
                         "18\"",
                         "19\"",
                         "20\""
-                    ]
+                    ],
+                    "prezzo": 400.0
                 },
-                "ruotino_di_scorta": false,
-                "vetri_oscurati": true
-            },
+                {
+                    "nome": "vetri oscurati",
+                    "opzioni": [],
+                    "prezzo": 500.0
+                }
+            ],
             "prezzo_base": "41700"
         }
     ]

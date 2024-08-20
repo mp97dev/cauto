@@ -1,5 +1,9 @@
 #pragma once
 
+#include <pistache/endpoint.h>
+#include <pistache/http.h>
+#include <pistache/router.h>
+#include "../utils.h"
 #include <vector>
 #include <iostream>
 #include "../json.hpp"
@@ -34,11 +38,16 @@ namespace cauto
         std::vector<cauto::sede> concessionari;
         std::string file_path = "./db/sedi.json";
 
-        void load_all()
+        json get_all_as_json()
         {
             std::ifstream file(file_path);
             json j;
             file >> j;
+        }
+
+        void load_all()
+        {
+            json j = get_all_as_json();
 
             for (const auto &item : j)
             {
@@ -66,4 +75,34 @@ namespace cauto
         }
     };
 
+}
+
+namespace rest_server
+{
+    using namespace Pistache;
+
+    class sedi_server
+    {
+        friend class server;
+
+    private:
+        void _setup_routes(Rest::Router &router)
+        {
+            Rest::Routes::Get(router, "/api/sedi", Rest::Routes::bind(&sedi_server::_api_get_sedi, this));
+        }
+
+        void _api_get_sedi(const Rest::Request &request, Http::ResponseWriter response)
+        {
+            std::string user_data;
+            if (!kernel::get_user_id_from_access_token(request, user_data))
+            {
+                response.send(Http::Code::Bad_Request, "");
+            }
+
+            // TODO check role segreteria
+
+            cauto::sedi_management db;
+            response.send(Http::Code::Ok, db.get_all_as_json());
+        }
+    };
 }

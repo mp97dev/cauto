@@ -12,12 +12,17 @@
 #include <unistd.h>
 #include <linux/limits.h>
 #include <map>
+#include <pistache/endpoint.h>
+#include <pistache/http.h>
+#include <pistache/router.h>
 
 #include "json.hpp"
 using json = nlohmann::json;
 
 namespace kernel
 {
+    using namespace Pistache;
+
     inline std::vector<std::string> split(const std::string &s, const char delim)
     {
         std::vector<std::string> result;
@@ -85,23 +90,32 @@ namespace kernel
         return data;
     }
 
-    inline std::string time_HH_MM_SS()
+    std::string add_days(const std::string &data, int giorni)
     {
-        using namespace std::chrono;
+        std::tm tm = {};
 
-        auto now = system_clock::now();
-        // get number of milliseconds for the current second
-        auto ms = duration_cast<milliseconds>(now.time_since_epoch()) % 1000;
-        // conversion
-        auto timer = system_clock::to_time_t(now);
-        std::tm bt = *std::localtime(&timer);
+        if (data.empty())
+        {
+            std::time_t tempoAttuale = std::time(nullptr);
+            tm = *std::localtime(&tempoAttuale);
+        }
+        else
+        {
+            std::stringstream ss(data);
+            ss >> std::get_time(&tm, "%d-%m-%Y");
+            if (ss.fail())
+                return "";
+        }
 
-        std::ostringstream oss;
+        tm.tm_isdst = -1; // ora legale
+        std::time_t tempo = std::mktime(&tm);
 
-        oss << std::put_time(&bt, "%Y-%m-%dT%H:%M:%S");
-        oss << '.' << std::setfill('0') << std::setw(3) << ms.count();
+        tempo += giorni * 24 * 60 * 60;
+        tm = *std::localtime(&tempo);
+        std::stringstream risultato;
+        risultato << std::put_time(&tm, "%d-%m-%Y");
 
-        return oss.str();
+        return risultato.str();
     }
 
     inline void write_file(std::string filename, const std::string &file, const std::string folder_path)
@@ -132,13 +146,34 @@ namespace kernel
         }
     }
 
-    inline std::string read_file_into_string(const std::string &path)
+    static inline bool get_user_id_from_access_token(const Http::Request &request, std::string &user_data)
     {
-        std::ifstream i_file(path);
-        if (!i_file.is_open())
-            return "";
-        std::string content((std::istreambuf_iterator<char>(i_file)), std::istreambuf_iterator<char>());
-        i_file.close();
-        return content;
+        if (!request.headers().has<Http::Header::Authorization>())
+            return false;
+        std::string raw_auth = request.headers().getRaw("Authorization").value();
+        if (raw_auth.find("Bearer ") != std::string::npos)
+            user_data = raw_auth.replace(0, 7, "");
+        else
+            user_data = raw_auth;
+        return true;
+    }
+
+    static inline bool valid_body(const std::string &body) //, std::vector<std::string> fields)
+    {
+        if (body.empty())
+            return false;
+        else
+        {
+            if (!json::accept(body))
+                return false;
+            else
+            {
+                return true;
+                // _body = json::parse(body);
+                // for (std::string &f : fields)
+                //     _valid &= _body.contains(f);
+            }
+        }
+        return false;
     }
 }

@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "preventivo.h"
+#include "../../utils.h"
 
 namespace cauto
 {
@@ -26,52 +27,84 @@ namespace cauto
             }
         }
 
-        double calcolaPrezzoFinale(const std::vector<std::string>& optionals, const std::string& prezzo_base, const double& sconto)
+        double calcolaPrezzoFinale(const cauto::macchina &macchina, const std::vector<cauto::optional> &optionals, const std::string &prezzo_base, const double &sconto)
         {
             double prezzo_optionals = 0.0;
-            for (const auto &opt : optionals)
+            for (const cauto::optional &opt : optionals)
             {
-                if (opt == "colore")
-                    prezzo_optionals += 300.0;
-                else if (opt == "ruota_di_scorta")
-                    prezzo_optionals += 150.0;
-                else if (opt == "ruotino_di_scorta")
-                    prezzo_optionals += 100.0;
-                else if (opt == "vetri_oscurati")
-                    prezzo_optionals += 1000.0;
-                else if (opt == "interni_in_pelle")
-                    prezzo_optionals += 2000.0;
-                else if (opt == "ruote_maggiorate")
-                    prezzo_optionals += 1500.0;
+                for (const cauto::optional o : macchina.optionals)
+                    if (o.nome == opt)
+                        prezzo_optionals += o.prezzo;
             }
 
             double prezzo_totale = std::stoi(prezzo_base) + prezzo_optionals;
-
             prezzo_totale *= (1.0 - sconto / 100.0);
-
             return prezzo_totale;
         }
 
-        void conferma()
+        // void conferma()
+        // {
+        // }
+
+        bool remove(const int &id)
         {
-        }
-        void elimina()
-        {
-        }
-        bool check_scadenza()
-        {
-            return true;
-        }
-        void calcola_data_consegna()
-        {
+            auto remove_it = std::remove_if(preventivi.begin(), preventivi.end(),
+                                            [&id](const cauto::preventivo &prev)
+                                            {
+                                                return prev.id == id;
+                                            });
+
+            if (remove_it != preventivi.end())
+            {
+                preventivi.erase(remove_it, preventivi.end());
+                return true;
+            }
+            return false;
         }
 
-        void to_pdf()
+        bool check_se_scaduto(cauto::preventivo &preventivo)
         {
+            std::tm tm = {};
+            std::stringstream ss(preventivo.data_scadenza);
+            ss >> std::get_time(&tm, "%d-%m-%Y");
+
+            if (ss.fail())
+                return true;
+
+            tm.tm_isdst = -1;
+            std::time_t data_scadenza = std::mktime(&tm);
+            std::time_t ora = std::time(nullptr);
+
+            if (data_scadenza >= ora)
+                return true;
+            return false;
         }
 
-        void finalizza()
+        std::string calcola_data_consegna(cauto::preventivo &preventivo)
         {
+            if (preventivo.acconto == 0)
+                return "";
+
+            int days = 31 + (preventivo.optionals.size() * 10);
+            return kernel::add_days("", days);
         }
+
+        void save()
+        {
+            json j;
+            for (const cauto::preventivo : preventivi)
+                j.push_back(preventivo.toJson());
+
+            std::ofstream file(file_path);
+            file << j.dump(4);
+        }
+
+        // void to_pdf()
+        // {
+        // }
+
+        // void finalizza()
+        // {
+        // }
     };
 }

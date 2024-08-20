@@ -1,5 +1,6 @@
 #include "utils.h"
 #include "server.h"
+#include "cauto/macchine_management/optional.h"
 #include "cauto/user_management/user_management.h"
 #include "cauto/macchine_management/macchine_management.h"
 #include "cauto/sede.h"
@@ -29,8 +30,8 @@ int main(int argc, char *argv[])
     // nuovoModello.dimensioni = {"1500 mm", "3940 mm", "1040 kg", "286 L"};
     // nuovoModello.motore = {"1.5L 3 cilindri", "Ibrida"};
     // nuovoModello.immagini = {"yaris_frontale.jpg", "yaris_laterale.jpg", "yaris_posteriore.jpg", {"yaris_bianco.jpg"}};
-    // nuovoModello.optionals = {
-    //     {"Bianco", "Rosso"}, true, true, true, true, {"16\"", "17\""}};
+    // nuovoModello.add_optional(cauto::optional("colore", 200.0, {"Bianco", "Nero"}));
+    // nuovoModello.add_optional(cauto::optional("ruota di scorta", 300.0, {}));
 
     // database.marche_auto["Toyota"].push_back(nuovoModello);
     // database.save();
