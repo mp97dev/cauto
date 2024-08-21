@@ -4,7 +4,6 @@
 #include <pistache/http.h>
 #include <pistache/router.h>
 
-
 namespace rest_server
 {
     using namespace Pistache;
@@ -36,15 +35,12 @@ namespace rest_server
             _setup_routes();
         }
 
-        void start(const bool blocking)
+        void start()
         {
             _httpEndpoint->setHandler(_router.handler());
             // _httpEndpoint->useSSL(certificate, key);
-            std::cout << "Server server start listening at port " + std::to_string(_addr.port()) + " in " + (blocking ? "" : "non ") + "blocking mode" << std::endl;
-            if (blocking)
-                _httpEndpoint->serve();
-            else
-                _httpEndpoint->serveThreaded();
+            std::cout << "Server start listening at port " + std::to_string(_addr.port()) << std::endl;
+            _httpEndpoint->serve();
         }
     };
 }

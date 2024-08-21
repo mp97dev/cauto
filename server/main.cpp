@@ -9,6 +9,10 @@
 
 int main(int argc, char *argv[])
 {
+    rest_server::server server(Pistache::Address(Pistache::Ipv4::any(), Pistache::Port(1984)));
+    server.init(2);
+    server.start();
+
     //* test signup and login ----------------------------------------------------------------
     // cauto::user_management userManager;
     // bool res = userManager.signup("alice_visit", "password123");

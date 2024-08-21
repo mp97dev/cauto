@@ -24,13 +24,14 @@ namespace rest_server
 
         void _api_get_macchine(const Rest::Request &request, Http::ResponseWriter response)
         {
-            std::string user_data;
-            if (!kernel::get_user_id_from_access_token(request, user_data))
+            std::vector<std::string>  user_data;
+            if (!kernel::get_user_from_access_token(request, user_data))
             {
                 response.send(Http::Code::Bad_Request, "");
             }
 
-            // TODO check role segreteria
+            if (user_data[1] != "segreteria")
+                response.send(Http::Code::Unauthorized, "");
 
             cauto::macchine_management database;
             response.send(Http::Code::Ok, database.get_all_as_json());
@@ -38,18 +39,19 @@ namespace rest_server
 
         void _api_post_macchine(const Rest::Request &request, Http::ResponseWriter response)
         {
-            std::string user_data;
-            if (!kernel::get_user_id_from_access_token(request, user_data))
+            std::vector<std::string>  user_data;
+            if (!kernel::get_user_from_access_token(request, user_data))
             {
                 response.send(Http::Code::Bad_Request, "");
             }
 
-            // TODO check role segreteria
+            if (user_data[1] != "segreteria")
+                response.send(Http::Code::Unauthorized, "");
 
-            if (!kernel::valid_body(request.body()))
+            json body;
+            if (!kernel::valid_body(request, body))
                 response.send(Http::Code::Bad_Request, "");
 
-            json body = json::parse(request.body());
             cauto::macchine_management database;
             database.get_all();
 
@@ -78,17 +80,19 @@ namespace rest_server
 
         void _api_delete_macchine(const Rest::Request &request, Http::ResponseWriter response)
         {
-            std::string user_data;
-            if (!kernel::get_user_id_from_access_token(request, user_data))
+            std::vector<std::string>  user_data;
+            if (!kernel::get_user_from_access_token(request, user_data))
             {
                 response.send(Http::Code::Bad_Request, "");
             }
 
-            // TODO check role segreteria
-            if (!kernel::valid_body(request.body()))
+            if (user_data[1] != "segreteria")
+                response.send(Http::Code::Unauthorized, "");
+
+            json body;
+            if (!kernel::valid_body(request, body))
                 response.send(Http::Code::Bad_Request, "");
 
-            json body = json::parse(request.body());
             cauto::macchine_management database;
 
             database.remove(body["marca"].get<std::string>(), body["nome_univoco"].get<std::string>());
