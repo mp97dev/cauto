@@ -3,11 +3,19 @@
     
     <a routerLink="/" routerLinkActive="active">Home</a> 
 
-    @if((auth.user | async)?.loggedIn) {
-        <a routerLink="/prospect" routerLinkActive="active"></a> 
-        <a routerLink="/admin/evaluations" routerLinkActive="active"></a> 
-        <a routerLink="/admin/branches" routerLinkActive="active"></a> 
+    @if((user | async)?.loggedIn) {
+        <a class="hover:cursor-pointer hover:underline" routerLink="prospect" >Prospects</a> 
+        <a class="hover:cursor-pointer hover:underline" routerLink="evaluations" >Evaluations</a> 
+        <a class="hover:cursor-pointer hover:underline" routerLink="branches" >Branches</a> 
     }
+    <span class="flex-1"></span>
 
-    <button routerLink="/login" class="bg-white text-purple-800 p-2 rounded-md">login</button>
+    @if(!(user|async)?.loggedIn) {
+        <button (click)="login()" class="bg-white text-purple-800 p-2 rounded-md">login</button>
+    } @else {
+        <div>
+            <img [src]="(auth.user | async)?.imgUrl">
+            <span>{{(user | async)?.username}}</span>
+        </div>
+    } 
 </nav>

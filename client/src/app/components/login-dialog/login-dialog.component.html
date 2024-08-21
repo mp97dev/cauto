@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Login</h1>
+<div mat-dialog-content [formGroup]="form">
+  <mat-tab-group mat-align-tabs="center" mat-stretch-tabs="false" #tabs>
+    <mat-tab label="Login" formGroupName="login">
+        <div class="w-full h-full flex flex-col gap-4 pt-4">
+            <mat-form-field subscriptSizing="dynamic" >
+                <mat-label>email</mat-label>
+                <input matInput type="text" formControlName="username">
+                @if(loginGroup?.hasError('wrongCreds')) {<mat-error>Credenziali errate</mat-error>}
+                @if(lusr?.hasError("email")) {<mat-error>This is not an email</mat-error>}
+            </mat-form-field>
+            <mat-form-field subscriptSizing="dynamic" >
+                <mat-label>Password</mat-label>
+                <input matInput type="password"  formControlName="password">
+                @if(loginGroup?.hasError('wrongCreds')) {<mat-error>Credenziali errate</mat-error>}
+            </mat-form-field>
+        </div>
+    </mat-tab>
+    <mat-tab label="Sign up" formGroupName="registration">
+        <div class="w-full h-full flex flex-col flex-wrap gap-4 pt-4">
+            <mat-form-field subscriptSizing="dynamic">
+                <mat-label>email</mat-label>
+                <input matInput type="text" formControlName="email">
+            </mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
+                <mat-label>username</mat-label>
+                <input matInput type="text" formControlName="username">
+            </mat-form-field>
+            <mat-form-field subscriptSizing="dynamic">
+                <mat-label>Password</mat-label>
+                <input matInput type="password"  formControlName="password">
+            </mat-form-field>
+        </div>
+    </mat-tab>
+</mat-tab-group>
+</div>
+<div mat-dialog-actions>
+    <button mat-fab extended
+        (click)="tabs.selectedIndex === 0 ? login() : register()"
+        [disabled]="tabs.selectedIndex === 0 ? !loginGroup?.valid : !registrationGroup?.valid">
+        <mat-icon>login</mat-icon>
+        {{tabs.selectedIndex === 0 ? 'Login' : 'Sign Up'}}
+    </button>
+</div>
