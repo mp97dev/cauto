@@ -26,29 +26,27 @@ namespace rest_server
             json body;
             if (!kernel::valid_body(request, body))
                 response.send(Http::Code::Bad_Request, "");
-            
+
             cauto::user_management userManager;
             bool res = userManager.signup(body["username"].get<std::string>(), body["password"].get<std::string>());
-            if (res)
-                response.send(Http::Code::Ok, "");
-            else
+            if (!res)
                 response.send(Http::Code::Bad_Request, "");
+
+            response.send(Http::Code::Ok, body["username"].get<std::string>());
         }
 
         void _api_login(const Rest::Request &request, Http::ResponseWriter response)
         {
-            // std::vector<std::string> user_data;
-            // if (!kernel::get_user_from_access_token(request, user_data))
-            // {
-            //     response.send(Http::Code::Bad_Request, "");
-            // }
-            
+            json body;
+            if (!kernel::valid_body(request, body))
+                response.send(Http::Code::Bad_Request, "");
+
             cauto::user_management userManager;
-            bool res = userManager.login("alice_visit", "password123");
-            if (res)
-                response.send(Http::Code::Ok, "");
-            else
+            bool res = userManager.login(body["username"].get<std::string>(), body["password"].get<std::string>());
+            if (!res)
                 response.send(Http::Code::Unauthorized, "");
+
+            response.send(Http::Code::Ok, "");
         }
     };
 }
