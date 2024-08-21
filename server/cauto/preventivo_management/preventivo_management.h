@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "preventivo.h"
+#include "../macchine_management/macchine_management.h"
 #include "../../utils.h"
 
 namespace cauto
@@ -12,12 +13,18 @@ namespace cauto
         std::vector<cauto::preventivo> preventivi;
         std::string file_path = "./db/preventivi.json";
 
-        void get_all()
+        json get_all_as_json()
         {
             std::ifstream file(file_path);
             json j;
             if (file.is_open())
                 file >> j;
+            return j;
+        }
+
+        void get_all()
+        {
+            json j = get_all_as_json();
 
             for (const auto &item : j)
             {
@@ -27,8 +34,12 @@ namespace cauto
             }
         }
 
-        double calcolaPrezzoFinale(const cauto::macchina &macchina, const std::vector<cauto::optional> &optionals, const std::string &prezzo_base, const double &sconto)
+        double calcolaPrezzoFinale(const std::string &macchina_marca, const std::string &macchina_modello, const std::vector<cauto::optional> &optionals, const double &sconto)
         {
+            cauto::macchina macchina;
+            if (!macchine_management::find_modello(macchina_marca, macchina_modello, macchina))
+                return 0;
+
             double prezzo_optionals = 0.0;
             for (const cauto::optional &opt : optionals)
             {
@@ -37,7 +48,7 @@ namespace cauto
                         prezzo_optionals += o.prezzo;
             }
 
-            double prezzo_totale = std::stoi(prezzo_base) + prezzo_optionals;
+            double prezzo_totale = std::stoi(macchina.prezzo_base) + prezzo_optionals;
             prezzo_totale *= (1.0 - sconto / 100.0);
             return prezzo_totale;
         }
@@ -58,6 +69,19 @@ namespace cauto
             {
                 preventivi.erase(remove_it, preventivi.end());
                 return true;
+            }
+            return false;
+        }
+
+        bool find_by_id(const int &id, cauto::preventivo& prev)
+        {
+            for (cauto::preventivo& preventivo : preventivi)
+            {
+                if (preventivo.id == id)
+                {
+                    prev = preventivo;
+                    return true;
+                }
             }
             return false;
         }

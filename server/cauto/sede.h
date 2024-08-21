@@ -43,6 +43,7 @@ namespace cauto
             std::ifstream file(file_path);
             json j;
             file >> j;
+            return j;
         }
 
         void load_all()

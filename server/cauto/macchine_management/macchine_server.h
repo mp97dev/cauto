@@ -75,7 +75,7 @@ namespace rest_server
             database.marche_auto[body["marca"].get<std::string>()].push_back(nuovoModello);
             database.save();
 
-            response.send(Http::Code::Ok, nuovoModello.toJson());
+            response.send(Http::Code::Ok, "");
         }
 
         void _api_delete_macchine(const Rest::Request &request, Http::ResponseWriter response)
@@ -97,7 +97,7 @@ namespace rest_server
 
             database.remove(body["marca"].get<std::string>(), body["nome_univoco"].get<std::string>());
             database.save();
-            response.send(Http::Code::Ok, database.get_all_as_json());
+            response.send(Http::Code::Ok, "");
         }
     };
 }
