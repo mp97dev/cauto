@@ -12,7 +12,7 @@ namespace cauto
     {
         std::vector<cauto::preventivo> preventivi;
         std::string file_path = "./db/preventivi.json";
-
+    public:
         json get_all_as_json()
         {
             std::ifstream file(file_path);
@@ -37,14 +37,15 @@ namespace cauto
         double calcolaPrezzoFinale(const std::string &macchina_marca, const std::string &macchina_modello, const std::vector<cauto::optional> &optionals, const double &sconto)
         {
             cauto::macchina macchina;
-            if (!macchine_management::find_modello(macchina_marca, macchina_modello, macchina))
+            cauto::macchine_management management;
+            if (!management.find_modello(macchina_marca, macchina_modello, macchina))
                 return 0;
 
             double prezzo_optionals = 0.0;
             for (const cauto::optional &opt : optionals)
             {
-                for (const cauto::optional o : macchina.optionals)
-                    if (o.nome == opt)
+                for (const cauto::optional& o : macchina.optionals)
+                    if (o.nome == opt.nome)
                         prezzo_optionals += o.prezzo;
             }
 
@@ -89,7 +90,7 @@ namespace cauto
         bool check_se_scaduto(cauto::preventivo &preventivo)
         {
             std::tm tm = {};
-            std::stringstream ss(preventivo.data_scadenza);
+            std::stringstream ss(preventivo.data_scadenza.value());
             ss >> std::get_time(&tm, "%d-%m-%Y");
 
             if (ss.fail())
@@ -116,8 +117,8 @@ namespace cauto
         void save()
         {
             json j;
-            for (const cauto::preventivo : preventivi)
-                j.push_back(preventivo.toJson());
+            for (const cauto::preventivo& prev : preventivi)
+                j.push_back(prev.toJson());
 
             std::ofstream file(file_path);
             file << j.dump(4);

@@ -97,14 +97,19 @@ namespace rest_server
             std::vector<std::string>  user_data;
             if (!kernel::get_user_from_access_token(request, user_data))
             {
-                response.send(Http::Code::Bad_Request, "");
+                response.send(Http::Code::Bad_Request, {});
+                return;
             }
 
             if (user_data[1] != "segreteria")
-                response.send(Http::Code::Unauthorized, "");
+            {
+                response.send(Http::Code::Unauthorized, {});
+                return;
+            }
 
             cauto::sedi_management db;
             response.send(Http::Code::Ok, db.get_all_as_json());
+            return;
         }
     };
 }

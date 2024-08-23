@@ -27,11 +27,15 @@ namespace rest_server
             std::vector<std::string>  user_data;
             if (!kernel::get_user_from_access_token(request, user_data))
             {
-                response.send(Http::Code::Bad_Request, "");
+                response.send(Http::Code::Bad_Request, {});
+                return;
             }
 
             if (user_data[1] != "segreteria")
-                response.send(Http::Code::Unauthorized, "");
+            {
+                response.send(Http::Code::Unauthorized, {});
+                return;
+            }
 
             cauto::macchine_management database;
             response.send(Http::Code::Ok, database.get_all_as_json());
@@ -42,15 +46,22 @@ namespace rest_server
             std::vector<std::string>  user_data;
             if (!kernel::get_user_from_access_token(request, user_data))
             {
-                response.send(Http::Code::Bad_Request, "");
+                response.send(Http::Code::Bad_Request, {});
+                return;
             }
 
             if (user_data[1] != "segreteria")
-                response.send(Http::Code::Unauthorized, "");
+            {
+                response.send(Http::Code::Unauthorized, {});
+                return;
+            }
 
             json body;
             if (!kernel::valid_body(request, body))
-                response.send(Http::Code::Bad_Request, "");
+            {
+                response.send(Http::Code::Bad_Request, {});
+                return;
+            }
 
             cauto::macchine_management database;
             database.get_all();
@@ -61,7 +72,8 @@ namespace rest_server
             database.marche_auto[body["marca"].get<std::string>()].push_back(nuovoModello);
             database.save();
 
-            response.send(Http::Code::Ok, "");
+            response.send(Http::Code::Ok, {});
+            return;
         }
 
         void _api_delete_macchine(const Rest::Request &request, Http::ResponseWriter response)
@@ -69,21 +81,28 @@ namespace rest_server
             std::vector<std::string>  user_data;
             if (!kernel::get_user_from_access_token(request, user_data))
             {
-                response.send(Http::Code::Bad_Request, "");
+                response.send(Http::Code::Bad_Request, {});
+                return;
             }
 
             if (user_data[1] != "segreteria")
-                response.send(Http::Code::Unauthorized, "");
+            {
+                response.send(Http::Code::Unauthorized, {});
+                return;
+            }
 
             json body;
             if (!kernel::valid_body(request, body))
-                response.send(Http::Code::Bad_Request, "");
+            {
+                response.send(Http::Code::Bad_Request, {});
+                return;
+            }
 
             cauto::macchine_management database;
 
             database.remove(body["marca"].get<std::string>(), body["nome_univoco"].get<std::string>());
             database.save();
-            response.send(Http::Code::Ok, "");
+            response.send(Http::Code::Ok, {});
         }
     };
 }

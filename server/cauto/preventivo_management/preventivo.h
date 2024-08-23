@@ -33,7 +33,7 @@ namespace cauto
                 opt.push_back(o.toJson());
 
             if (id.has_value())
-                res["id"] = id;
+                res["id"] = id.value();
             res["macchina_marca"] = macchina_marca;
             res["macchina_marca"] = macchina_modello;
             res["optionals"] = opt;
@@ -43,7 +43,7 @@ namespace cauto
             if (sconto.has_value())
                 res["sconto"] = sconto.value();
             if (prezzo_finale.has_value())
-                res["prezzo_finale"] = prezzo_finale.value(), ;
+                res["prezzo_finale"] = prezzo_finale.value();
             if (data_creazione.has_value())
                 res["data_creazione"] = data_creazione.value();
             if (acconto.has_value())
@@ -71,7 +71,7 @@ namespace cauto
             }
             utente = j.at("utente").get<std::string>();
             if (j.contains("usato"))
-                usato.fromJson(j.at("usato"));
+                usato.value().fromJson(j.at("usato"));
             if (j.contains("sconto"))
                 sconto = j.at("sconto").get<double>();
             if (j.contains("prezzo_finale"))
@@ -81,7 +81,7 @@ namespace cauto
             if (j.contains("acconto"))
                 acconto = j.at("acconto").get<double>();
             if (j.contains("luogo_ritiro"))
-                luogo_ritiro.fromJson(j.at("luogo_ritiro"));
+                luogo_ritiro.value().fromJson(j.at("luogo_ritiro"));
             if (j.contains("data_scadenza"))
                 data_scadenza = j.at("data_scadenza").get<std::string>();
             if (j.contains("data_consegna"))

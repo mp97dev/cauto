@@ -2,7 +2,8 @@
 
 #include <vector>
 #include <iostream>
-#include "optionals.h"
+#include "../../json.hpp"
+using json = nlohmann::json;
 
 namespace cauto
 {
@@ -22,7 +23,7 @@ namespace cauto
         static usato fromJson(const json &j)
         {
             usato u;
-            u.immagini = j.at("immagini").get<std::string>();
+            u.immagini = j.at("immagini").get<std::vector<std::string>>();
             u.descrizione = j.at("descrizione").get<std::string>();
             return u;
         }

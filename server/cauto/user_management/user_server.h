@@ -25,28 +25,42 @@ namespace rest_server
         {
             json body;
             if (!kernel::valid_body(request, body))
-                response.send(Http::Code::Bad_Request, "");
+            {
+                response.send(Http::Code::Bad_Request, {});
+                return;
+            }
 
             cauto::user_management userManager;
             bool res = userManager.signup(body["username"].get<std::string>(), body["password"].get<std::string>());
             if (!res)
-                response.send(Http::Code::Bad_Request, "");
+            {
+                response.send(Http::Code::Bad_Request, {});
+                return;
+            }
 
-            response.send(Http::Code::Ok, body["username"].get<std::string>());
+            response.send(Http::Code::Ok, {body["username"].get<std::string>()});
+            return;
         }
 
         void _api_login(const Rest::Request &request, Http::ResponseWriter response)
         {
             json body;
             if (!kernel::valid_body(request, body))
-                response.send(Http::Code::Bad_Request, "");
+            {
+                response.send(Http::Code::Bad_Request, {});
+                return;
+            }
 
             cauto::user_management userManager;
             bool res = userManager.login(body["username"].get<std::string>(), body["password"].get<std::string>());
             if (!res)
-                response.send(Http::Code::Unauthorized, "");
+            {
+                response.send(Http::Code::Unauthorized, {});
+                return;
+            }
 
-            response.send(Http::Code::Ok, "");
+            response.send(Http::Code::Ok, {});
+            return;
         }
     };
 }

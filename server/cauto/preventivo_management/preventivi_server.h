@@ -3,6 +3,7 @@
 #include <pistache/endpoint.h>
 #include <pistache/http.h>
 #include <pistache/router.h>
+#include <chrono>
 #include "./preventivo_management.h"
 #include "../../utils.h"
 
@@ -26,14 +27,19 @@ namespace rest_server
             std::vector<std::string> user_data;
             if (!kernel::get_user_from_access_token(request, user_data))
             {
-                response.send(Http::Code::Bad_Request, "");
+                response.send(Http::Code::Bad_Request, {});
+                return;
             }
 
             if (user_data[1] != "segreteria" || user_data[1] != "impiegato")
-                response.send(Http::Code::Unauthorized, "");
+            {
+                response.send(Http::Code::Unauthorized, {});
+                return;
+            }
 
             cauto::preventivo_management database;
             response.send(Http::Code::Ok, database.get_all_as_json());
+            return;
         }
 
         void _api_post_preventivi(const Rest::Request &request, Http::ResponseWriter response)
@@ -41,12 +47,16 @@ namespace rest_server
             std::vector<std::string> user_data;
             if (!kernel::get_user_from_access_token(request, user_data))
             {
-                response.send(Http::Code::Bad_Request, "");
+                response.send(Http::Code::Bad_Request, {});
+                return;
             }
 
             json body;
             if (!kernel::valid_body(request, body))
-                response.send(Http::Code::Bad_Request, "");
+            {
+                response.send(Http::Code::Bad_Request, {});
+                return;
+            }
 
             cauto::preventivo_management database;
             database.get_all();
@@ -54,23 +64,28 @@ namespace rest_server
             cauto::preventivo newPreventivo;
             try
             {
-                newPreventivo.fromJson(body);
-                std::time_t tempo = std::mktime(&std::time(nullptr));
-                newPreventivo.id = static_cast<int>(tempo);
+                auto now = std::chrono::system_clock::now();
+                newPreventivo.id = static_cast<int>(std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count());
                 newPreventivo.sconto = rand() % 30;
-                newPreventivo.prezzo_finale = database.calcolaPrezzoFinale(body["macchina_marca"].get<std::string>(), body["macchina_modello"].get<std::string>(), newPreventivo.optionals, newPreventivo.sconto);
+                newPreventivo.prezzo_finale = database.calcolaPrezzoFinale(body["macchina_marca"].get<std::string>(), body["macchina_modello"].get<std::string>(), newPreventivo.optionals, newPreventivo.sconto.value());
                 if (newPreventivo.prezzo_finale == 0)
-                    response.send(Http::Code::Expectation_Failed, "");
+                {
+                    response.send(Http::Code::Expectation_Failed, {});
+                    return;
+                }
                 newPreventivo.data_creazione = kernel::add_days("", 0);
-                newPreventivo.data_scadenza = kernel::add_days(newPreventivo.data_creazione, 20);
+                newPreventivo.data_scadenza = kernel::add_days(newPreventivo.data_creazione.value(), 20);
                 newPreventivo.data_consegna = database.calcola_data_consegna(newPreventivo);
             }
             catch (...)
-                response.send(Http::Code::Bad_Request, "");
+            {
+                response.send(Http::Code::Bad_Request, {});
+                return;
+            }
 
-            database.save()
-                response.send(Http::Code::Ok, "");
+            database.save();
+            response.send(Http::Code::Ok, {});
+            return;
         }
     };
 }
->
