@@ -11,7 +11,7 @@
     },
     {
         "password": "password123",
-        "role": "visit",
+        "role": "",
         "username": "alice_visit"
     }
 ]

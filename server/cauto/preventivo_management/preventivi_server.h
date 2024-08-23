@@ -54,26 +54,27 @@ namespace rest_server
             cauto::preventivo newPreventivo;
             try
             {
+                newPreventivo.fromJson(body);
                 std::time_t tempo = std::mktime(&std::time(nullptr));
                 newPreventivo.id = static_cast<int>(tempo);
-                newPreventivo.macchina_marca = body["macchina_marca"].get<std::string>();
-                newPreventivo.macchina_marca = body["macchina_modello"].get<std::string>();
-                for (const auto &item : body.at("optionals"))
-                {
-                    cauto::optional opt;
-                    opt.fromJson(item);
-                    newPreventivo.optionals.push_back(opt);
-                }
-                newPreventivo.usato = newPreventivo.usato.fromJson(body.at("usato"));
-                newPreventivo.utente = user_data[0];
+                // newPreventivo.macchina_marca = body["macchina_marca"].get<std::string>();
+                // newPreventivo.macchina_marca = body["macchina_modello"].get<std::string>();
+                // for (const auto &item : body.at("optionals"))
+                // {
+                //     cauto::optional opt;
+                //     opt.fromJson(item);
+                //     newPreventivo.optionals.push_back(opt);
+                // }
+                // newPreventivo.usato = newPreventivo.usato.fromJson(body.at("usato"));
+                // newPreventivo.utente = user_data[0];
                 newPreventivo.sconto = rand() % 30;
                 newPreventivo.prezzo_finale = database.calcolaPrezzoFinale(body["macchina_marca"].get<std::string>(), body["macchina_modello"].get<std::string>(), newPreventivo.optionals, newPreventivo.sconto);
                 if (newPreventivo.prezzo_finale == 0)
                     response.send(Http::Code::Expectation_Failed, "");
                 newPreventivo.data_creazione = kernel::add_days("", 0);
-                newPreventivo.luogo_ritiro = newPreventivo.luogo_ritiro.fromJson(body.at("luogo_ritiro"));
+                // newPreventivo.luogo_ritiro = newPreventivo.luogo_ritiro.fromJson(body.at("luogo_ritiro"));
                 newPreventivo.data_scadenza = kernel::add_days(newPreventivo.data_creazione, 20);
-                newPreventivo.acconto = body["acconto"].get<double>();
+                // newPreventivo.acconto = body["acconto"].get<double>();
                 newPreventivo.data_consegna = database.calcola_data_consegna(newPreventivo);
             }
             catch (...)
