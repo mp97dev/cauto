@@ -57,21 +57,6 @@ namespace rest_server
 
             cauto::macchina nuovoModello;
             nuovoModello.fromJson(body);
-            // nuovoModello.nome_univoco = body["nome_univoco"].get<std::string>();
-            // nuovoModello.descrizione = body["descrizione"].get<std::string>();
-            // nuovoModello.prezzo_base = body["prezzo_base"].get<int>();
-            // nuovoModello.dimensioni.altezza = body["dimensioni"]["altezza"].get<std::string>();
-            // nuovoModello.dimensioni.lunghezza = body["dimensioni"]["lunghezza"].get<std::string>();
-            // nuovoModello.dimensioni.peso = body["dimensioni"]["peso"].get<std::string>();
-            // nuovoModello.dimensioni.volume_bagagliaio = body["dimensioni"]["volume_bagagliaio"].get<std::string>();
-            // nuovoModello.motore.alimentazione = body["motore"]["alimentazione"].get<std::string>();
-            // nuovoModello.motore.tipo = body["motore"]["tipo"].get<std::string>();
-            // nuovoModello.immagini.vista_frontale = body["immagini"]["vista_frontale"].get<std::string>();
-            // nuovoModello.immagini.vista_laterale = body["immagini"]["vista_laterale"].get<std::string>();
-            // nuovoModello.immagini.vista_posteriore = body["immagini"]["vista_posteriore"].get<std::string>();
-            // nuovoModello.immagini.colori = body["immagini"]["colori"].get<std::vector<std::string>>();
-            // for (auto &optional : body["optionals"])
-            //     nuovoModello.add_optional(cauto::optional(optional["nome"].get<std::string>(), optional["prezzo"].get<double>(), optional["opzioni"]));
 
             database.marche_auto[body["marca"].get<std::string>()].push_back(nuovoModello);
             database.save();
