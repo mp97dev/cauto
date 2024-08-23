@@ -38,7 +38,7 @@ namespace rest_server
                 return;
             }
 
-            response.send(Http::Code::Ok, {body["username"].get<std::string>()});
+            response.send(Http::Code::Ok, (json{"username", body["username"].get<std::string>()}).dump());
             return;
         }
 
@@ -52,14 +52,15 @@ namespace rest_server
             }
 
             cauto::user_management userManager;
-            bool res = userManager.login(body["username"].get<std::string>(), body["password"].get<std::string>());
+            std::string role;
+            bool res = userManager.login(body["username"].get<std::string>(), body["password"].get<std::string>(), role);
             if (!res)
             {
                 response.send(Http::Code::Unauthorized, {});
                 return;
             }
 
-            response.send(Http::Code::Ok, {});
+            response.send(Http::Code::Ok, (json{{"username", body["username"].get<std::string>()}, {"role", role}}).dump());
             return;
         }
     };

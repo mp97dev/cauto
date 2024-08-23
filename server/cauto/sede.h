@@ -20,8 +20,8 @@ namespace cauto
         void fromJson(const json &j)
         {
             id = j.at("id").get<int>();
-            nome = j.at("nome").get<std::string>();
             indirizzo = j.at("indirizzo").get<std::string>();
+            nome = j.at("nome").get<std::string>();
         }
 
         json toJson() const
@@ -108,7 +108,7 @@ namespace rest_server
             }
 
             cauto::sedi_management db;
-            response.send(Http::Code::Ok, db.get_all_as_json());
+            response.send(Http::Code::Ok, (db.get_all_as_json()).dump());
             return;
         }
     };

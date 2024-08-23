@@ -10,9 +10,10 @@ namespace cauto
 {
     class preventivo_management
     {
+    public:
         std::vector<cauto::preventivo> preventivi;
         std::string file_path = "./db/preventivi.json";
-    public:
+
         json get_all_as_json()
         {
             std::ifstream file(file_path);
@@ -38,6 +39,7 @@ namespace cauto
         {
             cauto::macchina macchina;
             cauto::macchine_management management;
+            management.get_all();
             if (!management.find_modello(macchina_marca, macchina_modello, macchina))
                 return 0;
 
@@ -53,10 +55,6 @@ namespace cauto
             prezzo_totale *= (1.0 - sconto / 100.0);
             return prezzo_totale;
         }
-
-        // void conferma()
-        // {
-        // }
 
         bool remove(const int &id)
         {
@@ -87,6 +85,16 @@ namespace cauto
             return false;
         }
 
+        void find_by_user(const std::string& user, json& prev)
+        {
+            for (cauto::preventivo& preventivo : preventivi)
+            {
+                if (preventivo.utente == user)
+                    prev.push_back(preventivo.toJson());
+            }
+            return;
+        }
+
         bool check_se_scaduto(cauto::preventivo &preventivo)
         {
             std::tm tm = {};
@@ -100,7 +108,7 @@ namespace cauto
             std::time_t data_scadenza = std::mktime(&tm);
             std::time_t ora = std::time(nullptr);
 
-            if (data_scadenza >= ora)
+            if (data_scadenza <= ora)
                 return true;
             return false;
         }
@@ -123,13 +131,5 @@ namespace cauto
             std::ofstream file(file_path);
             file << j.dump(4);
         }
-
-        // void to_pdf()
-        // {
-        // }
-
-        // void finalizza()
-        // {
-        // }
     };
 }

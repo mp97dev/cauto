@@ -38,7 +38,7 @@ namespace rest_server
             }
 
             cauto::macchine_management database;
-            response.send(Http::Code::Ok, database.get_all_as_json());
+            response.send(Http::Code::Ok, (database.get_all_as_json()).dump());
         }
 
         void _api_post_macchine(const Rest::Request &request, Http::ResponseWriter response)
@@ -67,8 +67,12 @@ namespace rest_server
             database.get_all();
 
             cauto::macchina nuovoModello;
+            if (database.find_modello(body["marca"].get<std::string>(), body["nome_univoco"].get<std::string>(), nuovoModello))
+            {
+                response.send(Http::Code::Conflict, {});
+                return;
+            }
             nuovoModello.fromJson(body);
-
             database.marche_auto[body["marca"].get<std::string>()].push_back(nuovoModello);
             database.save();
 
@@ -99,8 +103,12 @@ namespace rest_server
             }
 
             cauto::macchine_management database;
-
-            database.remove(body["marca"].get<std::string>(), body["nome_univoco"].get<std::string>());
+            database.get_all();
+            if (!database.remove(body["marca"].get<std::string>(), body["nome_univoco"].get<std::string>()))
+            {
+                response.send(Http::Code::No_Content, {});
+                return;
+            }
             database.save();
             response.send(Http::Code::Ok, {});
         }
