@@ -14,7 +14,7 @@ export class AuthService {
   constructor(
     private api: ApiService,
   ) {
-    this.checkPreviousSession()
+    this.loginFromLocalStorage()
   }
 
   private user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null)
@@ -54,52 +54,11 @@ export class AuthService {
     const ls = localStorage.getItem('auth-session')
     if(!ls) return
     
-    let session
     try {
-      session = JSON.parse(ls)
-      if(!session) return
-      // session = // todo
+      if(!ls) return
+      const u = new User(JSON.parse(ls))
+      if(!u) return
+      this.user$.next(u)
     } catch {}
-
-    if(ls) this.user$.next(session.user) 
   }
-
-  private checkPreviousSession() {
-    const prev = localStorage.getItem('token')
-    if(!prev) return
-
-    if(this.isTokenExpired(prev)) {
-      localStorage.removeItem('token')
-      return
-    }
-
-    this.token$.next(prev)
-    this.populateUser()
-  }
-
-  private isTokenExpired(token: string): boolean {
-
-    try {
-      const decoded: {exp: number} = { exp: 1234 }
-      // const decoded = jwt_decode.jwtDecode(token)
-      const expirationDate = new Date(0)
-      const exp = decoded.exp
-      if(!exp) return true
-      expirationDate.setUTCSeconds(exp)
-      
-      return expirationDate < new Date()
-    } catch(err) {
-      return true
-    }
-  }
-
-  private populateUser() {
-    // try {
-    //   if(!this.token) return
-    //   // const decoded = jwt_decode.jwtDecode(this.token)
-    //   // this.user$.next(decoded)
-    // }
-  }
-
-
 }
