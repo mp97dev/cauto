@@ -3,21 +3,29 @@
 #include <vector>
 #include <iostream>
 #include "preventivo.h"
+#include "../macchine_management/macchine_management.h"
 #include "../../utils.h"
 
 namespace cauto
 {
     class preventivo_management
     {
+    public:
         std::vector<cauto::preventivo> preventivi;
         std::string file_path = "./db/preventivi.json";
 
-        void get_all()
+        json get_all_as_json()
         {
             std::ifstream file(file_path);
             json j;
             if (file.is_open())
                 file >> j;
+            return j;
+        }
+
+        void get_all()
+        {
+            json j = get_all_as_json();
 
             for (const auto &item : j)
             {
@@ -27,24 +35,26 @@ namespace cauto
             }
         }
 
-        double calcolaPrezzoFinale(const cauto::macchina &macchina, const std::vector<cauto::optional> &optionals, const std::string &prezzo_base, const double &sconto)
+        double calcolaPrezzoFinale(const std::string &macchina_marca, const std::string &macchina_modello, const std::vector<cauto::optional> &optionals, const double &sconto)
         {
+            cauto::macchina macchina;
+            cauto::macchine_management management;
+            management.get_all();
+            if (!management.find_modello(macchina_marca, macchina_modello, macchina))
+                return 0;
+
             double prezzo_optionals = 0.0;
             for (const cauto::optional &opt : optionals)
             {
-                for (const cauto::optional o : macchina.optionals)
-                    if (o.nome == opt)
+                for (const cauto::optional& o : macchina.optionals)
+                    if (o.nome == opt.nome)
                         prezzo_optionals += o.prezzo;
             }
 
-            double prezzo_totale = std::stoi(prezzo_base) + prezzo_optionals;
+            double prezzo_totale = std::stoi(macchina.prezzo_base) + prezzo_optionals;
             prezzo_totale *= (1.0 - sconto / 100.0);
             return prezzo_totale;
         }
-
-        // void conferma()
-        // {
-        // }
 
         bool remove(const int &id)
         {
@@ -62,10 +72,33 @@ namespace cauto
             return false;
         }
 
+        bool find_by_id(const int &id, cauto::preventivo& prev)
+        {
+            for (cauto::preventivo& preventivo : preventivi)
+            {
+                if (preventivo.id == id)
+                {
+                    prev = preventivo;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        void find_by_user(const std::string& user, json& prev)
+        {
+            for (cauto::preventivo& preventivo : preventivi)
+            {
+                if (preventivo.utente == user)
+                    prev.push_back(preventivo.toJson());
+            }
+            return;
+        }
+
         bool check_se_scaduto(cauto::preventivo &preventivo)
         {
             std::tm tm = {};
-            std::stringstream ss(preventivo.data_scadenza);
+            std::stringstream ss(preventivo.data_scadenza.value());
             ss >> std::get_time(&tm, "%d-%m-%Y");
 
             if (ss.fail())
@@ -75,7 +108,7 @@ namespace cauto
             std::time_t data_scadenza = std::mktime(&tm);
             std::time_t ora = std::time(nullptr);
 
-            if (data_scadenza >= ora)
+            if (data_scadenza <= ora)
                 return true;
             return false;
         }
@@ -92,19 +125,11 @@ namespace cauto
         void save()
         {
             json j;
-            for (const cauto::preventivo : preventivi)
-                j.push_back(preventivo.toJson());
+            for (const cauto::preventivo& prev : preventivi)
+                j.push_back(prev.toJson());
 
             std::ofstream file(file_path);
             file << j.dump(4);
         }
-
-        // void to_pdf()
-        // {
-        // }
-
-        // void finalizza()
-        // {
-        // }
     };
 }

@@ -15,7 +15,7 @@ namespace cauto
         std::string password;
         std::string role;
 
-        user(const std::string &usr, const std::string &pwd, const std::string &ruolo = "visit") : username(usr), password(pwd), role(ruolo) {}
+        user(const std::string &usr, const std::string &pwd, const std::string &ruolo = "") : username(usr), password(pwd), role(ruolo) {}
         user() = default;
 
         const std::string getUsername()

@@ -48,7 +48,7 @@ namespace cauto
             return true;
         }
 
-        bool login(const std::string &username, const std::string &password)
+        bool login(const std::string &username, const std::string &password, std::string& role)
         {
             for (unsigned int i = 0; i < users.size(); i++)
                 if (users[i]["username"] == username)
@@ -56,7 +56,10 @@ namespace cauto
                     cauto::user user;
                     user.fromJson(users[i]);
                     if (user.checkPassword(password))
+                    {
+                        role = user.role;
                         return true;
+                    }
                 }
             return false;
         }

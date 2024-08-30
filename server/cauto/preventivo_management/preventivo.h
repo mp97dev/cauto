@@ -2,78 +2,100 @@
 
 #include <vector>
 #include <iostream>
-#include "usato.h"
+#include "./usato.h"
 #include "../sede.h"
-#include "../macchine_management/macchine_management.h"
-#include "../user_management/user_management.h"
+#include "../macchine_management/optional.h"
 
 namespace cauto
 {
     class preventivo
     {
     public:
-        // cauto::macchina macchina;
-        // unsigned int data_scadenza; //?
-        // unsigned int prezzo;
-        // std::string utente;
-        // unsigned int pagamento;
-        // cauto::sede sede;
-        // unsigned int data_consegna; //?
-        // bool macchina_pronta;
-        // cauto::usato usato;
-
-        int id;
-        cauto::macchina macchina;
+        std::optional<int> id;
+        std::string macchina_marca;
+        std::string macchina_modello;
         std::vector<cauto::optional> optionals;
-        cauto::usato usato;
-        cauto::user utente;
-        double sconto;
-        double prezzo_finale;
-        std::string data_creazione;
-        double acconto;
-        sede luogo_ritiro;
-        std::string data_scadenza;
-        std::string data_consegna;
+        std::optional<cauto::usato> usato;
+        std::optional<std::string> utente;
+        std::optional<int> sconto;
+        std::optional<double> prezzo_finale;
+        std::optional<std::string> data_creazione;
+        std::optional<double> acconto;
+        std::optional<sede> luogo_ritiro;
+        std::optional<std::string> data_scadenza;
+        std::optional<std::string> data_consegna;
 
         json toJson() const
         {
+            json res;
             json opt = json::array();
             for (cauto::optional o : optionals)
                 opt.push_back(o.toJson());
-            return json{
-                {"id", id},
-                {"macchina", macchina.toJson()},
-                {"optionals", opt},
-                {"oggetto", usato.toJson()},
-                {"sconto", sconto},
-                {"prezzo_finale", prezzo_finale},
-                {"data_creazione", data_creazione},
-                {"acconto", acconto},
-                {"luogo_ritiro", luogo_ritiro.toJson()},
-                {"data_scadenza", data_scadenza},
-                {"data_consegna", data_consegna},
-                {"utente", utente.toJson()}};
+
+            if (id.has_value())
+                res["id"] = id.value();
+            res["macchina_marca"] = macchina_marca;
+            res["macchina_modello"] = macchina_modello;
+            res["optionals"] = opt;
+            if (usato.has_value())
+                res["usato"] = usato.value().toJson();
+            if (utente.has_value())
+                res["utente"] = utente.value();
+            if (sconto.has_value())
+                res["sconto"] = sconto.value();
+            if (prezzo_finale.has_value())
+                res["prezzo_finale"] = prezzo_finale.value();
+            if (data_creazione.has_value())
+                res["data_creazione"] = data_creazione.value();
+            if (acconto.has_value())
+                res["acconto"] = acconto.value();
+            if (luogo_ritiro.has_value())
+                res["luogo_ritiro"] = luogo_ritiro.value().toJson();
+            if (data_scadenza.has_value())
+                res["data_scadenza"] = data_scadenza.value();
+            if (data_consegna.has_value())
+                res["data_consegna"] = data_consegna.value();
+            return res;
         }
 
         void fromJson(const json &j)
         {
-            id = j.at("id").get<int>();
-            macchina.fromJson(j.at("macchina").get<std::string>());
+            if (j.contains("id"))
+                id = j.at("id").get<int>();
+            macchina_marca = j.at("macchina_marca").get<std::string>();
+            macchina_modello = j.at("macchina_modello").get<std::string>();
             for (const auto &item : j.at("optionals"))
             {
                 cauto::optional opt;
                 opt.fromJson(item);
                 optionals.push_back(opt);
             }
-            usato.fromJson(j.at("usato").get<std::string>());
-            sconto = j.at("sconto").get<double>();
-            prezzo_finale = j.at("prezzo_finale").get<double>();
-            data_creazione = j.at("data_creazione").get<std::string>();
-            acconto = j.at("acconto").get<double>();
-            luogo_ritiro.fromJson(j.at("luogo_ritiro").get<std::string>());
-            data_scadenza = j.at("data_scadenza").get<std::string>();
-            data_consegna = j.at("data_consegna").get<std::string>();
-            utente.fromJson(j.at("utente").get<std::string>());
+            if (j.contains("utente"))
+                utente = j.at("utente").get<std::string>();
+            if (j.contains("usato"))
+            {
+                if (!usato.has_value())
+                    usato.emplace();
+                usato->fromJson(j.at("usato"));
+            }
+            if (j.contains("sconto"))
+                sconto = j.at("sconto").get<int>();
+            if (j.contains("prezzo_finale"))
+                prezzo_finale = j.at("prezzo_finale").get<double>();
+            if (j.contains("data_creazione"))
+                data_creazione = j.at("data_creazione").get<std::string>();
+            if (j.contains("acconto"))
+                acconto = j.at("acconto").get<double>();
+            if (j.contains("luogo_ritiro"))
+            {
+                if (!luogo_ritiro.has_value())
+                    luogo_ritiro.emplace();
+                luogo_ritiro->fromJson(j.at("luogo_ritiro"));
+            }
+            if (j.contains("data_scadenza"))
+                data_scadenza = j.at("data_scadenza").get<std::string>();
+            if (j.contains("data_consegna"))
+                data_consegna = j.at("data_consegna").get<std::string>();
         }
     };
 }

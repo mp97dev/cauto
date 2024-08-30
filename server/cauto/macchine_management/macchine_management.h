@@ -74,5 +74,23 @@ namespace cauto
             }
             return false;
         }
+
+        bool find_modello(const std::string &brand, const std::string &model_name, cauto::macchina &macchina)
+        {
+            auto it = marche_auto.find(brand);
+            if (it == marche_auto.end())
+                return false;
+
+            std::vector<cauto::macchina> &models = it->second;
+            for (cauto::macchina& model : models)
+            {
+                if (model.nome_univoco == model_name)
+                {
+                    macchina = model;
+                    return true;
+                }
+            }
+            return false;
+        }
     };
 }
