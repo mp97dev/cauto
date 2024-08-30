@@ -63,7 +63,7 @@ namespace cauto
                 auto remove_it = std::remove_if(models.begin(), models.end(),
                                                 [&model_name](const cauto::macchina &model)
                                                 {
-                                                    return model.nome_univoco == model_name;
+                                                    return model.modello == model_name;
                                                 });
 
                 if (remove_it != models.end())
@@ -84,7 +84,7 @@ namespace cauto
             std::vector<cauto::macchina> &models = it->second;
             for (cauto::macchina& model : models)
             {
-                if (model.nome_univoco == model_name)
+                if (model.modello == model_name)
                 {
                     macchina = model;
                     return true;

@@ -35,12 +35,12 @@ namespace cauto
             }
         }
 
-        double calcolaPrezzoFinale(const std::string &macchina_marca, const std::string &macchina_modello, const std::vector<cauto::optional> &optionals, const double &sconto)
+        double calcolaPrezzoFinale(const std::string &marca, const std::string &modello, const std::vector<cauto::optional> &optionals, const double &sconto)
         {
             cauto::macchina macchina;
             cauto::macchine_management management;
             management.get_all();
-            if (!management.find_modello(macchina_marca, macchina_modello, macchina))
+            if (!management.find_modello(marca, modello, macchina))
                 return 0;
 
             double prezzo_optionals = 0.0;

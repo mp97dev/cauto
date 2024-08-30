@@ -12,8 +12,8 @@ namespace cauto
     {
     public:
         std::optional<int> id;
-        std::string macchina_marca;
-        std::string macchina_modello;
+        std::string marca;
+        std::string modello;
         std::vector<cauto::optional> optionals;
         std::optional<cauto::usato> usato;
         std::optional<std::string> utente;
@@ -34,8 +34,8 @@ namespace cauto
 
             if (id.has_value())
                 res["id"] = id.value();
-            res["macchina_marca"] = macchina_marca;
-            res["macchina_modello"] = macchina_modello;
+            res["marca"] = marca;
+            res["modello"] = modello;
             res["optionals"] = opt;
             if (usato.has_value())
                 res["usato"] = usato.value().toJson();
@@ -62,8 +62,8 @@ namespace cauto
         {
             if (j.contains("id"))
                 id = j.at("id").get<int>();
-            macchina_marca = j.at("macchina_marca").get<std::string>();
-            macchina_modello = j.at("macchina_modello").get<std::string>();
+            marca = j.at("marca").get<std::string>();
+            modello = j.at("modello").get<std::string>();
             for (const auto &item : j.at("optionals"))
             {
                 cauto::optional opt;

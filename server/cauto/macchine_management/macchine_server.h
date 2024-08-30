@@ -67,7 +67,7 @@ namespace rest_server
             database.get_all();
 
             cauto::macchina nuovoModello;
-            if (database.find_modello(body["marca"].get<std::string>(), body["nome_univoco"].get<std::string>(), nuovoModello))
+            if (database.find_modello(body["marca"].get<std::string>(), body["modello"].get<std::string>(), nuovoModello))
             {
                 response.send(Http::Code::Conflict, {});
                 return;
@@ -104,7 +104,7 @@ namespace rest_server
 
             cauto::macchine_management database;
             database.get_all();
-            if (!database.remove(body["marca"].get<std::string>(), body["nome_univoco"].get<std::string>()))
+            if (!database.remove(body["marca"].get<std::string>(), body["modello"].get<std::string>()))
             {
                 response.send(Http::Code::No_Content, {});
                 return;
