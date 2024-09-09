@@ -1,20 +1,23 @@
-\documentclass[a4paper, 11pt,oneside,]{book}
+\documentclass[a4paper, 11pt,oneside]{book}
 \usepackage{import}
 \usepackage[T1]{fontenc}
 \usepackage{hyperref}
 \usepackage[utf8]{inputenc}
 \usepackage{tocloft}
-\usepackage[english,italian]{babel} % Lingua principale italiano, con parti in inglese
-\usepackage{graphicx} % Per includere immagini esterne
-\usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm,headheight=14pt]{geometry} %impaginazione e margini documento
+\usepackage[english,italian]{babel} 
+\usepackage{graphicx} 
+\usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm,headheight=14pt]{geometry}
 \usepackage{titlesec}
-\usepackage{mathptmx} % font simil Times New Roman
+\usepackage{mathptmx}
 \usepackage{fancyhdr}
 \usepackage{float}
 \usepackage{xcolor}
 \usepackage{amsmath}
 \usepackage{enumitem}
 \usepackage[most]{tcolorbox}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{array}
 
 \newtcolorbox{mybox}[2][]{
     title = #2,#1,breakable,
@@ -32,7 +35,7 @@
 
 
 % personalizzazioni
-\graphicspath{{image/}}
+\graphicspath{{immagini/}}
 \newcommand{\add}[1]{\import{componenti/}{#1}}
 \newcommand{\spacing}{\par\bigskip\noindent}
 
@@ -52,6 +55,7 @@
 %Inizio Elaborato
 \begin{document}
 
+
 % input file frontespizio.tex
 \add{frontespizio}
 
@@ -60,6 +64,11 @@
     \hypersetup{hidelinks}
     \tableofcontents
     \addtocontents{toc}{~\hfill\textbf{Pagina}\par}
+\endgroup
+
+\begingroup
+    \hypersetup{hidelinks}
+    \listoffigures
 \endgroup
 
 
@@ -107,7 +116,7 @@
     La segreteria amministrativa del gruppo è responsabile dell'inserimento delle informazini su modelli e optional di ogni marca. Essa può accedere al sistema e visualizzare i preventivi per cliente, per marca
     e per negozio di consegna richiesto.
     \spacing
-    Il sistema deve inoltre permettere all'utente di configurare l'auto avendo un controllo del prezzo finale dell'auto ad ogni momento.
+    Il sistema deve inoltre permettere all'utente di configurare l'auto avendo un controllo del prezzo finale dell'auto ad ogni momento. 
 
 
 
@@ -134,9 +143,20 @@
             Pistache è un framework leggero e open-source scritto in C++ per lo sviluppo di server HTTP. Progettato per essere semplice ed efficiente, Pistache offre un architettura basata su eventi e supporta la creazione di server web ad alte prestazioni,
             in grado di gestire numerose connessioni simultanee. \'E particolarmente adatto per lo sviluppo di API RESTfull, grazie alla sua capacità di gestire richieste e risposte HTTP in modo intuitivo e veloce. Pistache è una scelta popolare per gli sviluppatori 
             in C++ che cercano un framework minimalista ma potente per costruire applicazioni web scalabili e performanti.
+        \subsection{Postman}
+            Si tratta di uno strumento collaborativo per lo sviluppo e il test delle API. Consente agli sviluppatori di inviare richieste HTTP, visualizzare le risposte e automatizzare i test semplificando il processo di interazione con le API durante lo sviluppo.
+            Con Postaman è possibile creare e gestire raccolte di richieste, configurare ambienti, variabili e documentare le API in modo efficiente. Grazie alla sua interfaccia user-friendly e alle potenti funzionalità di automazione è diventato uno strumento essenziale 
+            per lo sviluppo, debug e la gestione della API migliorando così la produttività e la collaborazione nei team di sviluppo
+        \subsection{Karma}
+            Karma è un test runner per Javascript sviluppato come parte dell'ecosistema Angular. Progettato per facilitare il processo di testing, consente di eseguire test unitari e di integrazione direttamente nel browser, garantendo che il codice funzioni correttamente
+            in diversi ambienti. Supporta vari framework di test come Jasmine e Mocha e si integra facilmente nei flussi di lavoro e i sviluppo continuo. Con Karma,gli sviluppatori, possono automatizzare l'esecuzione dei test su più browser e dispositivi ricevendo feedback immediato
+            sulle modifiche al codice, il che rende il processo di sviluppo delle applicazioni Angular più affidabile e efficiente
+        \subsection{Jasmine}
+            Jasmine è un framework di testing per Javascript, ampiamente utilizzato nel contesto Angular per scrivere test unitari.E'basato su un'architettura di testing behavior-driven(BDD), che consente di secrivere il comportamento del codice in modo leggibile e intuitivo. Jasmine 
+            non richiede dipendenze esterne e offre un ampia gamma di funzionalità, come gli assertion, gli spy per il monitoraggio delle funzioni e la gestione asincrona del test. Quando integrato con angular, Jasmine permette di testare i singoli componenti, servizi e moduli assicurandosi
+            che ogni parte dell'applicazione funzioni come previsto contribuendo con alla creazione di codice affidabile a manutenibile
     \section{Formule applicate}
         Nello sviluppo di questo software ci siamo soffermati su due punti in particolare che richiedevano precise formule per soddisfare la desiderata.
-        \spacing
         La prima riguarda la fase di configurazione dell'auto dove il prezzo finale deve sempre essere controllabile in ogni momento pertanto il calcolo che viene fatto è il seguente:
         \begin{gather*}
             p_{f} = p_{0} + {\sum_{0}^{i}} p_{i} \\
@@ -358,9 +378,7 @@
     e le relazioni tra di esse come l'ereditarietà, l'associazione e la composizione. Si tratta di uno strumento fondamentale per la progettazione del software poichè consente di visualizzare e definire
     chiaramente l'architettura del sistema, facilitando la comprensione, la manutenzione e l'implementazione del codice.
     \spacing
-    Si tratta del secondo step che abbiamo deciso di sviluppare in quanto, una volta ultimato, permetteva una stesura iniziale del codice avendo già ideato quella che doveva essere a grandi linee la 
-    struttura dal software.
-    \spacing
+    Si tratta del secondo step che abbiamo deciso di sviluppare in quanto serviva a dare un'idea generale della struttura del processo e permettere una stesura iniziale del codice in base alla metodologia che abbiamo deciso di adottare descritta nel capitolo dedicato. 
     All'interno del diagramma ogni classe viene rappresentata in forma di un rettangolo, che può avere fino a 3 slot:
     \begin{itemize}
         \item nome e l'eventuale stereotipo (in UpperCamelCase, obbligatorio)
@@ -374,10 +392,34 @@
     \end{itemize}
     Per rappresentare invece le istanze delle classi si utilizza una notazione molto simile, quinid avranno anch'esse una forma rettangolare. Le differenze sostanziali stanno:
     \begin{itemize}
-        \item il titolo degli oggetti è sottolineato e nella forma "nome:classe" con nome opzionale
+        \item Il titolo degli oggetti è sottolineato e nella forma "nome:classe" con nome opzionale
         \item Non hanno uno slot per le operazioni, possono invece definire valori per gli attributi
     \end{itemize}
-%quarto capitolo
+    Fatta questa premessa si procede a mostrare mostrare il diagramma delle classi nella sua interezza e successivamente verrà fornita una breve descrizione di come è stato composto.
+    \begin{figure}[H]
+        \includegraphics[width=\textwidth]{diagramma_delle_classi.png}
+        \caption{Diagramma delle Classi}
+        \label{fig:diagramma_delle_classi}
+    \end{figure}
+    \spacing
+    All'interno del diagramma sono state riportate tutte le classi inserite all'interno del codice. Per completezza abbiamo deciso di mostrare anche tutte le operazioni e gli attributi che abbiamo creato.\\
+    Per quanto riguarda invece i tipi di collegamento abbiamo scelto di utilizzare:
+    \begin{itemize}
+        \item \textbf{<<instanceOf>>:} \'Abbiamo deciso di rappresentare una istanza per la classe utente, dove si va a passare l'attributo "role". questo
+              è stato pensato per indicare la registrazione sulla piattaforma da parte dell'utente. A differenza degli altri due non ha possibilità di scegliere, il ruolo deve essere sempre definito
+        \item \textbf{Associazione:} si tratta di un tipo di relazione generico che va ad indicare l'esistenza di un collegamento tra le istanze delle classi
+        \item \textbf{Realizzazione:} identificabile dai riquadri che contengono <<interface>> e si tratta di una relazione semantica in cui il fornitore presenta una specifica e il cliente la realizzano
+        \item \textbf{Dipendenza:} si tratta di una forma più debole di relazione tra classi e operazioni
+        \item \textbf{Aggregazione:} si tratta di una relazione poco forte dove le due parti possono esistere anche da sole ed inoltre ognuna di esse può appartenere a più aggregazioni
+        \item \textbf{Composizione:} relazione molto forte dove le part dipendono dal tutto e non possono esistere al di fuori di esso 
+    \end{itemize}
+    \spacing
+    Dall'immagine si possono vedere dei riquadri leggermente diversi che non sono propriamente elementi del diagramma delle classi per questo motivo abbiamo deciso di rappresentarli solamente con linee tratteggiate.
+    Questa scelta è stata fatta in quanto alcune classi sono state composte con degli object e per poter dare chiarezza su come è veramente composta la classe. Quindi i blocchi in questione sono da intendere come un espansione
+    dell'elemento object di riferimento che mostra gli attributi di cui è composto
+
+
+% quinto capitolo
 \chapter{Diagrammi d'interazione}
     Si tratta di diagrammi di comportamento che modellano le interazioni tra varie entità di un sistema inoltre permettono di visualizzare
     lo scambio di messaggi trà entità nel tempo. Il loro scopo principale è quello di mostrare come un certo comportamento viene realizzato dalla collaborazione
@@ -396,5 +438,295 @@
             \item istanze di classe
         \end{itemize}
     \end{itemize}
-    Tutti gli elementi che ci occorrono vengono estrapolati dai vari diagrammi e schede dei capitoli precedenti
+    Generalmente nei diagrammi di interazione non compaiono direttamente classificatori come le classi, al loro posto ci sono:
+    \begin{itemize}
+        \item \textbf{Istanze} di classificatori (oggetti, istanze di attori)
+            \begin{itemize}
+                \item rappresenta uno specifico oggetto, e solo quello.
+            \end{itemize}
+        \item \textbf{Linee di vita} (lifeline) di classificatori
+            \begin{itemize}
+                \item è più generale.
+                \item rappresenta un'istanza arbitraria di un classificatore.
+                \item fornisce modi per specificare come quest'istanza viene scelta
+                \item esprime il ruolo giocato da un'istanza senza preoccuparsi della sua identità
+            \end{itemize}
+    \end{itemize}
+    La differenza tra questi due elementi è sottile ma, in generale, è preferibile usare le linee di vita
+    \spacing
+    In tutto ci sono 4 tipi di diagrammi di interazione ma andremo ad elaborare solamente il \textbf{diagramma di sequenza} che, come dice il nome, è adatto a mostrare la sequenza
+    temporale degli avvenimenti per ogni entità nel diagramma e cominciamo sviluppando quelli relativi ai casi d'uso presi singolarmente
+    \spacing
+    \section{Casi d'uso}
+        Per quanto riguarda i casi d'uso del Cliente viene omessa la consulta del catalogo in quanto l'iterazione con il sistema è veramente minima se non quasi nulla pertanto anche rappresentandola tramite
+        diagramma non mostrerebbe molte più informazioni rispetto a quelli precedentemente trattati. Si procede quindi a mostrare quello riguardante la creazione del preventivo
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.75]{sequence_diagram_preventivo.png}
+            \caption{Diagramma di sequenza Cliente}
+            \label{fig:diagramma_sequenza_utente}
+        \end{figure}
+        \spacing
+        A livello temporale si è cercato di esprimere in sequenza come dovrebbe avvenire il processo per la richiesta di un preventivo da parte di un cliente.
+        Innanzitutto l'utente può consultare liberamente ogni auto a catalogo e ha la facoltà di configurarla, durante questo processo il sistema dovrà fornire in ogni momento
+        il prezzo finale dell'auto. Una volta scelta e configurata l'auto il cliente può procedere con l'acquisto ma prima di poter fare ciò deve essere per forza autenticato.
+        Da qui in avanti avrà dunque la possibilità di procedere in due strade, la prima è quella di richiedere direttamente il preventivo, nella seconda invece può scegliere anche di richiedere 
+        la valutazione del proprio usato. Per entrambi i casi l'ultimo passaggio che rimane da fare è quello di attendere di ricevere conferma da parte del sistema dopo la quale l'utente può procedere a pagare
+        l'acconto dovuto ed attendere che l'auto sia pronta per poterla andare a ritirare nella sede da lui specificata.
+        \spacing
+        Si procede dunque a mostrare il diagramma creato per gli Impiegati.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.75]{sequence_diagram_confirm.png}
+            \caption{Diagramma di sequenza Impiegato}
+            \label{fig:diagramma_sequenza_impiegato}
+        \end{figure}
+        \spacing
+        In questo caso il passaggio che avviene è più semplice, una volta che l'impiegato effettua l'accesso alla piattaforma, quest'ultima fornirà la lista di tutti
+        i preventivi che sono in attesa di conferma ossia quei preventivi nel quale è stata richiesta la valutazione dell'usato. Quello che deve fare l'impiegato è quindi controllare le immagini che sono state fornite
+        e stimare un prezzo per l'auto usata, dopodichè può procedere con la conferma del preventivo. Una volta fatto questo non gli resta altro che avvisare il cliente quando l'auto è pronta per il ritiro
+        \spacing
+        Procediamo infine a mostrare il diagramma creato per la segreteria.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.75]{sequence_diagram_catalog.png}
+            \caption{Diagramma di sequenza Segreteria}
+            \label{fig:diagramma_sequenza_segreteria}
+        \end{figure}
+        \spacing
+        Anche in questo caso la procedura è molto semplice, la segreteria effettua l'accesso alla piattaforma che provvederà a fornire la lista di tutte le auto a catalogo. Avrà quindi la possibilità di aggiornare le auto
+        già presenti oppure aggiungere nuove auto.
+    \section{Sistema}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.5]{sequence_diagram_sistema.png}
+            \caption{Diagramma di sequenza sistema}
+            \label{fig:diagramma_sequenza_sistema}
+        \end{figure}
+        \spacing
+        Quanto riportato è il diagramma di sequenza che rappresenta il funzionamento dell'intero sistema a livello temporale di quello che accadrebbe dall'inizio alla fine nello svolgimento della sua funzione principale,
+        mentre di seguito vengono riportati i diagrammi che fanno riferimento all'operatore ref utilizzato nell'immagine soprastante.
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.75]{sequence_diagram_rif_autenticazione.png}
+            \caption{Diagramma di sequenza autenticazione}
+            \label{fig:diagramma_sequenza_autenticazione}
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.75]{sequence_diagram_rif_pagamento.png}
+            \caption{Diagramma di sequenza pagamento}
+            \label{fig:diagramma_sequenza_pagamento}
+        \end{figure}
+        \spacing
+        \newpage\noindent
+        Con il diagramma riportato nella figura 5.4 abbiamo messo in evidenza come le varie entità collaborino nel fornire l'output richiesto dalla desiderata
+        \spacing
+        Nella costruzione di tutti i diagrammi di attività riportati abbiamo utilizzato:
+        \begin{itemize}
+            \item \textbf{Messaggi:}
+            \begin{itemize}
+                \item chiamata sincrona: ossia quei messaggi che bloccano chi li manda in attesa di un messaggio di ritorno del destinatario
+                \item chiamata asincrona: dove il mittente non si aspetta una risposta e prosegue immediatamente
+                \item chiamata di ritorno: anche se opzionali abbiamo scelto di utilizzarli ogni qual volta è stata definita una richiesta sincrona per indicare
+                cosa ci si aspetta per poter proseguire
+                \item creazione: come dice il nome duranta la sequenza servono ad indicarela creazione di un nuovo oggetto
+                \item distruzione: similmente a quello di creazione indica la distruzione dell'oggetto, una volta arrivati a quel punto non sarà più accessibile
+            \end{itemize}
+            \item \textbf{Attivazioni annidate:} le linee vita mandano messaggi a se stesse si tratta di operazioni frequenti per indicare per esempio invocazioni di operazioni private
+            \item \textbf{stato:} è definito come una condizione o situazione durante la vita dell'oggetto in cui esso soddisfa una condizione, uno stato o aspetta un evento
+            \item \textbf{operatori:} determina la semantica dell'esecuzione di un frammento combinato ossia una sottoarea che racchiude una parte dell'interazione e le modalità della sua esecuzine, quelli utilizzati sono:
+            \begin{itemize}
+                \item opt: corrisponde a if/then e accetta solo un operando che viene eseguito se e solo se la guardia è valutata true
+                \item alt: corrisponde a case/select e accetta un qualunque numero di operandi e ne esegue al più uno
+                \item ref: rende i diagrammi di sequenza modulari, l'operatore contiene il nome di un'altra interazione che viene eseguita qui
+            \end{itemize}
+        \end{itemize}
+
+
+% sesto capitolo
+\chapter{Diagrammi di Stato e attività}
+    Si tratta di diagrammi che permettono di descrivere il comportamento, procediamo ad analizzarli singolarmente
+    \section{Diagramma di stato}
+        Serve a modellare il comportamento (generalmente di una sola entità) come variazione del suo stato interno. Come dice il nome esso permette di descrivere la sequenza di stati in cui si trova un oggetto durante il suo
+        ciclo di vita e in risposta agli eventi.\\
+        In UML qualunque oggetto può essere associato a una macchina a stati che descrive il funzionamento delle sue istanze ed è caratterizzato da 3 elementi:
+        \begin{itemize}
+            \item Uno \textbf{stato}, ossia una condizione o situazione nella vita di un oggetto in cui esso:
+            \begin{itemize}
+                \item soddisfa una condizione
+                \item esegue un'attività
+                \item aspetta un evento
+            \end{itemize}
+            \item Un \textbf{evento}, ossia la specifica di un'occorrenza che ha una collocazione nel tempo e nello spazio
+            \item Una \textbf{transizione}, ossia il passaggio da uno stato a un altro in risposta ad un evento. Oltre allo stato d'origine e destinazione una transizione può specificare
+            \begin{itemize}
+                \item \textbf{event:} un trigger che attiva il passaggio di stato
+                \item \textbf{guard:} una condizione che, se vera, permette il passaggio di stato
+                \item \textbf{action:} un'azione che risulta dal cambio di stato
+            \end{itemize}
+        \end{itemize}
+        Procediamo quindi ad elaborare i due diagrammi di stato che abbiamo deciso di sviluppare
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.55]{diagramma di stato_autenticazione.png}
+            \caption{Diagramma di stato autenticazione}
+            \label{fig:diagramma_stati_autenticazione}
+        \end{figure}
+        \begin{figure}[H]
+            \centering
+            \includegraphics[scale=0.49]{diagramma di stato_preventivo.png}
+            \caption{Diagramma di stato preventivo}
+            \label{fig:diagramma_stato_preventivo}
+        \end{figure}
+        \pagebreak\noindent
+        Nella costruzione del diagramma sono stati utilizzati solamente gli elementi base, l'unico elemento particolare che è stato aggiunto per il preventivo
+        è lo \textbf{stato composito e sincronizzazione} che permette di suddividere la complessità del modello. Dall'esterno si vede un macro-stato al cui interno però ci sono altri stati. Con la sincronizzazione invece si divide lo stato composito in sotto-diagrammi
+        e si utilizzano gli operatori fork e join.
+    \section{Diagramma di attività}
+        I diagrammi di attività servono per modellare un attività relativa ad un qualsiasi oggetto,tra i suoi usi più comuni troviamo il modellare il flusso di un caso d'uso, modellare il funzionamento di un operatore di classe e modellare un algoritmo e sono composti da tre elementi principali:
+        \begin{itemize}
+            \item Nodi \textbf{azione:} specificano unità di comportamento e possono invocare un'attività, un comportamento o un'operazione
+            \item Nodi \textbf{oggetto:} specificano oggetti usati come input e output di azioni
+            \item Nodi \textbf{controllo:} specificano il flusso delle attività.
+        \end{itemize}
+        Per capire la semantica dei diagrammi di attività bisogna immaginare delle entità chiamate token, che viaggiano lungo il diagramma. Il flusso di questi token definisce quello dell'attività inoltre essi possono rimanere fermi in un nodo azione/oggetto in attesa che si avveri una condizione su una freccia,
+        oppure una precondizione o postcondizione su un nodo. Un nodo azione viene eseguito quando sono presenti token su tutti gli archi in entrata e tutte le precondizioni sono soddisfatte. Quando invece termina un azione vengono generati control token su tutti gli archi in uscita.
+        \spacing
+        Procediamo a mostrare il suddetto diagramma:
+        \begin{figure}[H]
+            \centering
+            \includegraphics[trim={0 36cm 0 0},clip, scale=0.6]{diagramma di attività.png}
+            \phantomcaption
+        \end{figure}
+        \begin{figure}[H]
+            \continuedfloat
+            \centering
+            \includegraphics[trim={0 0 0 18cm},clip, scale=0.6]{diagramma di attività.png}
+            \caption{Diagramma di attività}
+            \label{fig:diagramma_attività}
+        \end{figure}
+        \spacing
+        Oltre a quanto già riportato, nella creazione del diagramma sopra riportato abbiamo utilizzato dei particolari nodi di controlli ossia:
+        \begin{itemize}
+            \item \textbf{nodi iniziali/finali:} classici nodi del diagramma, il disco znero marca l'inizio dell'attività e quindi la generazione del token mentre quello nero bordato indica che l'attività ha termine
+            \item \textbf{nodi di decisione:} hanno un input e vari output mutuamente esclusivi
+            \item \textbf{nodi fork:} hanno un ingresso e varie uscite, ciò corrisponde al token in ingresso che viene duplicato verso tutte le uscite
+            \item \textbf{nodi join:} hanno vari ingressi e una sola uscita, quando sono presenti token su tutti gli ingressi, viene prodotto almeno un token in uscita
+            \item \textbf{nodi finali di flusso} quando raggiunti da un token, causano la terminazione solo del flusso che li ha toccati
+        \end{itemize}
+        \spacing
+        Arrivati alla conclusione del capito si può notare come i diagrammi di stato e di attività siano in pratica la stessa cosa semplicemente usati in modo diversi. Sostanzialmente i diagrammi di attività sono diagrammi di stato in cui gli stati vengono convertiti in azioni.
+        Infatti come si può notare, confrontando quanto riportato si può notare una certa similitudine nella struttura e negli elementi tra i vari diagrammi
+
+
+
+% settimo capitolo
+\chapter{Test del Software}
+    Per verificate la solidità, l'efficenza, la chiarezza e la precisione nel soddisfare la richiesta del software prodotto sono state eseguite le seguenti attività:
+    \begin{enumerate}
+        \item Revisione della desiderata e del documento creato
+        \item Verifica della consistenza tra diagrammi e codice prodotto
+        \item Ispezione del codice per verificare la corretta struttura e ricerca errori a livello di leggibilità
+        \item Unit test eseguito con l'ausilio di Karma e Jasmine per il Front End e Postaman per il Back End
+        \item Test da parte degli sviluppatori del software
+        \item Test da parte di un utente esterno con raccolta feedback
+    \end{enumerate}
+    L'esecuzione di questi test ha portato a modifiche, migliorie e nuove implementazioni del software che a conti fatti corrisponderebbe a diverse versione di una beta prima del rilascio/vendita effettiva del software che possono essere riassunti nel seguente modo
+    \begin{center}
+        \begin{tabular}{|| m{0.1\textwidth} | m{0.8\textwidth} ||}
+            \hline
+            Versione & Descrizione \\
+            \hline
+            \hline
+            v0.1 & Si tratta di una versione base durante la creazione del documento per portarsi avanti con lo sviluppo dove erano presenti semplici elementi comuni a tutte le interfaccie\\
+            \hline
+            v0.2 & Si tratta della versione prodotta una volta concluso il documento e quindi tutta la parte di analisi e progettazione \\
+            \hline
+            v0.3 & Si tratta della versione pordotta dovo aver terminato i diversi Unit Test \\
+            \hline
+            v0.4 & Si tratta della versione prodotta dopo aver concluso i test da parte degli sviluppatori \\
+            \hline
+            v1.0 & Si può considerare la prima release del software dovo aver eseguito i test da parte degli utenti esterni. Si tratta delle versione del software presentata oggi \\
+            \hline
+        \end{tabular}
+    \end{center}
+    \section{Revisione e Ispezione}
+        In questa fase siamo semplicemente partiti analizzando nuovamente la desiderata per accertarci che non ci fosse sfuggito niente durante le prime letture e analisi del contenuto. Una volta accertati che avessimo inquadrato tutti i punti siamo passati a controllare il documento
+        confrontando i diversi diagrammi UML prodotti con il codice sviluppato per verificarne la consistenza. Si è trattato del punto più decisivo nello sviluppo del software.\\
+        Una volta conclusa l'attività siamo passati a ricontrollare il codice per controllare che non fossero presenti errori a livello di leggibilità e struttura del software, dopo aver eseguito questo passaggio si può considerare il software quasi completo, i restanti test che abbiamo fatto
+        hanno solamento portato a correzzioni o piccole rivisatazioni
+    \section{Unit Test}
+    \section{Test degli Sviluppatori}
+        In questa fase abbiamo testato personalmente il sistema per controllare che le funzioni previste dal software funzionassero correttamente. Nello specifico i test che si sono svolti sono i seguenti:
+        \begin{itemize}
+            \item \textbf{Autenticazione:} Per questo test abbiamo provato a simulare la creazione di nuove utenze relative al personale ossia impiegato e segreteria. Con queste utenze si è provato ad effettuare l'accesso per controllare se funzionasse correttamente e restituisse la visualizzazione
+            dedicata alle mansioni che devono svolgere. Per l'utenza dei clienti si è provato a creare l'utenza attraverso la pagina dedicata e abbiamo verificato che non ci fossero problemi
+            \item \textbf{Catalogo:} Per questo test abbiamo provato ad accedere alla pagina dedicata al catalogo e abbiamo verificato che restituisse correttamente tutte le auto a catalogo, abbiamo inoltre provato a configurare alcune delle auto presenti per verificare che il prezzo finale venisse
+            mostrato correttamente
+            \item \textbf{Preventivo:} La prima cosa che abbiamo controllato in questa fase e che la pagina dedicata per la creazione del preventivo fosse accessibile solo da autenticato quindi abbiamo provato a controllare che non ci fosse alcun modo per accederci senza aver effettuato il login. Una volta
+            fatto questo abbiamo provato a creare un preventivo e verificare che avvenisse correttamente e che fosse correttamente mostrato nella pagina dedicata della lista dei preventivi per tutte le utenze interessate
+            \item \textbf{Auto usata:} Da un preventivo precedentemente creato abbiamo provato ad aggiungere la richiesta per una valutazione dell'usato allegando le immagini necessarie e abbiamo verificato che quest'ultime venissero salvate correttamente e che la richiesta fosse visibile
+            \item \textbf{Impiegato:} Provando ad accedere con un utenza da impiegato abbiamo verificato che si vedessero correttamente tutti i preventivi sia quelli che richiedevano la valutazione dell'usato sia quelli già avvisati che erano in attesa della consegna. Abbiamo controllato che riuscisse a vedere
+            correttamente le immagini per la valutazione e che riuscisse a completare la valutazione. Abbiamo inoltre porvato ad avvisare il cliente quando l'auto fosse pronta per la consegna
+            \item \textbf{Segreteria:} Provando ad accedere con un utenza da segreteria abbiamo verificato che vedesse correttamente tutte le pagina ossia la lista dei preventivi e del catalogo. Nella pagina dei preventivi abbiamo controllato che ci fossero tutti e che avesse la possibilità di filtrarli mentre
+            nella pagina del catalogo abbiamo controllato che potesse modificare, aggiungere e rimuovere sia auto e preventivi
+            \item \textbf{Acquisto:} Dopo tutte le premesse con un preventivo finalizzato abbiamo testato che il pagamento dell'acconto e la proposta della data di consegna funzionasse correttamente. Come ultimo test abbiamo inoltre verificato che passati i 20 giorni senza che avvenisse il pagamento il preventivo
+            venga rimosso
+        \end{itemize}
+    \section{Test degli Utenti}
+    Come test finale abbiamo fatto provare l'applicazione a diversi utenti con più o meno dimestichezza con la tecnologia. Per lo svolgimento del test è stata solamente fornita la finalità del software. Nella prima fase abbiamo dato agli utenti piena libertà di navigazione mentre in un secondo momento abbiamo richiesto
+    alcune particolari simulazioni indicando cosa volevamo ottenere per testare in particolare le utenze degli impiegati e delle segreteria. Durante ogni fase del test abbiamo risposto ad eventuali domande e raccolti tutti i feedback ricevuti, in questo modo abbiamo avuto la possibilità di correggere alcuni piccoli problemi e migliorato
+    il software del punto di vista dell'usabilità.
+
+
+% ottavo capitolo
+\chapter{Note sul processo di sviluppo}
+    Il progetto è stato sviluppato principalmente seguendo il modello di tipo a Cascata implementando alcuni aspetti del tipo Agile.
+    Il modello a cascata è caratterizzato da fasi separate e distinte di specifiche e sviluppo, in linea di principio una fase deve essere completata prima di passare alla fase successiva. Il modello a cascata rende difficile "accogliere" i cambiamenti a processo avviato quindi non è l'ideale per rispondere ad eventuali modifiche
+    richieste dal cliente. Al contrario però si presta molto bene nel caso in cui i requisiti siano ben chiari fin dall'inizio come per il nostro caso dove è stato proposto lo sviluppo di una desiderata che rimasta fissa. Il fatto dell'applicazione del modello a cascata è ben visibile anche dall'elaborato appena sviluppato. Ogni aspetto
+    dello sviluppo è avvenuto passo per passo, abbiamo definito con chiarezza:
+    \begin{itemize}
+        \item I requisiti richiesti
+        \item L'ideazione del design del software
+        \item L'implementazione e gli Unit Test
+        \item Test del sistema
+    \end{itemize}
+    Procedendo in questo modo abbiamo creato una solida base su cui lavorare nello step successivo riducendo così il rischio di "perdere tempo" nel dover tornare indietro  nell'accorgerci che qualcosa era stato definito in maniera errata. \\
+    Per permettere comunque un lavoro più fluido si è deciso comunque di uscire un pò dalla rigida struttura del modello cascata per agevolare un pò le tempistiche visti gli impegni del gruppo. Periodicamente ci fornivamo a vicenda gli aggiornamenti riguardo ciò che avevamo
+    fatto, in questo modo se uno doveva lavorare allo step successivo poteva cominciare a portarsi avanti con il lavoro defininendo almeno gli aspetti base e una volta terminato lo step antecedente poteva completarlo aggiungendo ciò che restava in sospeso.\\
+    Per quanto riguardo l'intera implementazione ci siamo suddivisi i ruoli in base alla confidenza dei membri del gruppo sulle parti richieste da sviluppare, ciò ha permesso uno sviluppo più rapido in quanto abbiamo ridotto il rischio di problemi dovuti allo sviluppo simultaneo del codice. L'elemento chiave per la riuscita nello sviluppo del 
+    software è stata la pianificazione dettagliata creata all'inizio che abbiamo seguito dall'inizio alla fine. Nell'ottica del team work eravamo comunque pronti a fornire supporto in caso di necessita sulle attività degli altri membri del gruppo.
+
+
+
+% nono capitolo
+\chapter{Pattern Architetturali}
+    Un pattern architetturale è una soluzione collaudata e riutilizzabile per affrontare problemi comuni nella progettazione dell'architettura del software. Esso definisce una struttura organizzativa generale per un sistema fornendo linee guida su come suddividere il software in componenti, moduli e livelli e su come questi interagiscono tra loro.
+    Questa tipologia di pattern aiutano a garantire che il software sia scalabile, manutenibile e flessibile e la sua adozione consente ai progettisti di beneficiare delle esperienze accumulate nella risoluzione di problemi simili, migliorando l'efficienza e la qualità del progetto.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{Architettura MVC.png}
+        \caption{Architettura MVC}
+        \label{fig:architettura_mvc}
+    \end{figure}
+    \spacing
+    Per il nostro progetto abbiamo scelto di utilizzare il \textbf{pattern MVC}. Come dice il nome, questo modello è caratterizzato da tre elementi:
+    \begin{itemize}
+        \item \textbf{Modello:} Rappresenta la logica di gestione dei dati. Esso gestisce i dati dell'applicazione, risponde alle richieste della View per l'accesso ai dati e risponde alle istruzioni del Controller per modificare i dati
+        \item \textbf{Vista:} Si occupa della presentazione dei dati all'utente. Essa visualizza i dati che riceve dal Modello e riflette eventuali cambiamenti nei dati. E' responsabile dell'interfaccia utente e di come i dati vengono presentati all'utente finale
+        \item \textbf{Controllore:} Funziona come intermediario tra il Modello e la Vista. Esso riceve l'input dell'utente attraverso la Vista, elabora tale input (eventualmente interagendo con il Modello) e aggiorna la Vista di conseguenza.
+    \end{itemize}
+    Le azioni dell'utente saranno catturate dai listener del controllore, quest'ultimi sono pensati per reagire di conseguenza andando a modificare le informazioni contenute nel Modello e di conseguenza aggiornetà la vista che rappresenta il Modello\\
+    \'E stato scelto questo modello in quanto si adatta bene a quello che abbiamo progettato, i componenti dei modelli e del controllore possono essere riutilizzati con diverse viste il che aumenta l'efficenza nello sviluppo di nuove funzionalità o versioni dell'applicazione. Il modello MVC è una scelta popolare per lo sviluppo di applicazioni web 
+    e software, soprattutto in contesti in cui la manutenibilità, la modularità e la collaborazione sono essenziali.
+    \spacing
+    
+
+% decimo capitolo
+\chapter{Pattern adottati}
+    I design pattern sono per l'appunto pattern che utilizzano metodi e classi di un linguaggio OO. Durante lo sviluppo del progetto abbiamo utilizzato i seguenti pattern:
+    \begin{itemize}
+        \item 
+    \end{itemize}
 \end{document}

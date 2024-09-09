@@ -1,16 +1,32 @@
 \babel@toc {italian}{}\relax 
 \babel@toc {italian}{}\relax 
 ~\hfill \textbf {Pagina}\par 
-\contentsline {chapter}{\numberline {1}Desiderata}{2}{chapter.1}%
-\contentsline {chapter}{\numberline {2}Specifiche Tecniche}{4}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Tecnologie utilizzate}{4}{section.2.1}%
-\contentsline {subsection}{\numberline {2.1.1}C++}{4}{subsection.2.1.1}%
-\contentsline {subsection}{\numberline {2.1.2}Angular}{4}{subsection.2.1.2}%
-\contentsline {subsection}{\numberline {2.1.3}Json}{4}{subsection.2.1.3}%
-\contentsline {subsection}{\numberline {2.1.4}Pistache}{5}{subsection.2.1.4}%
-\contentsline {section}{\numberline {2.2}Formule applicate}{5}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Casi d'uso}{6}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Diagramma dei casi d'uso}{6}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Schede di specifica}{8}{section.3.2}%
-\contentsline {chapter}{\numberline {4}Diagramma della classi}{12}{chapter.4}%
-\contentsline {chapter}{\numberline {5}Diagrammi d'interazione}{13}{chapter.5}%
+\contentsline {chapter}{\numberline {1}Desiderata}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Specifiche Tecniche}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Tecnologie utilizzate}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}C++}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Angular}{5}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Json}{5}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Pistache}{6}{subsection.2.1.4}%
+\contentsline {subsection}{\numberline {2.1.5}Postman}{6}{subsection.2.1.5}%
+\contentsline {subsection}{\numberline {2.1.6}Karma}{6}{subsection.2.1.6}%
+\contentsline {subsection}{\numberline {2.1.7}Jasmine}{6}{subsection.2.1.7}%
+\contentsline {section}{\numberline {2.2}Formule applicate}{6}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Casi d'uso}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Diagramma dei casi d'uso}{8}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Schede di specifica}{10}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Diagramma della classi}{14}{chapter.4}%
+\contentsline {chapter}{\numberline {5}Diagrammi d'interazione}{17}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Casi d'uso}{18}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Sistema}{20}{section.5.2}%
+\contentsline {chapter}{\numberline {6}Diagrammi di Stato e attività}{23}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Diagramma di stato}{23}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Diagramma di attività}{25}{section.6.2}%
+\contentsline {chapter}{\numberline {7}Test del Software}{28}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Revisione e Ispezione}{28}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Unit Test}{29}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Test degli Sviluppatori}{29}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Test degli Utenti}{30}{section.7.4}%
+\contentsline {chapter}{\numberline {8}Note sul processo di sviluppo}{31}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Pattern Architetturali}{32}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Pattern adottati}{34}{chapter.10}%

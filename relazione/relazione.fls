@@ -996,6 +996,52 @@ INPUT /usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.
 INPUT /usr/share/texlive/texmf-dist/tex/generic/pgf/libraries/pgflibraryfadings.code.tex
 OUTPUT relazione.pdf
 INPUT /usr/share/texlive/texmf-dist/tex/latex/tcolorbox/tcbposter.code.tex
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+INPUT /usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ptm.fd
@@ -1053,10 +1099,10 @@ INPUT componenti/frontespizio.tex
 INPUT ./componenti/frontespizio.tex
 INPUT ./componenti/frontespizio.tex
 INPUT componenti/frontespizio.tex
-INPUT ./image//Logo.jpg
-INPUT image//Logo.jpg
-INPUT ./image//Logo.jpg
-INPUT ./image//Logo.jpg
+INPUT ./immagini//Logo.jpg
+INPUT immagini//Logo.jpg
+INPUT ./immagini//Logo.jpg
+INPUT ./immagini//Logo.jpg
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
@@ -1116,12 +1162,19 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
 OUTPUT relazione.toc
+INPUT ./relazione.lof
+INPUT relazione.lof
+INPUT relazione.lof
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+OUTPUT relazione.lof
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmro8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmro8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmro8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
 INPUT /usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1ptm.fd
@@ -1132,9 +1185,6 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8c.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8c.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmro8t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmro8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmro8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
@@ -1160,15 +1210,62 @@ INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/symbol/psyr.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/zptmcm7y.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
-INPUT ./image//Diagramma_casi_d'uso.png
-INPUT image//Diagramma_casi_d'uso.png
-INPUT ./image//Diagramma_casi_d'uso.png
-INPUT ./image//Diagramma_casi_d'uso.png
+INPUT ./immagini//Diagramma_casi_d'uso.png
+INPUT immagini//Diagramma_casi_d'uso.png
+INPUT ./immagini//Diagramma_casi_d'uso.png
+INPUT ./immagini//Diagramma_casi_d'uso.png
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmri8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmbi8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmbi8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmbi8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmri8t.vf
+INPUT ./immagini//diagramma_delle_classi.png
+INPUT immagini//diagramma_delle_classi.png
+INPUT ./immagini//diagramma_delle_classi.png
+INPUT ./immagini//diagramma_delle_classi.png
+INPUT ./immagini//sequence_diagram_preventivo.png
+INPUT immagini//sequence_diagram_preventivo.png
+INPUT ./immagini//sequence_diagram_preventivo.png
+INPUT ./immagini//sequence_diagram_preventivo.png
+INPUT ./immagini//sequence_diagram_confirm.png
+INPUT immagini//sequence_diagram_confirm.png
+INPUT ./immagini//sequence_diagram_confirm.png
+INPUT ./immagini//sequence_diagram_confirm.png
+INPUT ./immagini//sequence_diagram_catalog.png
+INPUT immagini//sequence_diagram_catalog.png
+INPUT ./immagini//sequence_diagram_catalog.png
+INPUT ./immagini//sequence_diagram_catalog.png
+INPUT ./immagini//sequence_diagram_sistema.png
+INPUT immagini//sequence_diagram_sistema.png
+INPUT ./immagini//sequence_diagram_sistema.png
+INPUT ./immagini//sequence_diagram_sistema.png
+INPUT ./immagini//sequence_diagram_rif_autenticazione.png
+INPUT immagini//sequence_diagram_rif_autenticazione.png
+INPUT ./immagini//sequence_diagram_rif_autenticazione.png
+INPUT ./immagini//sequence_diagram_rif_autenticazione.png
+INPUT ./immagini//sequence_diagram_rif_pagamento.png
+INPUT immagini//sequence_diagram_rif_pagamento.png
+INPUT ./immagini//sequence_diagram_rif_pagamento.png
+INPUT ./immagini//sequence_diagram_rif_pagamento.png
+INPUT ./immagini//diagramma di stato_autenticazione.png
+INPUT immagini//diagramma di stato_autenticazione.png
+INPUT ./immagini//diagramma di stato_autenticazione.png
+INPUT ./immagini//diagramma di stato_autenticazione.png
+INPUT ./immagini//diagramma di stato_preventivo.png
+INPUT immagini//diagramma di stato_preventivo.png
+INPUT ./immagini//diagramma di stato_preventivo.png
+INPUT ./immagini//diagramma di stato_preventivo.png
+INPUT ./immagini//diagramma di attività.png
+INPUT immagini//diagramma di attività.png
+INPUT ./immagini//diagramma di attività.png
+INPUT ./immagini//diagramma di attività.png
+INPUT ./immagini//diagramma di attività.png
+INPUT immagini//diagramma di attività.png
+INPUT ./immagini//diagramma di attività.png
+INPUT ./immagini//Architettura MVC.png
+INPUT immagini//Architettura MVC.png
+INPUT ./immagini//Architettura MVC.png
+INPUT ./immagini//Architettura MVC.png
 INPUT relazione.aux
 INPUT ./relazione.out
 INPUT ./relazione.out
