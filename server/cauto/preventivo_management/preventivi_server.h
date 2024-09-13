@@ -74,7 +74,7 @@ namespace rest_server
                 newPreventivo.sconto = rand() % 30;
                 if (!newPreventivo.usato.has_value())
                 {
-                    newPreventivo.prezzo_finale = database.calcolaPrezzoFinale(body["macchina_marca"].get<std::string>(), body["macchina_modello"].get<std::string>(), newPreventivo.optionals, newPreventivo.sconto.value());
+                    newPreventivo.prezzo_finale = database.calcolaPrezzoFinale(body["marca"].get<std::string>(), body["modello"].get<std::string>(), newPreventivo.optionals, newPreventivo.sconto.value());
                     if (newPreventivo.prezzo_finale == 0)
                     {
                         response.send(Http::Code::Expectation_Failed, {});
@@ -179,7 +179,7 @@ namespace rest_server
             }
 
             prev.usato.value().valutazione = body["valutazione"].get<double>();
-            prev.prezzo_finale = database.calcolaPrezzoFinale(prev.macchina_marca, prev.macchina_modello, prev.optionals, prev.sconto.value());
+            prev.prezzo_finale = database.calcolaPrezzoFinale(prev.marca, prev.modello, prev.optionals, prev.sconto.value());
             if (prev.prezzo_finale == 0)
             {
                 response.send(Http::Code::Expectation_Failed, {});
