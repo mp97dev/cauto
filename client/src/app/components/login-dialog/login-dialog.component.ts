@@ -1,121 +1,47 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
-import { MatInputModule } from '@angular/material/input';
-import { MatTabsModule } from '@angular/material/tabs';
-import { AuthService } from '../../services/auth.service';
-import { CommonModule } from '@angular/common';
-import {
-  MatButtonModule,
-  MatFabButton,
-  MatIconButton,
-} from '@angular/material/button';
+import { Component, Inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { catchError, tap } from 'rxjs';
+import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../../services/auth.service';
+import { catchError, of } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button'
 
 @Component({
   selector: 'app-login-dialog',
   standalone: true,
+  imports: [ ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatIconModule, MatDialogModule,  MatButtonModule ],
   templateUrl: './login-dialog.component.html',
-  styleUrl: './login-dialog.component.scss',
-  imports: [
-    MatDialogModule,
-    MatTabsModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatIconModule,
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './login-dialog.component.scss'
 })
-export class LoginDialogComponent implements OnInit {
+export class LoginDialogComponent {
+
+  public readonly action
+
   constructor(
+    @Inject(MAT_DIALOG_DATA) data: {action: 'login' | 'signup'},
     private dialogRef: MatDialogRef<LoginDialogComponent>,
-    private as: AuthService
-  ) {}
+    private auth: AuthService
+  ) {
+    this.action = data.action
+  }
 
   form = new FormGroup({
-    login: new FormGroup({
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-    }),
-    registration: new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      username: new FormControl('', [Validators.required]),
-      password: new FormControl('', [
-        Validators.required,
-        Validators.minLength(10),
-      ]),
-    }),
-  });
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
+  })
 
-  get lusr() {return this.loginGroup?.get('username')}
-  get lpsw() {return this.loginGroup?.get('password')}
+  onSubmit() {
+    if(!this.form.valid) throw new Error('Invalid login form')
+    const value = this.form.value
 
-  get loginGroup() {
-    return this.form.get('login');
-  }
-  get registrationGroup() {
-    return this.form.get('registration');
+    const sub = this.action === 'login' ? this.auth.login(value.username ?? '', value.password ?? '') : this.auth.register(value.username ?? '', value.password ?? '')
+    sub.pipe(
+
+      catchError(err => {console.log(err); return of(null)})
+    ).subscribe()
   }
 
-  ngOnInit(): void {
-    this.loginGroup?.valueChanges.subscribe((x) =>
-      console.log(this.loginGroup?.valid)
-    );
-  }
 
-  login() {
-    // if(this.loginGroup?.valid) this.as.login(this.loginGroup.value as {username: string, password: string})
-    if (this.loginGroup?.valid)
-      this.as
-        .login(this.loginGroup.value as { username: string; password: string })
-        .pipe(
-          tap((x) => {
-            console.log({...this.loginGroup?.errors, wrongCreds: true});  
-            if (!x) {
-              
-              this.loginGroup?.setErrors({
-                ...this.loginGroup.errors,
-                wrongCreds: true,
-              });
-            }
-            if(x?.loggedIn) this.dialogRef.close()
-          })
-        )
-        .subscribe();
-  }
-
-  register() {
-    if (this.registrationGroup?.valid)
-      this.as
-        .register(
-          this.registrationGroup.value as {
-            username: string;
-            password: string;
-            email: string;
-          }
-        )
-        .pipe(
-          tap((x) => {
-            if (!x)
-              this.loginGroup?.setErrors({
-                ...this.loginGroup.errors,
-                wrongCreds: true,
-              });
-            if(x?.loggedIn) this.dialogRef.close()
-          })
-        )
-        .subscribe();
-  }
 }

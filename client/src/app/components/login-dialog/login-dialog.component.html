@@ -1,44 +1,19 @@
-<h1 mat-dialog-title>Login</h1>
-<div mat-dialog-content [formGroup]="form">
-  <mat-tab-group mat-align-tabs="center" mat-stretch-tabs="false" #tabs>
-    <mat-tab label="Login" formGroupName="login">
-        <div class="w-full h-full flex flex-col gap-4 pt-4">
-            <mat-form-field subscriptSizing="dynamic" >
-                <mat-label>email</mat-label>
-                <input matInput type="text" formControlName="username">
-                @if(loginGroup?.hasError('wrongCreds')) {<mat-error>Credenziali errate</mat-error>}
-                @if(lusr?.hasError("email")) {<mat-error>This is not an email</mat-error>}
-            </mat-form-field>
-            <mat-form-field subscriptSizing="dynamic" >
-                <mat-label>Password</mat-label>
-                <input matInput type="password"  formControlName="password">
-                @if(loginGroup?.hasError('wrongCreds')) {<mat-error>Credenziali errate</mat-error>}
-            </mat-form-field>
-        </div>
-    </mat-tab>
-    <mat-tab label="Sign up" formGroupName="registration">
-        <div class="w-full h-full flex flex-col flex-wrap gap-4 pt-4">
-            <mat-form-field subscriptSizing="dynamic">
-                <mat-label>email</mat-label>
-                <input matInput type="text" formControlName="email">
-            </mat-form-field>
-            <mat-form-field subscriptSizing="dynamic">
-                <mat-label>username</mat-label>
-                <input matInput type="text" formControlName="username">
-            </mat-form-field>
-            <mat-form-field subscriptSizing="dynamic">
-                <mat-label>Password</mat-label>
-                <input matInput type="password"  formControlName="password">
-            </mat-form-field>
-        </div>
-    </mat-tab>
-</mat-tab-group>
+<h1 matDialogTitle class="text-gray-700 font-semibold text-lg">{{action}}</h1>
+<div [formGroup]="form" class="flex flex-col gap-2 p-4">
+    <mat-form-field>
+        <mat-label>username</mat-label>
+        <input type="text" matInput formControlName="username"/>
+        @if(form.get('username')?.hasError('required')) {<mat-error>è richiesto uno username</mat-error>}
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>password</mat-label>
+        <input type="password" matInput formControlName="password"/>
+        @if(form.get('password')?.hasError('required')) {<mat-error>è richiesta una password</mat-error>}
+        @if(form.hasError('wroncCredentails')) {<mat-error>Username or password are incorrect</mat-error>}
+    </mat-form-field>
 </div>
-<div mat-dialog-actions>
-    <button mat-fab extended
-        (click)="tabs.selectedIndex === 0 ? login() : register()"
-        [disabled]="tabs.selectedIndex === 0 ? !loginGroup?.valid : !registrationGroup?.valid">
-        <mat-icon>login</mat-icon>
-        {{tabs.selectedIndex === 0 ? 'Login' : 'Sign Up'}}
-    </button>
+<div matDialogActions>
+    <div class="w-full h-fit flex justify-end">
+        <button mat-button (click)="onSubmit()" class="bg-purple-500 hover:bg-white hover:text-purple-500">Invia</button>
+    </div>
 </div>

@@ -15,13 +15,13 @@ export class NavbarComponent {
 
   constructor(
     public auth: AuthService,
-    private dialog: MatDialog
   ) {}
 
-  get user() { return this.auth.user }
-
   login() {
-    this.auth.loginWithDialog(this.dialog)
+    this.auth.loginWithPopup()
+  }
+  signup() {
+    this.auth.loginWithPopup('signup')
   }
 
 }
