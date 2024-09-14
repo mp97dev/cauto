@@ -21,22 +21,22 @@ export class PreventiviService {
   }
 
   getPreventivi(): Observable<Preventivo[]> {
-    return this.api.get<Preventivo[]>(`${environment.apiUrl}/preventivi`)
+    return this.api.get<Preventivo[]>(`/preventivi`)
     return of(d)
   }
 
   deletePreventivo(p: Preventivo): Observable<Preventivo> {
-    return this.api.delete<Preventivo>(`${environment.apiUrl}/preventivi/${p.id}`)
+    return this.api.delete<Preventivo>(`/preventivi/${p.id}`)
     return of(d[0])
   }
 
   valutaUsato(p: Preventivo, valutazione: number): Observable<Preventivo> {
-    return this.api.post<Preventivo>(`${environment.apiUrl}/preventivi/usato/${p.id}`, {valutazione})
+    return this.api.post<Preventivo>(`/preventivi/usato/${p.id}`, {valutazione})
     return of(d[0])
   }
 
   aggiungiAcconto(p: Preventivo, acconto: number): Observable<Preventivo> {
-    return this.api.post<Preventivo>(`${environment.apiUrl}/preventivi/acconto/${p.id}`, {acconto})
+    return this.api.post<Preventivo>(`/preventivi/acconto/${p.id}`, {acconto})
     return of(d[0])
   }
 }

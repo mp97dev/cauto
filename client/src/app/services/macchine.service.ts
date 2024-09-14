@@ -212,7 +212,7 @@ export class MacchineService {
   }
 
   getCars() {
-    return this.api.get<CarBrand>(`${environment.apiUrl}/macchine`).pipe(
+    return this.api.get<CarBrand>(`/macchine`).pipe(
       tap(x => { if (x) this.cars$.next(x) })
     )
   }

@@ -55,7 +55,7 @@ describe('AuthService', () => {
       done();
     });
 
-    expect(apiServiceSpy.post).toHaveBeenCalledWith(`${environment.apiUrl}/login`, { username: 'testuser', password: 'password' });
+    expect(apiServiceSpy.post).toHaveBeenCalledWith(`/login`, { username: 'testuser', password: 'password' });
   });
 
   it('should register and set user', (done: DoneFn) => {
@@ -68,7 +68,7 @@ describe('AuthService', () => {
       done();
     });
 
-    expect(apiServiceSpy.post).toHaveBeenCalledWith(`${environment.apiUrl}/signup`, { username: 'newuser', password: 'password' });
+    expect(apiServiceSpy.post).toHaveBeenCalledWith(`/signup`, { username: 'newuser', password: 'password' });
   });
 
   it('should set user from local storage', () => {

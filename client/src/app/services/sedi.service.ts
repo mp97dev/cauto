@@ -21,16 +21,16 @@ export class SediService {
   }
 
   updateSedi(): Observable<Sede[]> {
-    return this.api.get<Sede[]>(`${environment.apiUrl}/sedi`).pipe(tap(res => this.sedi$.next(res)))
+    return this.api.get<Sede[]>(`/sedi`).pipe(tap(res => this.sedi$.next(res)))
     // return of(d)
   }
 
   deleteSede(sede: Sede) {
-    return this.api.delete<Sede>(`${environment.apiUrl}/sedi/${sede.id}`).pipe(finalize(() => this.updateSedi()))
+    return this.api.delete<Sede>(`/sedi/${sede.id}`).pipe(finalize(() => this.updateSedi()))
   }
 
   aggiungiSede(sede: Sede) {
-    return this.api.post<Sede>(`${environment.apiUrl}/sedi`, sede).pipe(finalize(() => this.updateSedi()))
+    return this.api.post<Sede>(`/sedi`, sede).pipe(finalize(() => this.updateSedi()))
   }
 }
 

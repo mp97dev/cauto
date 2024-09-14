@@ -107,7 +107,7 @@ export class ProspectPageComponent implements OnInit {
       }
     }
 
-    this.api.post(`${environment.apiUrl}/prospect`, value).subscribe()
+    this.api.post(`/prospect`, value).subscribe()
   }
 
 }
