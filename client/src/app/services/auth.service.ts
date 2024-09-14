@@ -51,4 +51,9 @@ export class AuthService {
       this.user$.next(u)
     } catch {}
   }
+
+  logout() {
+    localStorage.removeItem('auth-session')
+    this.user$.next(null)
+  }
 }

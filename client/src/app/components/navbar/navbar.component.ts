@@ -24,4 +24,8 @@ export class NavbarComponent {
     this.auth.loginWithPopup('signup')
   }
 
+  logout() {
+    this.auth.logout()
+  }
+
 }

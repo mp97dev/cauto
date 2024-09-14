@@ -9,6 +9,7 @@
         <a class="hover:cursor-pointer hover:underline" routerLink="branches" >Branches</a> 
         <span class="flex-grow"></span>
         <div>
+            <button (click)="logout()" class="p-2 rounded-md cursor-pointer hover:underline">logout</button>
             <span>{{(auth.user | async)?.username}}</span>
         </div>
     } @else {
