@@ -2,7 +2,8 @@
 
 #include <vector>
 #include <iostream>
-#include "optionals.h"
+#include "../../json.hpp"
+using json = nlohmann::json;
 
 namespace cauto
 {
@@ -11,20 +12,24 @@ namespace cauto
     public:
         std::string descrizione;
         std::vector<std::string> immagini;
+        std::optional<double> valutazione;
 
         json toJson() const
         {
-            return json{
-                {"immagini", immagini},
-                {"descrizione", descrizione}};
+            json res;
+            res["immagini"] = immagini;
+            res["descrizione"] = descrizione;
+            if (valutazione.has_value())
+                res["valutazione"] = valutazione.value();
+            return res;
         }
 
-        static usato fromJson(const json &j)
+        void fromJson(const json &j)
         {
-            usato u;
-            u.immagini = j.at("immagini").get<std::string>();
-            u.descrizione = j.at("descrizione").get<std::string>();
-            return u;
+            immagini = j.at("immagini").get<std::vector<std::string>>();
+            descrizione = j.at("descrizione").get<std::string>();
+            if (j.contains("valutazione"))
+                valutazione = j.at("valutazione").get<double>();
         }
     };
 }

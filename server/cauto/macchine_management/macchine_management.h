@@ -63,12 +63,30 @@ namespace cauto
                 auto remove_it = std::remove_if(models.begin(), models.end(),
                                                 [&model_name](const cauto::macchina &model)
                                                 {
-                                                    return model.nome_univoco == model_name;
+                                                    return model.modello == model_name;
                                                 });
 
                 if (remove_it != models.end())
                 {
                     models.erase(remove_it, models.end());
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        bool find_modello(const std::string &brand, const std::string &model_name, cauto::macchina &macchina)
+        {
+            auto it = marche_auto.find(brand);
+            if (it == marche_auto.end())
+                return false;
+
+            std::vector<cauto::macchina> &models = it->second;
+            for (cauto::macchina& model : models)
+            {
+                if (model.modello == model_name)
+                {
+                    macchina = model;
                     return true;
                 }
             }

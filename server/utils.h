@@ -146,28 +146,29 @@ namespace kernel
         }
     }
 
-    static inline bool get_user_id_from_access_token(const Http::Request &request, std::string &user_data)
+    static inline bool get_user_from_access_token(const Http::Request &request, std::vector<std::string> &user_data)
     {
         if (!request.headers().has<Http::Header::Authorization>())
             return false;
         std::string raw_auth = request.headers().getRaw("Authorization").value();
         if (raw_auth.find("Bearer ") != std::string::npos)
-            user_data = raw_auth.replace(0, 7, "");
+            user_data = split(raw_auth.replace(0, 7, ""), "#");
         else
-            user_data = raw_auth;
+            user_data = split(raw_auth, "#");
         return true;
     }
 
-    static inline bool valid_body(const std::string &body) //, std::vector<std::string> fields)
+    static inline bool valid_body(const Rest::Request &request, json &body) //, std::vector<std::string> fields)
     {
-        if (body.empty())
+        if (request.body().empty())
             return false;
         else
         {
-            if (!json::accept(body))
+            if (!json::accept(request.body()))
                 return false;
             else
             {
+                body = json::parse(request.body());
                 return true;
                 // _body = json::parse(body);
                 // for (std::string &f : fields)

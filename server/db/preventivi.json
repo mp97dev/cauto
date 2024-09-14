@@ -1,0 +1,110 @@
+[
+    {
+        "data_creazione": "23-08-2024",
+        "data_scadenza": "12-09-2024",
+        "id": 1724418984,
+        "marca": "Ford",
+        "modello": "Ford Fiesta 2024",
+        "optionals": [
+            {
+                "nome": "colore",
+                "opzioni": [
+                    "Rosso",
+                    "Giallo",
+                    "Bianco",
+                    "Grigio"
+                ],
+                "prezzo": 1000.0
+            },
+            {
+                "nome": "ruota di scorta",
+                "opzioni": [],
+                "prezzo": 300.0
+            }
+        ],
+        "prezzo_finale": 19401.0,
+        "sconto": 13,
+        "utente": "bob"
+    },
+    {
+        "data_creazione": "23-08-2024",
+        "data_scadenza": "12-09-2024",
+        "id": 1724419057,
+        "marca": "Ford",
+        "modello": "Ford Fiesta 2024",
+        "optionals": [
+            {
+                "nome": "colore",
+                "opzioni": [
+                    "Rosso"
+                ],
+                "prezzo": 1000.0
+            },
+            {
+                "nome": "ruota di scorta",
+                "opzioni": [],
+                "prezzo": 300.0
+            }
+        ],
+        "prezzo_finale": 18732.0,
+        "sconto": 16,
+        "utente": "bob"
+    },
+    {
+        "data_creazione": "23-08-2024",
+        "data_scadenza": "12-09-2024",
+        "id": 1724419281,
+        "marca": "Ford",
+        "modello": "Ford Fiesta 2024",
+        "optionals": [
+            {
+                "nome": "colore",
+                "opzioni": [
+                    "Rosso"
+                ],
+                "prezzo": 1000.0
+            },
+            {
+                "nome": "ruota di scorta",
+                "opzioni": [],
+                "prezzo": 300.0
+            }
+        ],
+        "prezzo_finale": 19401.0,
+        "sconto": 13,
+        "utente": "bob"
+    },
+    {
+        "acconto": 10000.0,
+        "data_consegna": "13-10-2024",
+        "data_creazione": "23-08-2024",
+        "data_scadenza": "12-09-2024",
+        "id": 1724421242,
+        "marca": "Ford",
+        "modello": "Ford Fiesta 2024",
+        "optionals": [
+            {
+                "nome": "colore",
+                "opzioni": [
+                    "Rosso"
+                ],
+                "prezzo": 1000.0
+            },
+            {
+                "nome": "ruota di scorta",
+                "opzioni": [],
+                "prezzo": 300.0
+            }
+        ],
+        "prezzo_finale": 17401.0,
+        "sconto": 13,
+        "usato": {
+            "descrizione": "lalla",
+            "immagini": [
+                "a.jpg"
+            ],
+            "valutazione": 2000.0
+        },
+        "utente": "bob"
+    }
+]

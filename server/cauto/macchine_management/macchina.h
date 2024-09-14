@@ -9,7 +9,7 @@ namespace cauto
     class macchina
     {
     public:
-        std::string nome_univoco;
+        std::string modello;
         std::string descrizione;
         std::string prezzo_base;
 
@@ -40,7 +40,7 @@ namespace cauto
         void fromJson(const json &j)
         {
             json opt = json::array();
-            nome_univoco = j.at("nome_univoco").get<std::string>();
+            modello = j.at("modello").get<std::string>();
             descrizione = j.at("descrizione").get<std::string>();
             prezzo_base = j.at("prezzo_base").get<std::string>();
             dimensioni.altezza = j.at("dimensioni").at("altezza").get<std::string>();
@@ -67,7 +67,7 @@ namespace cauto
             for (cauto::optional o : optionals)
                 opt.push_back(o.toJson());
             return json{
-                {"nome_univoco", nome_univoco},
+                {"modello", modello},
                 {"descrizione", descrizione},
                 {"prezzo_base", prezzo_base},
                 {"dimensioni", {{"altezza", dimensioni.altezza}, {"lunghezza", dimensioni.lunghezza}, {"peso", dimensioni.peso}, {"volume_bagagliaio", dimensioni.volume_bagagliaio}}},

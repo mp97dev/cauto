@@ -9,6 +9,10 @@
 
 int main(int argc, char *argv[])
 {
+    rest_server::server server(Pistache::Address(Pistache::Ipv4::any(), Pistache::Port(1984)));
+    server.init(2);
+    server.start();
+
     //* test signup and login ----------------------------------------------------------------
     // cauto::user_management userManager;
     // bool res = userManager.signup("alice_visit", "password123");
@@ -24,7 +28,7 @@ int main(int argc, char *argv[])
 
     //* aggiunta
     // cauto::macchina nuovoModello;
-    // nuovoModello.nome_univoco = "Toyota Yaris 2024";
+    // nuovoModello.modello = "Toyota Yaris 2024";
     // nuovoModello.descrizione = "City car compatta e moderna.";
     // nuovoModello.prezzo_base = "20000";
     // nuovoModello.dimensioni = {"1500 mm", "3940 mm", "1040 kg", "286 L"};
