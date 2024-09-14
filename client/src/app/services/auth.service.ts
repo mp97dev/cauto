@@ -5,6 +5,7 @@ import { ApiService } from './api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from '../../environments/environment.development';
 import { LoginDialogComponent } from '../components/login-dialog/login-dialog.component';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -14,7 +15,8 @@ export class AuthService {
 
   constructor(
     private api: ApiService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {
     this.loginFromLocalStorage()
   }
@@ -59,5 +61,6 @@ export class AuthService {
   logout() {
     localStorage.removeItem('auth-session')
     this.user$.next(null)
+    this.router.navigate(['/'])
   }
 }
