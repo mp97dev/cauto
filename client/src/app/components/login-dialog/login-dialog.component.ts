@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { AuthService } from '../../services/auth.service';
-import { catchError, of } from 'rxjs';
+import { catchError, of, tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button'
 
 @Component({
@@ -38,7 +38,7 @@ export class LoginDialogComponent {
 
     const sub = this.action === 'login' ? this.auth.login(value.username ?? '', value.password ?? '') : this.auth.register(value.username ?? '', value.password ?? '')
     sub.pipe(
-
+      tap(() => this.dialogRef.close()),
       catchError(err => {console.log(err); return of(null)})
     ).subscribe()
   }

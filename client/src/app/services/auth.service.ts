@@ -32,7 +32,6 @@ export class AuthService {
   }
   
   login(username: string, password: string ): Observable<User | null> {
-    
     return this.api.post<User>(`${environment.apiUrl}/login`, {username, password}).pipe(tap(x => this.user$.next(new User(x))))
   }
 
