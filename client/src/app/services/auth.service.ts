@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
-import { User } from '../models/user.model';
+import { Roles, User } from '../models/user.model';
 import { ApiService } from './api.service';
 import { MatDialog } from '@angular/material/dialog';
 import { environment } from '../../environments/environment.development';
@@ -28,13 +28,14 @@ export class AuthService {
 
 
   loginWithPopup(action: 'login' | 'signup' = 'login') {
-    this.dialog.open(LoginDialogComponent, {data: {action}})
+    const d = this.dialog.open(LoginDialogComponent, {data: {action}})
+    return d.afterClosed()
   }
   
   login(username: string, password: string ): Observable<User | null> {
     
     return this.api.post<User>(`/login`, {username, password}).pipe(tap(x => this.user$.next(new User(x))))
-    return of(new User({username, role: null})).pipe(tap(x => this.user$.next(x)))
+    return of(new User({username, role: Roles.IMPIEGATI})).pipe(tap(x => this.user$.next(x)))
   }
 
   register(username: string, password: string): Observable<User | null> {

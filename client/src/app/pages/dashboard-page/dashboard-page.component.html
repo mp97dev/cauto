@@ -6,7 +6,7 @@
         @for(c of displayColumns; track c) {
             <ng-container [matColumnDef]="c">
                 <mat-header-cell *matHeaderCellDef>{{c}}</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{row[c]}}</mat-cell>
+                <mat-cell *matCellDef="let row">{{ c.includes('data') ? (row[c] | date) : row[c] }}</mat-cell>
             </ng-container>
         }
 
@@ -18,10 +18,12 @@
                     <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="acconto(row)"><mat-icon>attach_money</mat-icon> Acconto </button>
+                    <button mat-menu-item (click)="acconto(row)"><mat-icon>attach_money</mat-icon>Paga acconto</button>
+                    
                     @if((user | async)?.role === 'impiegato') {
-                        <button mat-menu-item (click)="valutaUsato(row)" [disabled]="!row.usato"><mat-icon>recycling</mat-icon> Valutazione </button>
+                        <button mat-menu-item (click)="valutaUsato(row)" [disabled]="!row.usato"><mat-icon>recycling</mat-icon>Valutazione usato </button>
                         <button mat-menu-item (click)="elimina(row)"><mat-icon>delete</mat-icon> Elimina</button>
+                        <button mat-menu-item (click)="esporta(row)"><mat-icon>download</mat-icon>Scarica .pdf</button>
                     }
                 </mat-menu>
             </mat-cell>

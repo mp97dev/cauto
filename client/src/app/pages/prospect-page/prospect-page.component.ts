@@ -6,7 +6,7 @@ import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, Validator
 import { MacchineService } from '../../services/macchine.service';
 import { Car, CarBrand, Optional } from '../../models/macchina.model';
 import { MatSelectChange, MatSelectModule } from '@angular/material/select'
-import { tap } from 'rxjs';
+import { switchMap, take, tap } from 'rxjs';
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from "@angular/material/list";
@@ -16,6 +16,9 @@ import { SumOptionalsPipe } from '../../pipes/sum-optionals.pipe';
 import { Sede, SediService } from '../../services/sedi.service';
 import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { AuthService } from '../../services/auth.service';
+import { User } from '../../models/user.model';
+import { Router } from '@angular/router';
 
 
 
@@ -48,10 +51,12 @@ export class ProspectPageComponent implements OnInit {
 
   sedi = inject(SediService).sedi
 
+  private auth = inject(AuthService)
   
   constructor(
     public ms: MacchineService,
     private api: ApiService,
+    private router: Router
   ) {}
   
   form = new FormGroup({
@@ -116,7 +121,23 @@ export class ProspectPageComponent implements OnInit {
       luogo_ritiro: this.form.get('luogo_ritiro')?.value
     }
 
-    this.api.post(`/preventivi`, value).subscribe()
+    this.selectedOptionals.forEach(([valore, nome]) => {
+      const optional = value.optionals?.find(opt => opt.nome === nome)
+      if(optional) optional.opzioni.push(valore)
+    })
+
+    this.auth.user.pipe(
+      switchMap((user: User | null) => {
+        if(user) return this.api.post(`/preventivi`, value)
+        else return this.auth.loginWithPopup("login")
+      }),
+      take(1)
+    ).subscribe({
+      complete: () => this.router.navigate(['/dashboard']),
+      error: (err) => console.error(err)
+    })
+
+
   }
 
   removeUrl(url: string) {
@@ -144,8 +165,9 @@ export class ProspectPageComponent implements OnInit {
     event.chipInput!.clear();
   }
 
-  changeOptionalValue($event: MatSelectChange, optionalName: string) {
-    console.log($event, optionalName)
+  selectedOptionals: [string, string][] = []
+  changeOptionalValue(event: MatSelectChange, optionalName: string) {
+    this.selectedOptionals.push([event.value, optionalName])
   }
 
 }
