@@ -94,19 +94,6 @@ namespace rest_server
 
         void _api_get_sedi(const Rest::Request &request, Http::ResponseWriter response)
         {
-            std::vector<std::string>  user_data;
-            if (!kernel::get_user_from_access_token(request, user_data))
-            {
-                response.send(Http::Code::Bad_Request, {});
-                return;
-            }
-
-            if (user_data[1] != "segreteria")
-            {
-                response.send(Http::Code::Unauthorized, {});
-                return;
-            }
-
             cauto::sedi_management db;
             response.send(Http::Code::Ok, (db.get_all_as_json()).dump());
             return;

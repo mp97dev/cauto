@@ -126,5 +126,51 @@
             "immagini": []
         },
         "utente": "alessia"
+    },
+    {
+        "data_creazione": "14-09-2024",
+        "data_scadenza": "04-10-2024",
+        "id": 1726346701,
+        "luogo_ritiro": {
+            "id": 2,
+            "indirizzo": "Corso Vittorio Emanuele 101, Torino",
+            "nome": "TopCars Torino"
+        },
+        "marca": "Ford",
+        "modello": "Ford Fiesta 2024",
+        "optionals": [
+            {
+                "nome": "colore",
+                "opzioni": [
+                    "Giallo"
+                ],
+                "prezzo": 1000.0
+            }
+        ],
+        "sconto": 13,
+        "usato": {
+            "descrizione": "",
+            "immagini": []
+        },
+        "utente": "alessia"
+    },
+    {
+        "data_creazione": "14-09-2024",
+        "data_scadenza": "04-10-2024",
+        "id": 1726347401,
+        "luogo_ritiro": {
+            "id": 2,
+            "indirizzo": "Corso Vittorio Emanuele 101, Torino",
+            "nome": "TopCars Torino"
+        },
+        "marca": "Toyota",
+        "modello": "Toyota RAV4 2024",
+        "optionals": [],
+        "sconto": 16,
+        "usato": {
+            "descrizione": "",
+            "immagini": []
+        },
+        "utente": "ale"
     }
 ]
