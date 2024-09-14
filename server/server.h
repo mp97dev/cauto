@@ -35,6 +35,7 @@ namespace rest_server
 
         static bool _middleware(Pistache::Http::Request &request, Pistache::Http::ResponseWriter &response)
         {
+            response.headers().add<Pistache::Http::Header::AccessControlAllowOrigin>("*");
             response.headers().add<Http::Header::AccessControlAllowMethods>("GET,HEAD,OPTIONS,POST,PUT,DELETE");
             response.headers().add<Http::Header::AccessControlAllowHeaders>("Origin, Content-Type, Authorization");
 
