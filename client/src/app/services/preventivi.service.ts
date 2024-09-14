@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
-import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, of, switchMap, take, tap } from 'rxjs';
 import { Optional } from '../models/macchina.model';
 
 @Injectable({
@@ -20,7 +20,7 @@ export class PreventiviService {
   }
 
   getPreventivi(): Observable<Preventivo[]> {
-    return this.api.get<Preventivo[]>(`/preventivi`)
+    return this.api.get<Preventivo[]>(`/preventivi`).pipe(tap(p => this.preventivi$.next(p)))
     return of(d)
   }
 

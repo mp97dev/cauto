@@ -1,5 +1,5 @@
 <h1>Preventivi</h1>
-@if(ps.preventivi | async; as data) {
+@if((preventivi | async); as data) {
 
     <mat-table [dataSource]="data" class="mat-elevation-z8">
         

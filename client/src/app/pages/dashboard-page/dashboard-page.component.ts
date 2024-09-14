@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatTableModule } from "@angular/material/table";
 import { PreventiviService, Preventivo } from '../../services/preventivi.service';
 import { AsyncPipe } from '@angular/common';
@@ -23,10 +23,12 @@ import { AccontoComponent } from '../../components/acconto/acconto.component';
 })
 export class DashboardPageComponent {
 
+  private ps = inject(PreventiviService)
   constructor(
-    public ps: PreventiviService,
     private dialog: MatDialog
   ) {}
+
+  preventivi = this.ps.preventivi
 
   columns = [ 'utente', 'acconto', 'data_consegna', 'data_creazione', 'data_scadenza', 'macchina_marca', 'macchina_modello', 'prezzo_finale', 'sconto', 'action']
   displayColumns = [ 'utente', 'acconto', 'data_consegna', 'data_creazione', 'data_scadenza', 'macchina_marca', 'macchina_modello', 'prezzo_finale', 'sconto']
