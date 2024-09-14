@@ -19,11 +19,11 @@
                 </button>
                 <mat-menu #menu="matMenu">
                     <button mat-menu-item (click)="acconto(row)"><mat-icon>attach_money</mat-icon>Paga acconto</button>
+                    <button mat-menu-item (click)="esporta(row)"><mat-icon>download</mat-icon>Scarica .pdf</button>
                     
                     @if((user | async)?.role === 'impiegato') {
                         <button mat-menu-item (click)="valutaUsato(row)" [disabled]="!row.usato"><mat-icon>recycling</mat-icon>Valutazione usato </button>
                         <button mat-menu-item (click)="elimina(row)"><mat-icon>delete</mat-icon> Elimina</button>
-                        <button mat-menu-item (click)="esporta(row)"><mat-icon>download</mat-icon>Scarica .pdf</button>
                     }
                 </mat-menu>
             </mat-cell>
