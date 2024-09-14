@@ -51,7 +51,7 @@ namespace cauto
                         prezzo_optionals += o.prezzo;
             }
 
-            double prezzo_totale = std::stoi(macchina.prezzo_base) + prezzo_optionals;
+            double prezzo_totale = macchina.prezzo_base + prezzo_optionals;
             prezzo_totale *= (1.0 - sconto / 100.0);
             return prezzo_totale;
         }

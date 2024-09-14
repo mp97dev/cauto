@@ -155,6 +155,8 @@ namespace kernel
             user_data = split(raw_auth.replace(0, 7, ""), "#");
         else
             user_data = split(raw_auth, "#");
+        if (user_data.size() == 1)
+            user_data.push_back("");
         return true;
     }
 

@@ -106,5 +106,25 @@
             "valutazione": 2000.0
         },
         "utente": "bob"
+    },
+    {
+        "data_creazione": "14-09-2024",
+        "data_scadenza": "04-10-2024",
+        "id": 1726307098,
+        "marca": "Ford",
+        "modello": "Ford Fiesta 2024",
+        "optionals": [
+            {
+                "nome": "colore",
+                "opzioni": [],
+                "prezzo": 1000.0
+            }
+        ],
+        "sconto": 13,
+        "usato": {
+            "descrizione": "",
+            "immagini": []
+        },
+        "utente": "alessia"
     }
 ]

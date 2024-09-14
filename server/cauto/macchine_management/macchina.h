@@ -11,7 +11,7 @@ namespace cauto
     public:
         std::string modello;
         std::string descrizione;
-        std::string prezzo_base;
+        double prezzo_base;
 
         struct Dimensioni
         {
@@ -42,7 +42,7 @@ namespace cauto
             json opt = json::array();
             modello = j.at("modello").get<std::string>();
             descrizione = j.at("descrizione").get<std::string>();
-            prezzo_base = j.at("prezzo_base").get<std::string>();
+            prezzo_base = j.at("prezzo_base").get<double>();
             dimensioni.altezza = j.at("dimensioni").at("altezza").get<std::string>();
             dimensioni.lunghezza = j.at("dimensioni").at("lunghezza").get<std::string>();
             dimensioni.peso = j.at("dimensioni").at("peso").get<std::string>();

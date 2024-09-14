@@ -54,7 +54,7 @@
                     "prezzo": 150.0
                 }
             ],
-            "prezzo_base": "21000"
+            "prezzo_base": 21000.0
         }
     ],
     "Toyota": [
@@ -122,7 +122,7 @@
                     "prezzo": 150.0
                 }
             ],
-            "prezzo_base": "33000"
+            "prezzo_base": 33000.0
         },
         {
             "descrizione": "SUV spazioso con trazione integrale e tecnologia avanzata.",
@@ -183,7 +183,7 @@
                     "prezzo": 500.0
                 }
             ],
-            "prezzo_base": "41700"
+            "prezzo_base": 41700.0
         }
     ]
 }

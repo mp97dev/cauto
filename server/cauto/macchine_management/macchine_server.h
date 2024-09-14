@@ -24,19 +24,6 @@ namespace rest_server
 
         void _api_get_macchine(const Rest::Request &request, Http::ResponseWriter response)
         {
-            std::vector<std::string>  user_data;
-            if (!kernel::get_user_from_access_token(request, user_data))
-            {
-                response.send(Http::Code::Bad_Request, {});
-                return;
-            }
-
-            if (user_data[1] != "segreteria")
-            {
-                response.send(Http::Code::Unauthorized, {});
-                return;
-            }
-
             cauto::macchine_management database;
             response.send(Http::Code::Ok, (database.get_all_as_json()).dump());
         }
