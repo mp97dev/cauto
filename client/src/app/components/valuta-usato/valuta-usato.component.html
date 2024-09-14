@@ -1,0 +1,16 @@
+<h1 matDialogTitle>Valutazione usato</h1>
+<div matDialogContent [formGroup]="form">
+    <div class="flex flex-nowrap gap-4 overflow-x-auto flex-row">
+        @for(image of data.usato?.immagini; track image) {
+            <img height="256px" [src]="image" alt="auto" class="img-fluid">
+        }
+    </div>
+
+    <mat-form-field>
+        <mat-label>Prezzo</mat-label>
+        <input matInput type="number" formControlName="valutazione">
+    </mat-form-field>
+</div>
+<div matDialogActions>
+    <button mat-button (click)="confirm()">Conferma valutazione</button>
+</div>

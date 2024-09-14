@@ -1,0 +1,148 @@
+<mat-accordion [formGroup]="form" class="w-[50em] max-w-full">
+    <mat-expansion-panel [expanded]="step() === 0" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Selezione marca</mat-panel-title>
+            <mat-panel-description>{{form.get('marca')?.value}}</mat-panel-description>
+            <mat-icon>garage</mat-icon>
+        </mat-expansion-panel-header>
+
+        <section class="flex justify-between flex-col">
+
+        <mat-selection-list formControlName="marca" (selectionChange)="setStep(1)" [multiple]="false">
+            @for(marca of brands; track marca) {<mat-list-option [value]="marca">{{marca}}</mat-list-option>}
+        </mat-selection-list>
+            
+            <button mat-button [disabled]="!form.get('marca')?.value" (click)="setStep(1)">Prossimo</button>
+        </section>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step() === 1" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Selezione Modello</mat-panel-title>
+            <mat-panel-description>{{selectedModel?.nome_univoco}}</mat-panel-description>
+            <mat-icon>directions_car</mat-icon>
+        </mat-expansion-panel-header>
+        @if(form.get('marca')?.value) {
+        <div class="flex gap-4 w-full">
+
+            <div class="flex-1">
+                <mat-form-field class="w-full">
+                    <mat-label>Modello</mat-label>
+                    <mat-select formControlName="modello" class="w-full">
+                        @for(model of models; track model.nome_univoco) {
+                            <mat-option [value]="model.nome_univoco">{{model.nome_univoco}}</mat-option> }
+                        </mat-select>
+                </mat-form-field>
+
+            </div>
+
+            <div class="flex-1 grid grid-cols-2">
+                @if(selectedModel) {
+                <strong>nome</strong>
+                <p>{{selectedModel.nome_univoco}}</p>
+                <strong>descrzione</strong>
+                <p>{{selectedModel.descrizione}}</p>
+                <strong>prezzo</strong>
+                <p>{{selectedModel.prezzo_base.toLocaleString('it-IT')}} €</p>
+                <strong>motore</strong>
+                <p>{{selectedModel.motore.alimentazione}} - {{selectedModel.motore.tipo}}</p>
+                } @else {
+                <p>Seleziona un modello</p>
+                }
+            </div>
+        </div>
+
+        <button mat-button (click)="setStep(2)" [disabled]="!selectedModel">Prossimo</button>
+        } @else {
+        <p>Seleziona prima la marca</p>
+        }
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step() === 2" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Optionals</mat-panel-title>
+            <mat-icon>extension</mat-icon>
+        </mat-expansion-panel-header>
+        @if(selectedModel) {
+
+            <mat-selection-list formControlName="optionals" [multiple]="true">
+                @for(o of selectedModel.optionals; track o.nome) {
+                    <mat-list-option [value]="o">
+                        <span matListItemTitle>{{o.nome}}</span>
+                        <span matListItemSecondary>{{o.prezzo}} €</span>
+                    </mat-list-option>
+                }
+            </mat-selection-list>
+
+        } @else {
+        <p>Seleziona prima il modello</p>
+        }
+
+        <button mat-button (click)="setStep(3)">Prossimo</button>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle [expanded]="step() === 3">
+        <mat-expansion-panel-header>
+            <mat-panel-title>Ultimi ritocchi</mat-panel-title>
+            <mat-icon>brush</mat-icon>
+        </mat-expansion-panel-header>
+        @for (o of ((form.get('optionals')?.value ?? []) | withOptions ); track o.nome) {
+            <mat-form-field>
+                <mat-label>{{o.nome}}</mat-label>
+                <mat-select>
+                    @for(op of o.opzioni; track op) {
+                        <mat-option [value]="op">{{op}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+        }
+        <button mat-button (click)="setStep(4)">Prossimo</button>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel hideToggle [expanded]="step() === 4">
+        <mat-expansion-panel-header>
+            <mat-panel-title>Aggiungi usato</mat-panel-title>
+            <mat-icon>recycling</mat-icon>
+        </mat-expansion-panel-header>
+
+        <mat-form-field class="w-full">
+            <mat-label>Descrizione</mat-label>
+            <textarea matInput [cols]="4" class="w-full" formControlName="usato"></textarea>
+        </mat-form-field>
+
+        <input type="file" multiple accept=".jpg,.jpeg,.png,.webp,.gif" formControlName="immagini">
+        <button mat-button (click)="setStep(5)">Prossimo</button>
+    </mat-expansion-panel>
+    <mat-expansion-panel [expanded]="step() === 5" hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Preventivo</mat-panel-title>
+            <mat-icon>attach_money</mat-icon>
+        </mat-expansion-panel-header>
+        @if(form.valid && selectedModel) {
+
+            <div class="flex gap-4 w-full mb-8">
+                <div class="flex-1">
+                    <strong>Prezzo base</strong>
+                    <p>{{selectedModel.prezzo_base.toLocaleString('it-IT')}} €</p>
+                    <strong>Optionals</strong>
+                    <p>{{form.get('optionals')?.value | sumOptionals}} €</p>
+                    <strong>Totale</strong>
+                    <p>{{((form.get('optionals')?.value | sumOptionals) + selectedModel.prezzo_base).toLocaleString('it-IT')}} €</p>
+                </div>
+                <div class="flex-1">
+                    <strong>Usato</strong>
+                    <p>{{form.get('usato')?.value}}</p>
+                    <strong>Immagini</strong>
+                    <p>{{form.get('immagini')?.value?.length}}</p>
+                </div>
+            </div>
+
+            <div class="flex justify-center">
+                <button mat-fab extended (click)="send()" [disabled]="this.form.invalid"><mat-icon>send</mat-icon>Invia preventivo</button>
+            </div>
+            
+        } @else {
+            Devi ancora completare il form
+        }
+    </mat-expansion-panel>
+</mat-accordion>

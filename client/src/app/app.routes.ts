@@ -6,6 +6,7 @@ import { EvaluationsPageComponent } from './pages/admin/evaluations-page/evaluat
 import { BranchesPageComponent } from './pages/admin/branches-page/branches-page.component';
 import { roleGuard } from './guards/role.guard';
 import { Roles } from './models/user.model';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 
 export const routes: Routes = [
   {
@@ -17,6 +18,12 @@ export const routes: Routes = [
     path: 'prospect',
     component: ProspectPageComponent,
     title: 'Cauto | Prospect',
+    canActivate: [authGuard],
+  },
+  {
+    path: 'dashboard',
+    component: DashboardPageComponent,
+    title: 'Cauto | Dashboard',
     canActivate: [authGuard],
   },
   {
