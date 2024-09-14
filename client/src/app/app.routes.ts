@@ -27,13 +27,6 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'evaluations',
-    component: EvaluationsPageComponent,
-    title: 'Cauto | Evaluations',
-    canActivate: [authGuard, roleGuard],
-    data: {roles: [Roles.IMPIEGATI]}
-  },
-  {
     path: 'branches', // filiali
     component: BranchesPageComponent,
     title: 'Cauto | Branches',

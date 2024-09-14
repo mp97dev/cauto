@@ -4,9 +4,9 @@
     <a routerLink="/" routerLinkActive="active">Home</a> 
 
     @if((auth.loggedIn$ | async)) {
-        <a class="hover:cursor-pointer hover:underline" routerLink="prospect" >Prospects</a> 
-        <a class="hover:cursor-pointer hover:underline" routerLink="evaluations" >Evaluations</a> 
-        <a class="hover:cursor-pointer hover:underline" routerLink="branches" >Branches</a> 
+        <a class="hover:cursor-pointer hover:underline" routerLink="prospect" >Nuovo preventivo</a> 
+        <a class="hover:cursor-pointer hover:underline" routerLink="dashboard" >Storico</a> 
+        <a class="hover:cursor-pointer hover:underline" routerLink="branches" >Sedi</a> 
         <span class="flex-grow"></span>
         <div>
             <button (click)="logout()" class="p-2 rounded-md cursor-pointer hover:underline">logout</button>
