@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { BehaviorSubject, Observable, of, switchMap } from 'rxjs';
 import { Optional } from '../models/macchina.model';
-import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
