@@ -15,11 +15,11 @@ export class MacchineService {
 
   private cars$: BehaviorSubject<CarBrand | null> = new BehaviorSubject<CarBrand | null>(null)
   get carsAsObservable(): Observable<CarBrand> {
-    return this.cars$.asObservable().pipe(
-      take(1),
-      switchMap(
-      res => res ? of(res) : this.getCars()
-    ))
+    // return this.cars$.asObservable().pipe(
+    //   take(1),
+    //   switchMap(
+    //   res => res ? of(res) : this.getCars()
+    // ))
     return of({
       "Ford": [
         {

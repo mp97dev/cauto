@@ -2,15 +2,22 @@
     <!-- <img src="logo.png" alt="Cauto logo"> -->
     
     <a routerLink="/" routerLinkActive="active">Home</a> 
+    <a class="hover:cursor-pointer hover:underline" routerLink="preventivo" >Nuovo preventivo</a>
+    <a class="hover:cursor-pointer hover:underline" routerLink="catalogo" >Catalogo</a> 
 
-    @if((auth.loggedIn$ | async)) {
-        <a class="hover:cursor-pointer hover:underline" routerLink="prospect" >Nuovo preventivo</a> 
-        <a class="hover:cursor-pointer hover:underline" routerLink="dashboard" >Storico</a> 
-        <a class="hover:cursor-pointer hover:underline" routerLink="branches" >Sedi</a> 
+
+    @if(user | async; as user) {
+        <a class="hover:cursor-pointer hover:underline" routerLink="dashboard" >Dashboard</a> 
+        
+        @if (user.role === 'segreteria') {
+            <a class="hover:cursor-pointer hover:underline" routerLink="sedi" >Sedi</a> 
+        }
+
+
         <span class="flex-grow"></span>
-        <div>
-            <button (click)="logout()" class="p-2 rounded-md cursor-pointer hover:underline">logout</button>
-            <span>{{(auth.user | async)?.username}}</span>
+        <div class="flex gap-4 items-center">
+            <button (click)="logout()" mat-flat-button class="p-2 rounded-md cursor-pointer hover:underline">logout</button>
+            <b>{{(auth.user | async)?.username}}</b>
         </div>
     } @else {
         <span class="flex-grow"></span>

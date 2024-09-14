@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ValutaUsatoComponent } from '../../components/valuta-usato/valuta-usato.component';
 import { of, switchMap } from 'rxjs';
 import { AccontoComponent } from '../../components/acconto/acconto.component';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -24,6 +25,10 @@ import { AccontoComponent } from '../../components/acconto/acconto.component';
 export class DashboardPageComponent {
 
   private ps = inject(PreventiviService)
+  public data = this.ps.preventivi
+  public user = inject(AuthService).user
+
+
   constructor(
     private dialog: MatDialog
   ) {}

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 import { User } from '../models/user.model';
 import { ApiService } from './api.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -32,6 +32,8 @@ export class AuthService {
   }
   
   login(username: string, password: string ): Observable<User | null> {
+    return of(new User({username, role: null})).pipe(tap(x => this.user$.next(x)))
+
     return this.api.post<User>(`/login`, {username, password}).pipe(tap(x => this.user$.next(new User(x))))
   }
 
@@ -41,6 +43,8 @@ export class AuthService {
 
   private loginFromLocalStorage() {
     const ls = localStorage.getItem('auth-session')
+    console.log(ls)
+    
     if(!ls) return
     
     try {

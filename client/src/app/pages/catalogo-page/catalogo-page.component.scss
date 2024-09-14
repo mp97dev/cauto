@@ -1,0 +1,8 @@
+:host {
+  @apply flex flex-col h-full w-full;
+}
+
+#logo {
+  background-image: url('/copertina.jpeg');
+  background-size: cover;
+}

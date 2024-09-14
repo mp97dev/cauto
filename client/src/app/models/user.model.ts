@@ -12,6 +12,6 @@ export class User {
         this.username = options.username
         this.role = options?.role ?? null
 
-        localStorage.setItem('token', JSON.stringify(this))
+        localStorage.setItem('auth-session', JSON.stringify(this))
     }
 }

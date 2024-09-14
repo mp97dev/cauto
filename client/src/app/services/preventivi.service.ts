@@ -1,12 +1,16 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { BehaviorSubject, Observable, of, switchMap, take, tap } from 'rxjs';
 import { Optional } from '../models/macchina.model';
+import { AuthService } from './auth.service';
+import { Roles } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PreventiviService {
+
+  private user = inject(AuthService).user
 
   constructor(
     private api: ApiService
@@ -14,14 +18,21 @@ export class PreventiviService {
 
   private preventivi$ = new BehaviorSubject<Preventivo[] | null>(null);
   get preventivi(): Observable<Preventivo[]> {
-    return this.preventivi$.asObservable().pipe(
-      switchMap(p => p ? of(p) : this.getPreventivi())
+    return this.preventivi$.asObservable()
+    .pipe(
+      switchMap(p => 
+        p ? of(p) : this.user.pipe(take(1), switchMap(user => (user && user.role === Roles.IMPIEGATI) ? this.getAllPreventivi() : this.getUserPreventivi())))
     );
   }
 
-  getPreventivi(): Observable<Preventivo[]> {
-    return this.api.get<Preventivo[]>(`/preventivi`).pipe(tap(p => this.preventivi$.next(p)))
+  getAllPreventivi(): Observable<Preventivo[]> {
     return of(d)
+    return this.api.get<Preventivo[]>(`/preventivi`).pipe(tap(p => this.preventivi$.next(p)))
+  }
+
+  getUserPreventivi(): Observable<Preventivo[]> {
+    return of(d)
+    return this.api.get<Preventivo[]>(`/preventivi/user`).pipe(tap(p => this.preventivi$.next(p)))
   }
 
   deletePreventivo(p: Preventivo): Observable<Preventivo> {
