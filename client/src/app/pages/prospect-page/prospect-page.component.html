@@ -8,10 +8,10 @@
 
         <section class="flex justify-between flex-col">
 
-        <mat-selection-list formControlName="marca" (selectionChange)="setStep(1)" [multiple]="false">
-            @for(marca of brands; track marca) {<mat-list-option [value]="marca">{{marca}}</mat-list-option>}
-        </mat-selection-list>
-            
+            <mat-selection-list formControlName="marca" (selectionChange)="setStep(1)" [multiple]="false">
+                @for(marca of brands; track marca) {<mat-list-option [value]="marca">{{marca}}</mat-list-option>}
+            </mat-selection-list>
+
             <button mat-button [disabled]="!form.get('marca')?.value" (click)="setStep(1)">Prossimo</button>
         </section>
     </mat-expansion-panel>
@@ -30,8 +30,8 @@
                     <mat-label>Modello</mat-label>
                     <mat-select formControlName="modello" class="w-full">
                         @for(model of models; track model.modello) {
-                            <mat-option [value]="model.modello">{{model.modello}}</mat-option> }
-                        </mat-select>
+                        <mat-option [value]="model.modello">{{model.modello}}</mat-option> }
+                    </mat-select>
                 </mat-form-field>
 
             </div>
@@ -65,14 +65,14 @@
         </mat-expansion-panel-header>
         @if(selectedModel) {
 
-            <mat-selection-list formControlName="optionals" [multiple]="true">
-                @for(o of selectedModel.optionals; track o.nome) {
-                    <mat-list-option [value]="o">
-                        <span matListItemTitle>{{o.nome}}</span>
-                        <span matListItemSecondary>{{o.prezzo}} €</span>
-                    </mat-list-option>
-                }
-            </mat-selection-list>
+        <mat-selection-list formControlName="optionals" [multiple]="true">
+            @for(o of selectedModel.optionals; track o.nome) {
+            <mat-list-option [value]="o">
+                <span matListItemTitle>{{o.nome}}</span>
+                <span matListItemSecondary>{{o.prezzo}} €</span>
+            </mat-list-option>
+            }
+        </mat-selection-list>
 
         } @else {
         <p>Seleziona prima il modello</p>
@@ -86,20 +86,20 @@
             <mat-panel-title>Ultimi ritocchi</mat-panel-title>
             <mat-icon>brush</mat-icon>
         </mat-expansion-panel-header>
-        @for (o of ((form.get('optionals')?.value ?? []) | withOptions ); track o.nome) {
-            <mat-form-field>
-                <mat-label>{{o.nome}}</mat-label>
-                <mat-select>
-                    @for(op of o.opzioni; track op) {
-                        <mat-option [value]="op">{{op}}</mat-option>
-                    }
-                </mat-select>
-            </mat-form-field>
+        @for (o of (optionalsArray | withOptions); track o.nome) {
+        <mat-form-field class="w-full">
+            <mat-label>{{o.nome}}</mat-label>
+            <mat-select (selectionChange)="changeOptionalValue($event, o.nome)">
+                @for(op of o.opzioni; track op) {
+                <mat-option [value]="op">{{op}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
         }
         <button mat-button (click)="setStep(4)">Prossimo</button>
     </mat-expansion-panel>
 
-    <mat-expansion-panel hideToggle [expanded]="step() === 4">
+    <mat-expansion-panel [expanded]="step() === 4" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>Aggiungi usato</mat-panel-title>
             <mat-icon>recycling</mat-icon>
@@ -110,39 +110,57 @@
             <textarea matInput [cols]="4" class="w-full" formControlName="usato"></textarea>
         </mat-form-field>
 
-        <input type="file" multiple accept=".jpg,.jpeg,.png,.webp,.gif" formControlName="immagini">
+        <mat-form-field class="w-full">
+            <mat-label>Url immagini</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Aggiungi link" formControlName="immagini">
+                @for (imgUrl of urls(); track imgUrl) {
+                <mat-chip-row (removed)="removeUrl(imgUrl)">
+                    {{imgUrl}}
+                    <button matChipRemove aria-label="'remove ' + keyword">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip-row>
+                }
+            </mat-chip-grid>
+            <input placeholder="Nuova immagine..." [matChipInputFor]="chipGrid"
+                (matChipInputTokenEnd)="addUrl($event)" />
+        </mat-form-field>
+
         <button mat-button (click)="setStep(5)">Prossimo</button>
     </mat-expansion-panel>
+
     <mat-expansion-panel [expanded]="step() === 5" hideToggle>
         <mat-expansion-panel-header>
-            <mat-panel-title>Preventivo</mat-panel-title>
-            <mat-icon>attach_money</mat-icon>
+            <mat-panel-title>Ritiro</mat-panel-title>
+            <mat-icon>apartment</mat-icon>
         </mat-expansion-panel-header>
-        @if(form.valid && selectedModel) {
 
-            <div class="flex gap-4 w-full mb-8">
-                <div class="flex-1">
-                    <strong>Prezzo base</strong>
-                    <p>{{selectedModel.prezzo_base.toLocaleString('it-IT')}} €</p>
-                    <strong>Optionals</strong>
-                    <p>{{form.get('optionals')?.value | sumOptionals}} €</p>
-                    <strong>Totale</strong>
-                    <p>{{((form.get('optionals')?.value | sumOptionals) + selectedModel.prezzo_base).toLocaleString('it-IT')}} €</p>
-                </div>
-                <div class="flex-1">
-                    <strong>Usato</strong>
-                    <p>{{form.get('usato')?.value}}</p>
-                    <strong>Immagini</strong>
-                    <p>{{form.get('immagini')?.value?.length}}</p>
-                </div>
-            </div>
+        <mat-form-field class="w-full">
+            <mat-label>Sede di ritiro</mat-label>
+            <mat-select formControlName="luogo_ritiro">
+                @for(sede of (sedi | async); track sede.id) {<mat-option [value]="sede">{{sede.nome}}</mat-option>}
+            </mat-select>
+        </mat-form-field>
 
-            <div class="flex justify-center">
-                <button mat-fab extended (click)="send()" [disabled]="this.form.invalid"><mat-icon>send</mat-icon>Invia preventivo</button>
-            </div>
-            
-        } @else {
-            Devi ancora completare il form
-        }
     </mat-expansion-panel>
 </mat-accordion>
+
+<div>
+    <div class="flex gap-4 w-full mb-8">
+        <div class="flex-1">
+            <strong>Prezzo base</strong>
+            <p>{{selectedModel?.prezzo_base?.toLocaleString('it-IT') ?? '-'}} €</p>
+            <strong>Optionals</strong>
+            <p>{{form.get('optionals')?.value | sumOptionals}} €</p>
+            <strong>Totale</strong>
+            <p>{{((form.get('optionals')?.value | sumOptionals) + (selectedModel?.prezzo_base ??
+                0)).toLocaleString('it-IT')}} €</p>
+        </div>
+    </div>
+
+    <div class="flex justify-center">
+        <button mat-fab extended (click)="send()" [disabled]="this.form.invalid"><mat-icon>send</mat-icon>Invia
+            preventivo</button>
+    </div>
+    <p>Devi ancora completare il form</p>
+</div>

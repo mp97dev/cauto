@@ -1,11 +1,11 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { JsonPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidatorFn, Validators } from '@angular/forms';
 import { MacchineService } from '../../services/macchine.service';
 import { Car, CarBrand, Optional } from '../../models/macchina.model';
-import { MatSelectModule } from '@angular/material/select'
+import { MatSelectChange, MatSelectModule } from '@angular/material/select'
 import { tap } from 'rxjs';
 import { MatExpansionModule } from "@angular/material/expansion";
 import { MatButtonModule } from '@angular/material/button';
@@ -13,6 +13,10 @@ import { MatListModule } from "@angular/material/list";
 import { WithOptionsPipe } from '../../pipes/with-options.pipe';
 import { ApiService } from '../../services/api.service';
 import { SumOptionalsPipe } from '../../pipes/sum-optionals.pipe';
+import { Sede, SediService } from '../../services/sedi.service';
+import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
+import { LiveAnnouncer } from '@angular/cdk/a11y';
+
 
 
 @Component({
@@ -26,16 +30,23 @@ import { SumOptionalsPipe } from '../../pipes/sum-optionals.pipe';
     MatButtonModule,
     MatListModule,
     JsonPipe,
+    AsyncPipe,
     SumOptionalsPipe,
     WithOptionsPipe,
-    MatInputModule
+    MatInputModule,
+    MatChipsModule
   ],
   templateUrl: './prospect-page.component.html',
-  styleUrl: './prospect-page.component.scss'
+  styleUrl: './prospect-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProspectPageComponent implements OnInit {
 
+  announcer = inject(LiveAnnouncer);
   step = signal(0)
+  urls = signal([] as string[])
+
+  sedi = inject(SediService).sedi
 
   
   constructor(
@@ -49,6 +60,7 @@ export class ProspectPageComponent implements OnInit {
     optionals: new FormControl([] as Optional[], [singleOptionValidator]),
     usato: new FormControl(''),
     immagini: new FormControl([] as any),
+    luogo_ritiro: new FormControl(null as Sede | null, [Validators.required]),
   })
   
   cars: CarBrand = {}
@@ -56,7 +68,7 @@ export class ProspectPageComponent implements OnInit {
   models: Car[] = []
   selectedModel: Car | null = null
 
-  optionalSettings: Optional[] = []
+  optionalsArray: Optional[] = []
 
 
   ngOnInit(): void {
@@ -74,16 +86,15 @@ export class ProspectPageComponent implements OnInit {
     })
     this.form.get('modello')?.valueChanges.subscribe(modello => {
       this.selectedModel = this.models.find(car => car.modello === modello) || null
+
+      // salva optionals del modello
+      this.optionalsArray = JSON.parse(JSON.stringify(this.selectedModel?.optionals ?? []))
+      this.selectedModel?.optionals.forEach(o => o.opzioni = [])
     })
 
     this.form.get('optionals')?.valueChanges.subscribe(optionals => {
-      
-      this.optionalSettings = JSON.parse(JSON.stringify(optionals))
-      if(optionals?.some(o => o.opzioni.length > 1)) {
-        this.form.get('optionals')?.setValue(optionals.map(o => {o.opzioni = []; return o}))
-        return
-      }
-      })
+      console.log(optionals)
+    })
 
   }
 
@@ -100,11 +111,41 @@ export class ProspectPageComponent implements OnInit {
       optionals: this.form.get('optionals')?.value,
       usato: {
         descrizione: this.form.get('usato')?.value,
-        immagini: [] //!
-      }
+        immagini: this.form.get('immagini')?.value
+      },
+      luogo_ritiro: this.form.get('luogo_ritiro')?.value
     }
 
     this.api.post(`/preventivi`, value).subscribe()
+  }
+
+  removeUrl(url: string) {
+    this.urls.update(urls => {
+      const index = urls.indexOf(url);
+      if (index < 0) {
+        return urls;
+      }
+
+      urls.splice(index, 1);
+      this.announcer.announce(`removed ${urls}`);
+      return [...urls];
+    });
+  }
+
+  addUrl(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our keyword
+    if (value) {
+      this.urls.update(urls => [...urls, value]);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  changeOptionalValue($event: MatSelectChange, optionalName: string) {
+    console.log($event, optionalName)
   }
 
 }

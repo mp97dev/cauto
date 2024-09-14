@@ -26,13 +26,13 @@ export class PreventiviService {
   }
 
   getAllPreventivi(): Observable<Preventivo[]> {
-    return of(d)
     return this.api.get<Preventivo[]>(`/preventivi`).pipe(tap(p => this.preventivi$.next(p)))
+    return of(d)
   }
 
   getUserPreventivi(): Observable<Preventivo[]> {
-    return of(d)
     return this.api.get<Preventivo[]>(`/preventivi/user`).pipe(tap(p => this.preventivi$.next(p)))
+    return of(d)
   }
 
   deletePreventivo(p: Preventivo): Observable<Preventivo> {

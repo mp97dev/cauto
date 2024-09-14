@@ -39,7 +39,7 @@ $client-theme: mat.define-theme((
 @tailwind utilities;
 
 html {
-    @apply bg-zinc-800 text-gray-200;
+    @apply bg-gray-50 text-gray-500;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 html, body { height: 100%; }

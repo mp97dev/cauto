@@ -22,7 +22,7 @@ export class SediService {
 
   updateSedi(): Observable<Sede[]> {
     return this.api.get<Sede[]>(`/sedi`).pipe(tap(res => this.sedi$.next(res)))
-    // return of(d)
+    return of(d)
   }
 
   deleteSede(sede: Sede) {
