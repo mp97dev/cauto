@@ -26,10 +26,26 @@ namespace rest_server
 
         void _setup_routes()
         {
+            _router.addMiddleware(Rest::Routes::middleware(&server::_middleware));
             macchine._setup_routes(_router);
             preventivi._setup_routes(_router);
             sedi._setup_routes(_router);
             users._setup_routes(_router);
+        }
+
+        static bool _middleware(Pistache::Http::Request &request, Pistache::Http::ResponseWriter &response)
+        {
+            response.headers().add<Http::Header::AccessControlAllowMethods>("GET,HEAD,OPTIONS,POST,PUT,DELETE");
+            response.headers().add<Http::Header::AccessControlAllowHeaders>("Origin, Content-Type, Authorization");
+
+            if (request.method() == Http::Method::Options)
+            {
+                response.headers().add<Http::Header::ContentType>(MIME(Text, Plain));
+                response.send(Http::Code::Ok, {});
+                return false;
+            }
+            response.headers().add<Http::Header::ContentType>(MIME(Text, Json));
+            return true;
         }
 
     public:
