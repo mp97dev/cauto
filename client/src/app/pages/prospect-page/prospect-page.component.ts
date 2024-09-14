@@ -12,9 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from "@angular/material/list";
 import { WithOptionsPipe } from '../../pipes/with-options.pipe';
 import { ApiService } from '../../services/api.service';
-import { environment } from '../../../environments/environment.development';
 import { SumOptionalsPipe } from '../../pipes/sum-optionals.pipe';
-import { Sede, SediService } from '../../services/sedi.service';
 
 
 @Component({
@@ -63,7 +61,6 @@ export class ProspectPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.ms.carsAsObservable.pipe(tap(cars => {
-      console.log(cars)
       this.brands = Object.keys(cars)
       this.cars = cars
     })).subscribe()
@@ -96,9 +93,9 @@ export class ProspectPageComponent implements OnInit {
   }
 
   send() {
-        
+
     const value = {
-      marca: this.form.get('marca')?.value,
+      marca: this.form.get('marca')?.value![0],
       modello: this.form.get('modello')?.value,
       optionals: this.form.get('optionals')?.value,
       usato: {
