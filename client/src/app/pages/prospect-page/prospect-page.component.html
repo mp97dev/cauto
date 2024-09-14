@@ -19,7 +19,7 @@
     <mat-expansion-panel [expanded]="step() === 1" hideToggle>
         <mat-expansion-panel-header>
             <mat-panel-title>Selezione Modello</mat-panel-title>
-            <mat-panel-description>{{selectedModel?.nome_univoco}}</mat-panel-description>
+            <mat-panel-description>{{selectedModel?.modello}}</mat-panel-description>
             <mat-icon>directions_car</mat-icon>
         </mat-expansion-panel-header>
         @if(form.get('marca')?.value) {
@@ -29,8 +29,8 @@
                 <mat-form-field class="w-full">
                     <mat-label>Modello</mat-label>
                     <mat-select formControlName="modello" class="w-full">
-                        @for(model of models; track model.nome_univoco) {
-                            <mat-option [value]="model.nome_univoco">{{model.nome_univoco}}</mat-option> }
+                        @for(model of models; track model.modello) {
+                            <mat-option [value]="model.modello">{{model.modello}}</mat-option> }
                         </mat-select>
                 </mat-form-field>
 
@@ -39,7 +39,7 @@
             <div class="flex-1 grid grid-cols-2">
                 @if(selectedModel) {
                 <strong>nome</strong>
-                <p>{{selectedModel.nome_univoco}}</p>
+                <p>{{selectedModel.modello}}</p>
                 <strong>descrzione</strong>
                 <p>{{selectedModel.descrizione}}</p>
                 <strong>prezzo</strong>

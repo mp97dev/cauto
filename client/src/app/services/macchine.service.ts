@@ -44,7 +44,7 @@ export class MacchineService {
             "alimentazione": "Benzina",
             "tipo": "1.0L EcoBoost"
           },
-          "nome_univoco": "Ford Fiesta 2024",
+          "modello": "Ford Fiesta 2024",
           "optionals": [
             {
               "nome": "colore",
@@ -102,7 +102,7 @@ export class MacchineService {
             "alimentazione": "Ibrida",
             "tipo": "1.8L 4 cilindri"
           },
-          "nome_univoco": "Toyota Corolla 2024",
+          "modello": "Toyota Corolla 2024",
           "optionals": [
             {
               "nome": "colore",
@@ -168,7 +168,7 @@ export class MacchineService {
             "alimentazione": "Ibrida",
             "tipo": "2.5L 4 cilindri"
           },
-          "nome_univoco": "Toyota RAV4 2024",
+          "modello": "Toyota RAV4 2024",
           "optionals": [
             {
               "nome": "colore",

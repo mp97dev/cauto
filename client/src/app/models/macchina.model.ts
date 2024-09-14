@@ -16,7 +16,7 @@ export interface Car {
         alimentazione: string;
         tipo: string;
     };
-    nome_univoco: string;
+    modello: string;
     optionals: Optional[];
     prezzo_base: number;
 }

@@ -5,12 +5,12 @@ export enum Roles {
 
 export class User {
     username: string
-    roles: Roles[] = []
+    role: Roles | null = null
 
     constructor(options?: Partial<User> ) {
         if(!options?.username) throw new Error('username is required for a user')
         this.username = options.username
-        this.roles = options?.roles ?? []
+        this.role = options?.role ?? null
 
         localStorage.setItem('token', JSON.stringify(this))
     }

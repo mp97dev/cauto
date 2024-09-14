@@ -70,13 +70,13 @@ export class ProspectPageComponent implements OnInit {
 
     this.form.get('marca')?.valueChanges.subscribe(marca => {
       this.models = this.cars[marca as unknown as keyof CarBrand]
-      const sameBrandModel = this.models.find(car => car.nome_univoco === this.form.get('modello')?.value)
+      const sameBrandModel = this.models.find(car => car.modello === this.form.get('modello')?.value)
       if (!sameBrandModel) {
         this.form.get('modello')?.reset()
       }
     })
     this.form.get('modello')?.valueChanges.subscribe(modello => {
-      this.selectedModel = this.models.find(car => car.nome_univoco === modello) || null
+      this.selectedModel = this.models.find(car => car.modello === modello) || null
     })
 
     this.form.get('optionals')?.valueChanges.subscribe(optionals => {
