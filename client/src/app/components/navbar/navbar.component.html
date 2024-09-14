@@ -3,19 +3,18 @@
     
     <a routerLink="/" routerLinkActive="active">Home</a> 
 
-    @if((user | async)?.loggedIn) {
+    @if((auth.loggedIn$ | async)) {
         <a class="hover:cursor-pointer hover:underline" routerLink="prospect" >Prospects</a> 
         <a class="hover:cursor-pointer hover:underline" routerLink="evaluations" >Evaluations</a> 
         <a class="hover:cursor-pointer hover:underline" routerLink="branches" >Branches</a> 
-    }
-    <span class="flex-1"></span>
-
-    @if(!(user|async)?.loggedIn) {
-        <button (click)="login()" class="bg-white text-purple-800 p-2 rounded-md">login</button>
-    } @else {
+        <span class="flex-grow"></span>
         <div>
-            <img [src]="(auth.user | async)?.imgUrl">
-            <span>{{(user | async)?.username}}</span>
+            <button (click)="logout()" class="p-2 rounded-md cursor-pointer hover:underline">logout</button>
+            <span>{{(auth.user | async)?.username}}</span>
         </div>
+    } @else {
+        <span class="flex-grow"></span>
+        <button (click)="signup()" class="p-2 rounded-md cursor-pointer hover:underline">registrati</button>
+        <button (click)="login()" class="bg-white text-purple-800 p-2 rounded-md">login</button>
     } 
 </nav>

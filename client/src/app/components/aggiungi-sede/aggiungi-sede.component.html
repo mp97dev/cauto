@@ -1,0 +1,17 @@
+<h1 matDialogTitle> Nuova Sede</h1>
+<div matDialogContent [formGroup]="form">
+    <mat-form-field>
+        <mat-label>Nome</mat-label>
+        <input matInput formControlName="nome" />
+        @if(form.get('nome')?.hasError('required')) {<mat-error>Il nome è obbligatorio</mat-error>}
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Indirizzo</mat-label>
+        <input matInput formControlName="nome" />
+        @if(form.get('indirizzo')?.hasError('required')) {<mat-error>Il nome è obbligatorio</mat-error>}
+    </mat-form-field>
+
+</div>
+<div matDialogActions>
+    <button mat-button (click)="confirm()">Invia</button>
+</div>
