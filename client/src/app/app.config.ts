@@ -1,27 +1,32 @@
-import { ApplicationConfig, inject, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, inject, Injectable, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { HttpEvent, HttpHandlerFn, HttpRequest, provideHttpClient, withFetch, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, provideHttpClient, withFetch, withInterceptorsFromDi } from '@angular/common/http';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { Observable, switchMap, take, tap } from 'rxjs';
+import { map, Observable, switchMap, take, tap } from 'rxjs';
 import { AuthService } from './services/auth.service';
 
-
-export function authHeaderInterceptor(req: HttpRequest<unknown>, next: HttpHandlerFn): Observable<HttpEvent<unknown>> {
-  const auth = inject(AuthService)
-
-  return auth.user.pipe(
-    take(1),
-    tap(user => { if(user) req.headers.set('Authorization', `${user.username}#${user.role}`)}),
-    switchMap(() => next(req))
-  )
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, handler: HttpHandler): Observable<HttpEvent<any>> {
+    const auth = inject(AuthService)
+    
+    return auth.user.pipe(
+      take(1),
+      map(u => u ? req.clone({
+        headers: req.headers.set('Authorization', `${u.username}#${u.role}`)}) : req),
+      tap(r => console.log(r)),
+      switchMap(u => handler.handle(u))
+    )
+  }
 }
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(withFetch(), withInterceptors([authHeaderInterceptor])), provideAnimationsAsync()
+    provideHttpClient(withFetch(), withInterceptorsFromDi()), provideAnimationsAsync(),
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ]
 };
