@@ -39,6 +39,12 @@
           obbligatorio</mat-error> }
       </mat-form-field>
 
+      <mat-form-field>
+        <mat-label>larghezza</mat-label>
+        <input type="number" matInput placeholder="larghezza" formControlName="larghezza">
+        @if(form.get('dimensioni')?.get('larghezza')?.hasError('required')) {<mat-error>Il campo larghezza è
+          obbligatorio</mat-error> }
+      </mat-form-field>
 
       <mat-form-field>
         <mat-label>peso</mat-label>

@@ -1,10 +1,11 @@
 export interface Car {
     descrizione: string;
     dimensioni: {
-        altezza: string;
-        lunghezza: string;
-        peso: string;
-        volume_bagagliaio: string;
+        altezza: number;
+        lunghezza: number;
+        larghezza: number;
+        peso: number;
+        volume_bagagliaio: number;
     };
     immagini: {
         colori: string[];
@@ -19,6 +20,7 @@ export interface Car {
     modello: string;
     optionals: Optional[];
     prezzo_base: number;
+    sconto: number;
 }
 
 export interface Optional {

@@ -43,6 +43,7 @@ export class AddCarDialogComponent {
     dimensioni: new FormGroup({
       altezza: new FormControl('', [Validators.required]),
       lunghezza: new FormControl('', [Validators.required]),
+      larghezza: new FormControl('', [Validators.required]),
       peso: new FormControl('', [Validators.required]),
       volume_bagagliaio: new FormControl('', [Validators.required]),
     }),
