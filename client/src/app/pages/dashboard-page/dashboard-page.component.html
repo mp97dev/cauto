@@ -11,7 +11,7 @@
         <form [formGroup]="filter" class="flex gap-4">
 
             
-            <mat-slide-toggle formControlName="soloUsato">solo usato mancante</mat-slide-toggle>
+            <mat-slide-toggle formControlName="usatoDaValutare">usato da valutare</mat-slide-toggle>
 
             <mat-slide-toggle formControlName="soloScaduti">solo preventivi scaduti</mat-slide-toggle>
             
@@ -86,6 +86,16 @@
                     }
                 </mat-menu>
             </mat-cell>
+        </ng-container>
+
+        <ng-container [matColumnDef]="'usato'">
+            <mat-header-cell *matHeaderCellDef>usato</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.usato ? row.usato.descrizione : 'no' }}</mat-cell>
+        </ng-container>
+
+        <ng-container [matColumnDef]="'valutazione usato'">
+            <mat-header-cell *matHeaderCellDef>Valutazione</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.usato ? (row.usato.valutazione ?? '-'): 'non richiesta' }}</mat-cell>
         </ng-container>
         
         <mat-header-row *matHeaderRowDef="columns; sticky: true"></mat-header-row>

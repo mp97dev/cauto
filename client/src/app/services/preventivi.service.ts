@@ -70,7 +70,7 @@ export interface Preventivo {
   optionals: Optional[];
   prezzo_finale: number;
   sconto: number | null;
-  usato: {descrizione: string, immagini: string[]} | null;
+  usato: {descrizione: string, immagini: string[], valutazione?: number} | null;
   utente: string;
 }
 

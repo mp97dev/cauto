@@ -62,7 +62,7 @@ export class DashboardPageComponent implements AfterViewInit{
 
   filter = new FormGroup({
     soloScaduti: new FormControl(true as boolean),
-    soloUsato: new FormControl(true as boolean),
+    usatoDaValutare: new FormControl(true as boolean),
     cliente: new FormControl(''),
     marca: new FormControl(''),
     sede: new FormControl('')
@@ -75,8 +75,8 @@ export class DashboardPageComponent implements AfterViewInit{
 
   preventivi = this.ps.preventivi
 
-  displayColumns = [ 'utente', 'acconto', 'data_consegna', 'data_creazione', 'data_scadenza', 'marca', 'modello', 'prezzo_finale', 'sconto']
-  columns = [ ...this.displayColumns, 'action']
+  displayColumns = [ 'utente', 'acconto', 'data_consegna', 'data_creazione', 'data_scadenza', 'marca', 'modello', 'prezzo_finale', 'sconto', 'preventivo']
+  columns = [ ...this.displayColumns, 'usato', 'valutazione', 'action']
 
   dataSource = this.filter.valueChanges.pipe(
     switchMap(filters => {
@@ -84,14 +84,14 @@ export class DashboardPageComponent implements AfterViewInit{
       const cliente = filters.cliente
       const marca = filters.marca
       const sede = filters.sede
-      const usato = filters.soloUsato
+      const usato = filters.usatoDaValutare
 
       return this.ps.preventivi.pipe(
         map(preventivi => {
           return preventivi.filter(p => scaduti ? new Date(p.data_scadenza) < new Date() : true)
         }),
         map(preventivi => {
-          return preventivi.filter(p => usato ? !!p.usato : true)
+          return preventivi.filter(p => usato ? (p.usato && !p.usato.valutazione) : true )
         }),
         map(preventivi => {
           return preventivi.filter(p => cliente ? p.utente.includes(cliente) : true)
