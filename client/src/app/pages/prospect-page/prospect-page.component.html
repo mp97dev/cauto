@@ -1,3 +1,5 @@
+@if(ms.carsAsObservable | async) {
+    
 <mat-accordion [formGroup]="form" class="w-[50em] max-w-full">
     <mat-expansion-panel [expanded]="step() === 0" hideToggle>
         <mat-expansion-panel-header>
@@ -86,7 +88,7 @@
             <mat-panel-title>Ultimi ritocchi</mat-panel-title>
             <mat-icon>brush</mat-icon>
         </mat-expansion-panel-header>
-        @for (o of (optionalsArray | withOptions); track o.nome) {
+        @for (o of (optionalsArray | withOptions | includedInArray:form.get('optionals')?.value); track o.nome) {
         <mat-form-field class="w-full">
             <mat-label>{{o.nome}}</mat-label>
             <mat-select (selectionChange)="changeOptionalValue($event, o.nome)">
@@ -164,3 +166,9 @@
     </div>
     <p>Devi ancora completare il form</p>
 </div>
+
+} @else {
+    <div class="w-full h-full flex justify-center items-center content-center">
+        <mat-spinner diameter="30px"></mat-spinner>
+    </div>
+}

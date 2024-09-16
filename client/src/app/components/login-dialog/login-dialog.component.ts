@@ -39,7 +39,7 @@ export class LoginDialogComponent {
     const sub = this.action === 'login' ? this.auth.login(value.username ?? '', value.password ?? '') : this.auth.register(value.username ?? '', value.password ?? '')
     sub.pipe(
       tap(() => this.dialogRef.close()),
-      catchError(err => {console.log(err); return of(null)})
+      catchError(err => {console.error(err); return of(null)})
     ).subscribe()
   }
 

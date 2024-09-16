@@ -1,0 +1,166 @@
+<h1 matDialogTitle>Creazione auto</h1>
+<mat-dialog-content class="gap-2">
+
+  <form [formGroup]="form" class="flex flex-col gap-2">
+    <mat-form-field>
+      <mat-label>Marca</mat-label>
+      <input matInput placeholder="Marca" formControlName="marca">
+      @if(form.get('marca')?.hasError('required')) {<mat-error>Il campo marca è obbligatorio</mat-error> }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Modello</mat-label>
+      <input matInput placeholder="Modello" formControlName="modello">
+      @if(form.get('modello')?.hasError('required')) {<mat-error>Il campo modello è obbligatorio</mat-error> }
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Descrizione</mat-label>
+      <textarea matInput placeholder="Descrizione" formControlName="descrizione"></textarea>
+      @if(form.get('descrizione')?.hasError('required')) {<mat-error>Il campo descrizione è obbligatorio</mat-error> }
+    </mat-form-field>
+
+    <mat-divider />
+    <h2>Dimensioni</h2>
+    <div formGroupName="dimensioni">
+
+      <mat-form-field>
+        <mat-label>Altezza</mat-label>
+        <input type="number" matInput placeholder="Altezza" formControlName="altezza">
+        @if(form.get('dimensioni')?.get('altezza')?.hasError('required')) {<mat-error>Il campo altezza è
+          obbligatorio</mat-error> }
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>lunghezza</mat-label>
+        <input type="number" matInput placeholder="Lunghezza" formControlName="lunghezza">
+        @if(form.get('dimensioni')?.get('lunghezza')?.hasError('required')) {<mat-error>Il campo lunghezza è
+          obbligatorio</mat-error> }
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>peso</mat-label>
+        <input type="number" matInput placeholder="Peso" formControlName="peso">
+        @if(form.get('dimensioni')?.get('peso')?.hasError('required')) {<mat-error>Il campo peso è
+          obbligatorio</mat-error> }
+      </mat-form-field>
+
+
+      <mat-form-field>
+        <mat-label>Volume bagagliaio</mat-label>
+        <input type="number" matInput placeholder="Volume bagagliaio" formControlName="volume_bagagliaio">
+        @if(form.get('dimensioni')?.get('altezza')?.hasError('required')) {<mat-error>Il campo volume bagagliaio è
+          obbligatorio</mat-error> }
+      </mat-form-field>
+    </div>
+
+    <mat-divider />
+    <h2>Immagini</h2>
+
+    <ng-container [formGroup]="immagini">
+
+      <mat-form-field>
+        <mat-label>Vista frontale</mat-label>
+        <input matInput placeholder="immagine" formControlName="vista_frontale">
+        @if(immagini.get('vista_frontale')?.hasError('required')) {<mat-error>Il campo è obbligatorio</mat-error> }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Vista laterale</mat-label>
+        <input matInput placeholder="immagine" formControlName="vista_laterale">
+        @if(immagini.get('vista_laterale')?.hasError('required')) {<mat-error>Il campo è obbligatorio</mat-error> }
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Vista posteriore</mat-label>
+        <input matInput placeholder="immagine" formControlName="vista_posteriore">
+        @if(immagini.get('vista_posteriore')?.hasError('required')) {<mat-error>Il campo è obbligatorio</mat-error> }
+      </mat-form-field>
+
+      <ng-container formArrayName="colori">
+
+        @for(col of immaginiColori.controls; track col; let i = $index) {
+        <mat-form-field>
+          <mat-label>Immagine colore</mat-label>
+          <input matInput placeholder="immagine" formControlName="{{i}}">
+        </mat-form-field>
+        }
+
+        <button mat-raised-button (click)="addImmagniColori($event)">Aggiungi altra immagine</button>
+      </ng-container>
+
+    </ng-container>
+
+    <mat-divider />
+    <h2>Motore</h2>
+
+    <ng-container [formGroup]="motore">
+      <mat-form-field>
+        <mat-label>Alimentazione</mat-label>
+        <input matInput placeholder="Alimentazione" formControlName="alimentazione">
+        @if(motore.get('alimentazione')?.hasError('required')) {<mat-error>Il campo alimentazione è
+          obbligatorio</mat-error> }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tipo</mat-label>
+        <input matInput placeholder="Tipo" formControlName="tipo">
+        @if(motore.get('tipo')?.hasError('required')) {<mat-error>Il campo tipo è obbligatorio</mat-error> }
+      </mat-form-field>
+    </ng-container>
+
+    <mat-divider />
+    <h2>Prezzo</h2>
+    <mat-form-field>
+      <mat-label>Prezzo base</mat-label>
+      <input type="number" matInput placeholder="Prezzo base" formControlName="prezzo_base">
+      @if(form.get('prezzo_base')?.hasError('required')) {<mat-error>Il campo prezzo base è obbligatorio</mat-error> }
+    </mat-form-field>
+
+    <mat-divider />
+    <h2>Optionals</h2>
+    <ng-container formArrayName="optionals">
+      @for(optionalGroup of optionals.controls; track optionalGroup; let i = $index) {
+      <mat-card class="p-4">
+        <ng-container formGroupName="{{i}}">
+          <mat-form-field>
+            <mat-label>Nome</mat-label>
+            <input matInput placeholder="nome" formControlName="nome">
+            @if(optionals.get(i.toString())?.get('nome')?.hasError('required')) {<mat-error>Il campo nome è
+              obbligatorio</mat-error> }
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Prezzo</mat-label>
+            <input type="number" matInput placeholder="free" formControlName="prezzo">
+            @if(optionals.get(i.toString())?.get('nome')?.hasError('required')) {<mat-error>Il campo prezzo è
+              obbligatorio</mat-error> }
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Opzioni</mat-label>
+            <mat-chip-grid formControlName="opzioni" #reactiveChipGrid>
+              @for(o of optionalGroup.get('opzioni')?.value; track o; let j = $index) {
+              <mat-chip-row (removed)="removeOption(optionalGroup, j)">
+                {{o}}
+                <button matChipRemove>
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+              }
+            </mat-chip-grid>
+            <input [matChipInputFor]="reactiveChipGrid" (matChipInputTokenEnd)="addOption(optionalGroup, $event)">
+          </mat-form-field>
+
+        </ng-container>
+      </mat-card>
+      }
+      <button mat-raised-button (click)="addOptional($event)">Aggiungi optional</button>
+    </ng-container>
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Chiudi</button>
+  <button mat-flat-button [disabled]="form.invalid" (click)="send()">Salva</button>
+</mat-dialog-actions>

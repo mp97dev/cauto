@@ -30,3 +30,7 @@ export interface Optional {
 export interface CarBrand {
     [brand: string]: Car[];
 }
+
+export interface FlattenBrandCars extends Car{
+    marca: string
+}

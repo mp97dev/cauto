@@ -19,6 +19,8 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
+import { IncludedInArrayPipe } from '../../pipes/included-in-array.pipe';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -37,7 +39,9 @@ import { Router } from '@angular/router';
     SumOptionalsPipe,
     WithOptionsPipe,
     MatInputModule,
-    MatChipsModule
+    MatChipsModule,
+    IncludedInArrayPipe,
+    MatProgressSpinnerModule
   ],
   templateUrl: './prospect-page.component.html',
   styleUrl: './prospect-page.component.scss',
@@ -95,10 +99,6 @@ export class ProspectPageComponent implements OnInit {
       // salva optionals del modello
       this.optionalsArray = JSON.parse(JSON.stringify(this.selectedModel?.optionals ?? []))
       this.selectedModel?.optionals.forEach(o => o.opzioni = [])
-    })
-
-    this.form.get('optionals')?.valueChanges.subscribe(optionals => {
-      console.log(optionals)
     })
 
   }

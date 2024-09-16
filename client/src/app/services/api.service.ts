@@ -25,7 +25,7 @@ export class ApiService {
     return this.http.post<T>(`${environment.apiUrl}${path}`, body, {headers: headers})
   }
 
-  delete<T>(path: string, options?: any): Observable<T> {
+  delete<T>(path: string, body: any = Object,  options?: any): Observable<T> {
     const headers = deepMerge(this.options, options)
     return this.http.delete<T>(`${environment.apiUrl}${path}`, {headers: headers})
   }

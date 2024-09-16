@@ -7,6 +7,7 @@ import { roleGuard } from './guards/role.guard';
 import { Roles } from './models/user.model';
 import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
 import { CatalogoPageComponent } from './pages/catalogo-page/catalogo-page.component';
+import { GestionalePageComponent } from './pages/gestionale-page/gestionale-page.component';
 
 export const routes: Routes = [
   {
@@ -42,5 +43,12 @@ export const routes: Routes = [
     title: 'Cauto | Sedi',
     canActivate: [authGuard, roleGuard],
     data: { roles: [Roles.SEGRETERIA]}
-  }
+  },
+  {
+    path: 'gestionale',
+    component: GestionalePageComponent,
+    title: 'Cauto | Gestionale',
+    canActivate: [authGuard, roleGuard],
+    data: { roles: [Roles.SEGRETERIA]}
+  },
 ];

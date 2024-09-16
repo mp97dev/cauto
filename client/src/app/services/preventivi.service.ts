@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of, switchMap, take, tap } from 'rxjs';
 import { Optional } from '../models/macchina.model';
 import { AuthService } from './auth.service';
 import { Roles } from '../models/user.model';
+import { Sede } from './sedi.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,27 +28,27 @@ export class PreventiviService {
 
   getAllPreventivi(): Observable<Preventivo[]> {
     return this.api.get<Preventivo[]>(`/preventivi`).pipe(tap(p => this.preventivi$.next(p)))
-    return of(d)
+    // return of(d)
   }
 
   getUserPreventivi(): Observable<Preventivo[]> {
     return this.api.get<Preventivo[]>(`/preventivi/user`).pipe(tap(p => this.preventivi$.next(p)))
-    return of(d)
+    // return of(d)
   }
 
   deletePreventivo(p: Preventivo): Observable<Preventivo> {
     return this.api.delete<Preventivo>(`/preventivi/${p.id}`)
-    return of(d[0])
+    // return of(d[0])
   }
 
   valutaUsato(p: Preventivo, valutazione: number): Observable<Preventivo> {
-    return this.api.post<Preventivo>(`/preventivi/usato/${p.id}`, {valutazione})
-    return of(d[0])
+    return this.api.put<Preventivo>(`/preventivi/usato/${p.id}`, {valutazione})
+    // return of(d[0])
   }
 
   aggiungiAcconto(p: Preventivo, acconto: number): Observable<Preventivo> {
-    return this.api.post<Preventivo>(`/preventivi/acconto/${p.id}`, {acconto})
-    return of(d[0])
+    return this.api.put<Preventivo>(`/preventivi/acconto/${p.id}`, {acconto})
+    // return of(d[0])
   }
 }
 

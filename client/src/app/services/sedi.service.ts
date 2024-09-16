@@ -22,14 +22,14 @@ export class SediService {
 
   updateSedi(): Observable<Sede[]> {
     return this.api.get<Sede[]>(`/sedi`).pipe(tap(res => this.sedi$.next(res)))
-    return of(d)
+    // return of(d)
   }
 
   deleteSede(sede: Sede) {
     return this.api.delete<Sede>(`/sedi/${sede.id}`).pipe(finalize(() => this.updateSedi()))
   }
 
-  aggiungiSede(sede: Sede) {
+  aggiungiSede(sede: Sede) { //! unused
     return this.api.post<Sede>(`/sedi`, sede).pipe(finalize(() => this.updateSedi()))
   }
 }
@@ -40,7 +40,7 @@ export interface Sede {
   nome: string
 }
 
-export const d = [
+const d = [
   {
       "id": 1,
       "indirizzo": "Via Roma 123, Milano",

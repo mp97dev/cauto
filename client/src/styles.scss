@@ -48,3 +48,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-column-action {
   flex: 0 0 6em;
 }
+
+h1 {
+  @apply text-lg tracking-wider text-purple-700;
+}

@@ -1,5 +1,51 @@
-<h1>Preventivi</h1>
-@if((data | async); as data) {
+<div class="w-full flex justify-between items-center p-2">
+    <span class="flex gap-2 flex-row text-purple-700"><mat-icon>list_alt</mat-icon><h1>Dashboard preventivi</h1></span>
+</div>
+<mat-accordion>
+    <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+            <mat-panel-title>Filtri</mat-panel-title>
+            <mat-icon>filter_alt</mat-icon>
+        </mat-expansion-panel-header>
+        <form [formGroup]="filter" class="flex gap-4">
+            <mat-slide-toggle formControlName="soloScaduti">solo preventivi scaduti</mat-slide-toggle>
+            
+            <mat-form-field>
+                <mat-label>cliente</mat-label>
+                <input type="string" matInput formControlName="cliente" [matAutocomplete]="autoCliente">
+                <mat-autocomplete #autoCliente="matAutocomplete">
+                    @for(c of (distinctClienti | async); track c) {
+                        <mat-option [value]="c">{{c}}</mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>marca</mat-label>
+                <input type="string" matInput formControlName="marca" [matAutocomplete]="autoMarche">
+                <mat-autocomplete #autoMarche="matAutocomplete">
+                    @for(c of (distinctMarche | async); track c) {
+                        <mat-option [value]="c">{{c}}</mat-option>
+                    }
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>sede</mat-label>
+                <input type="string" matInput formControlName="sede" [matAutocomplete]="autoSedi">
+                <mat-autocomplete #autoSedi="matAutocomplete">
+                    @for(c of (distinctSedi | async); track c) {
+                        <mat-option [value]="c">{{c}}</mat-option>
+                    }
+                    </mat-autocomplete>
+            </mat-form-field>
+
+        </form>
+        
+
+    </mat-expansion-panel>
+</mat-accordion>
+@if((dataSource | async); as data) {
 
     <mat-table [dataSource]="data" class="mat-elevation-z8">
         
@@ -18,9 +64,15 @@
                     <mat-icon>more_vert</mat-icon>
                 </button>
                 <mat-menu #menu="matMenu">
-                    <button mat-menu-item (click)="acconto(row)"><mat-icon>attach_money</mat-icon>Paga acconto</button>
+                    <!--tutti-->
                     <button mat-menu-item (click)="esporta(row)"><mat-icon>download</mat-icon>Scarica .pdf</button>
                     
+                    <!--solo utente-->
+                    @if(!(user | async)?.role) {
+                        <button mat-menu-item (click)="acconto(row)"><mat-icon>attach_money</mat-icon>Paga acconto</button>
+                    }
+
+                    <!--solo impiegato-->
                     @if((user | async)?.role === 'impiegato') {
                         <button mat-menu-item (click)="valutaUsato(row)" [disabled]="!row.usato"><mat-icon>recycling</mat-icon>Valutazione usato </button>
                         <button mat-menu-item (click)="elimina(row)"><mat-icon>delete</mat-icon> Elimina</button>
@@ -30,7 +82,7 @@
         </ng-container>
         
         <mat-header-row *matHeaderRowDef="columns; sticky: true"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: columns;" class="cursor-pointer"></mat-row>
+        <mat-row *matRowDef="let row; columns: columns;"></mat-row>
     </mat-table>
 
 }

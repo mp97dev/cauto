@@ -3,7 +3,6 @@ import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
 import { Roles, User } from '../models/user.model';
 import { ApiService } from './api.service';
 import { MatDialog } from '@angular/material/dialog';
-import { environment } from '../../environments/environment.development';
 import { LoginDialogComponent } from '../components/login-dialog/login-dialog.component';
 import { Router } from '@angular/router';
 
@@ -37,7 +36,7 @@ export class AuthService {
   login(username: string, password: string ): Observable<User | null> {
     
     return this.api.post<User>(`/login`, {username, password}).pipe(tap(x => this.user$.next(new User(x))))
-    return of(new User({username, role: Roles.IMPIEGATI})).pipe(tap(x => this.user$.next(x)))
+    // return of(new User({username, role: Roles.IMPIEGATI})).pipe(tap(x => this.user$.next(x)))
   }
 
   register(username: string, password: string): Observable<User | null> {
@@ -46,7 +45,6 @@ export class AuthService {
 
   private loginFromLocalStorage() {
     const ls = localStorage.getItem('auth-session')
-    console.log(ls)
     
     if(!ls) return
     

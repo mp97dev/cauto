@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { MatTableModule } from "@angular/material/table";
 import { PreventiviService, Preventivo } from '../../services/preventivi.service';
 import { AsyncPipe, DatePipe } from '@angular/common';
@@ -6,11 +6,18 @@ import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { ValutaUsatoComponent } from '../../components/valuta-usato/valuta-usato.component';
-import { of, switchMap } from 'rxjs';
+import { map, of, switchMap, tap } from 'rxjs';
 import { AccontoComponent } from '../../components/acconto/acconto.component';
 import { AuthService } from '../../services/auth.service';
 import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable'
+import { MatExpansionModule } from '@angular/material/expansion';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Sede } from '../../services/sedi.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 @Component({
   selector: 'app-dashboard-page',
@@ -20,18 +27,45 @@ import autoTable from 'jspdf-autotable'
     AsyncPipe,
     MatMenuModule,
     MatIconModule,
-    DatePipe
+    DatePipe,
+    MatExpansionModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    MatAutocompleteModule
   ],
   providers: [DatePipe],
   templateUrl: './dashboard-page.component.html',
-  styleUrl: './dashboard-page.component.scss'
+  styleUrl: './dashboard-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardPageComponent {
+export class DashboardPageComponent implements AfterViewInit{
 
   private ps = inject(PreventiviService)
   public data = this.ps.preventivi
   public user = inject(AuthService).user
 
+  distinctClienti = this.ps.preventivi.pipe(
+    map(preventivi => preventivi.map(p => p.utente)),
+    map(clienti => [...new Set(clienti)])
+  )
+
+  distinctMarche = this.ps.preventivi.pipe(
+    map(preventivi => preventivi.map(p => p.macchina_marca)), //! macchina_marca è giusto?
+    map(marche => [...new Set(marche)])
+  )
+
+  distinctSedi = this.ps.preventivi.pipe(
+    map(preventivi => preventivi.map(p => p.luogo_ritiro.sede)),
+    map(sedi => [...new Set(sedi)])
+  ) 
+
+  filter = new FormGroup({
+    soloScaduti: new FormControl(true as boolean),
+    cliente: new FormControl(''),
+    marca: new FormControl(''),
+    sede: new FormControl(null as Sede | null)
+  })
 
   constructor(
     private dialog: MatDialog,
@@ -42,6 +76,36 @@ export class DashboardPageComponent {
 
   displayColumns = [ 'utente', 'acconto', 'data_consegna', 'data_creazione', 'data_scadenza', 'macchina_marca', 'macchina_modello', 'prezzo_finale', 'sconto']
   columns = [ ...this.displayColumns, 'action']
+
+  dataSource = this.filter.valueChanges.pipe(
+    switchMap(filters => {
+      const scaduti = filters.soloScaduti
+      const cliente = filters.cliente
+      const marca = filters.marca
+      const sede = filters.sede
+
+      return this.ps.preventivi.pipe(
+        map(preventivi => {
+          return preventivi.filter(p => scaduti ? new Date(p.data_scadenza) < new Date() : true)
+        }),
+        map(preventivi => {
+          return preventivi.filter(p => cliente ? p.utente.includes(cliente) : true)
+        }),
+        map(preventivi => {
+          return preventivi.filter(p => marca ? p.macchina_marca.includes(marca) : true)
+        }),
+        map(preventivi => {
+          return preventivi.filter(p => sede ? p.luogo_ritiro.sede.includes(sede.nome) : true)
+        })
+      )
+    })
+  )
+
+  ngAfterViewInit() {
+    this.filter.get('soloScaduti')?.setValue(false)
+  }
+  
+
 
   elimina(p: Preventivo) {
     this.ps.deletePreventivo(p).subscribe()
@@ -95,12 +159,4 @@ export class DashboardPageComponent {
     // Salva il PDF
     doc.save('preventivo.pdf');
   }
-
-  private formatKey(key: string): string {
-    // Converti il formato delle chiavi in modo leggibile (es. "data_consegna" -> "Data Consegna")
-    return key
-      .replace(/_/g, ' ')
-      .replace(/\b\w/g, char => char.toUpperCase());
-  }
-
 }

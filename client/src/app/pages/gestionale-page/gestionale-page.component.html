@@ -1,0 +1,70 @@
+<div class="w-full flex justify-between items-center p-2">
+  <span class="flex gap-2 flex-row text-purple-700"><mat-icon>directions_car</mat-icon><h1> Gestionale auto</h1></span>
+  <button mat-flat-button (click)="addCar()">Aggiungi macchina</button>
+</div>
+
+@if(cars | async; as data) {
+
+  <mat-table [dataSource]="data" class="mat-elevation-z8">
+    @for(col of columns; track col) {
+      
+      <ng-container [matColumnDef]="col">
+        <mat-header-cell *matHeaderCellDef> {{col}} </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row[col]}} </mat-cell>
+      </ng-container>
+    }
+
+    <ng-container matColumnDef="prezzo_base">
+      <mat-header-cell *matHeaderCellDef>Prezzo</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row.prezzo_base | currency : 'EUR' }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="motore">
+      <mat-header-cell *matHeaderCellDef>Motore</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{row.motore.alimentazione}} {{row.motore.tipo}}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="dimensioni">
+      <mat-header-cell *matHeaderCellDef>Dimensioni</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div>
+          <p>Lunghezza: {{row.dimensioni.lunghezza}}</p>
+          <p>Altezza: {{row.dimensioni.altezza}}</p>
+          <p>Peso: {{row.dimensioni.peso}}</p>
+          <p>Bagagliaio: {{row.dimensioni.volume_bagagliaio}}</p>
+        </div>
+      </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="optionals">
+      <mat-header-cell *matHeaderCellDef>Optionals</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <div>
+          @for(o of row.optionals; track o) {
+            <p>{{o.nome}} - {{o.prezzo}}</p>
+          }
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="azioni">
+      <mat-header-cell *matHeaderCellDef> Azioni </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="removeCar(row)"><mat-icon>delete</mat-icon> Elimina</button>
+        </mat-menu>
+    </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="displayColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
+  </mat-table>
+}

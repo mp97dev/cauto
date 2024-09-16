@@ -1,16 +1,16 @@
 <nav class="w-full p-4 h-fit flex items-center gap-4 bg-purple-800 text-white">
     <!-- <img src="logo.png" alt="Cauto logo"> -->
     
-    <a routerLink="/" routerLinkActive="active">Home</a> 
-    <a class="hover:cursor-pointer hover:underline" routerLink="preventivo" >Nuovo preventivo</a>
-    <a class="hover:cursor-pointer hover:underline" routerLink="catalogo" >Catalogo</a> 
-
-
+    <a routerLink="/" routerLinkActive="active">Cauto</a>
+    <a routerLink="preventivo" class="hover:cursor-pointer hover:underline" >Nuovo preventivo</a>
     @if(user | async; as user) {
-        <a class="hover:cursor-pointer hover:underline" routerLink="dashboard" >Dashboard</a> 
+        @if(!user.role || user.role === 'impiegato') {
+            <a routerLink="dashboard" class="hover:cursor-pointer hover:underline" >Dashboard</a> 
+        }
         
         @if (user.role === 'segreteria') {
-            <a class="hover:cursor-pointer hover:underline" routerLink="sedi" >Sedi</a> 
+            <a routerLink="sedi" class="hover:cursor-pointer hover:underline" >Sedi</a> 
+            <a routerLink="gestionale" class="hover:cursor-pointer hover:underline">Gestionale</a>
         }
 
 
