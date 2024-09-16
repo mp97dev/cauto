@@ -1,14 +1,16 @@
 <div class="w-full flex justify-between items-center p-2">
     <span class="flex gap-2 flex-row text-purple-700"><mat-icon>domain</mat-icon><h1>Sedi</h1></span>
     <button mat-flat-button disabled (click)="aggiungi()">Aggiungi sede</button>
-  </div>
-<mat-table [dataSource]="ss.sedi">
-    <ng-container matColumnDef="nome">
-        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
-        <mat-cell *matCellDef="let sede"> {{sede.nome}} </mat-cell>
-    </ng-container>
+</div>
+  @if(dataSource | async; as ds) {
 
-    <ng-container matColumnDef="indirizzo">
+      <mat-table [dataSource]="ds">
+          <ng-container matColumnDef="nome">
+              <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+              <mat-cell *matCellDef="let sede"> {{sede.nome}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="indirizzo">
         <mat-header-cell *matHeaderCellDef> Indirizzo </mat-header-cell>
         <mat-cell *matCellDef="let sede"> {{sede.indirizzo}} </mat-cell>
     </ng-container>
@@ -16,7 +18,7 @@
     <ng-container [matColumnDef]="'action'">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row">
-
+            
             <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon>more_vert</mat-icon>
             </button>
@@ -25,8 +27,9 @@
             </mat-menu>
         </mat-cell>
     </ng-container>
-
+    
     <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
 </mat-table>
+}

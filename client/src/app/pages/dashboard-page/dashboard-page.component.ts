@@ -144,7 +144,7 @@ export class DashboardPageComponent implements AfterViewInit{
       ['Marca Macchina', preventivo.marca],
       ['Modello Macchina', preventivo.modello],
       ['Prezzo Finale', preventivo.prezzo_finale + ' €'],
-      ['Sconto', (preventivo.sconto  + '%') ?? 'N/A'],
+      ['Sconto', (preventivo.sconto ?? '0') + ' %'],
       ['Usato', preventivo.usato?.descrizione ?? 'N/A'],
       ['Utente', preventivo.utente]
     ];

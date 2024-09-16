@@ -37,17 +37,23 @@ export class PreventiviService {
   }
 
   deletePreventivo(p: Preventivo): Observable<Preventivo> {
-    return this.api.delete<Preventivo>(`/preventivi/${p.id}`)
+    return this.api.delete<Preventivo>(`/preventivi/${p.id}`).pipe(
+      tap(() => this.user.pipe(take(1), switchMap(user => (user && user.role === Roles.IMPIEGATI) ? this.getAllPreventivi() : this.getUserPreventivi())).subscribe())
+    )
     // return of(d[0])
   }
 
   valutaUsato(p: Preventivo, valutazione: number): Observable<Preventivo> {
-    return this.api.put<Preventivo>(`/preventivi/usato/${p.id}`, {valutazione})
+    return this.api.put<Preventivo>(`/preventivi/usato/${p.id}`, {valutazione}).pipe(
+      tap(() => this.user.pipe(take(1), switchMap(user => (user && user.role === Roles.IMPIEGATI) ? this.getAllPreventivi() : this.getUserPreventivi())).subscribe())
+    )
     // return of(d[0])
   }
 
   aggiungiAcconto(p: Preventivo, acconto: number): Observable<Preventivo> {
-    return this.api.put<Preventivo>(`/preventivi/acconto/${p.id}`, {acconto})
+    return this.api.put<Preventivo>(`/preventivi/acconto/${p.id}`, {acconto}).pipe(
+      tap(() => this.user.pipe(take(1), switchMap(user => (user && user.role === Roles.IMPIEGATI) ? this.getAllPreventivi() : this.getUserPreventivi())).subscribe())
+    )
     // return of(d[0])
   }
 }

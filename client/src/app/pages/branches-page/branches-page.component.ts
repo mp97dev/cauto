@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Sede, SediService } from '../../services/sedi.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
@@ -6,6 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { AggiungiSedeComponent } from '../../components/aggiungi-sede/aggiungi-sede.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-branches-page',
@@ -14,17 +15,19 @@ import { AggiungiSedeComponent } from '../../components/aggiungi-sede/aggiungi-s
     MatTableModule,
     MatMenuModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    AsyncPipe
   ],
   templateUrl: './branches-page.component.html',
   styleUrl: './branches-page.component.scss'
 })
 export class BranchesPageComponent {
+  private ss = inject(SediService)
 
   displayedColumns = ['nome', 'indirizzo', 'action'];
+  dataSource = this.ss.sedi
 
   constructor(
-    public ss: SediService,
     private dialog: MatDialog
   ) {}
 
