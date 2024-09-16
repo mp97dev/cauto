@@ -4,6 +4,7 @@ import { ApiService } from './api.service';
 import { Car, CarBrand, FlattenBrandCars } from '../models/macchina.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AddCarDialogComponent } from '../components/add-car-dialog/add-car-dialog.component';
+import { UpdateScontoDialogComponent } from '../components/update-sconto-dialog/update-sconto-dialog.component';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,20 @@ export class MacchineService {
 
   deleteCar(car: Car, brand: keyof CarBrand) {
     return this.api.delete('/macchine', { marca: brand, modello: car.modello})
+  }
+
+  updateScontoWithDialog(car: Car, brand: keyof CarBrand) {
+
+    const a = this.dialog.open(UpdateScontoDialogComponent, {data: car.sconto})
+    return a.afterClosed().pipe(
+      switchMap(sconto => sconto ? this.updateSconto(car, brand, sconto) : of(null)),
+      tap(() => this.getCars())
+    )
+  }
+
+
+  updateSconto(car: Car, brand: keyof CarBrand, sconto: number) {
+    return this.api.put('/macchine/sconto', { marca: brand, modello: car.modello, sconto: sconto})
   }
 }
 

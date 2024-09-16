@@ -38,6 +38,10 @@ export class GestionalePageComponent {
     this.cs.deleteCar(car, car.marca).subscribe()
   }
 
+  public aggiornaSconto(car: FlattenBrandCars) {
+    this.cs.updateScontoWithDialog(car, car.marca).subscribe()
+  }
+
   constructor() { }
 
   flattenBrand(obj: CarBrand): FlattenBrandCars[] {

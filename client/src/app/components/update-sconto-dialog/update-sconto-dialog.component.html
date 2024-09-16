@@ -1,0 +1,11 @@
+<h1 matDialogTitle>Valutazione usato</h1>
+<div matDialogContent>
+
+    <mat-form-field>
+        <mat-label>Sconto</mat-label>
+        <input matInput type="number" [formControl]="newSconto">
+    </mat-form-field>
+</div>
+<div matDialogActions>
+    <button mat-button (click)="confirm()">Conferma valutazione</button>
+</div>
