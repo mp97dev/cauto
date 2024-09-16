@@ -35,7 +35,7 @@ namespace cauto
             }
         }
 
-        double calcolaPrezzoFinale(const std::string &marca, const std::string &modello, const std::vector<cauto::optional> &optionals, const double &sconto)
+        double calcolaPrezzoFinale(const std::string &marca, const std::string &modello, const std::vector<cauto::optional> &optionals, int &sconto)
         {
             cauto::macchina macchina;
             cauto::macchine_management management;
@@ -52,7 +52,8 @@ namespace cauto
             }
 
             double prezzo_totale = macchina.prezzo_base + prezzo_optionals;
-            prezzo_totale *= (1.0 - sconto / 100.0);
+            sconto = macchina.sconto;
+            prezzo_totale *= (1.0 - (double)sconto / 100.0);
             return prezzo_totale;
         }
 
