@@ -36,9 +36,10 @@ export class LoginDialogComponent {
     if(!this.form.valid) throw new Error('Invalid login form')
     const value = this.form.value
 
-    this.dialogRef.close()
-    const sub = this.action === 'login' ? this.auth.login(value.username ?? '', value.password ?? '') : this.auth.register(value.username ?? '', value.password ?? '')
-    .pipe(
+  const sub = this.action === 'login' ? this.auth.login(value.username ?? '', value.password ?? '') : this.auth.register(value.username ?? '', value.password ?? '')
+
+  sub.pipe(
+      tap(() => this.dialogRef.close()),
       catchError(err => {console.error(err); return of(null)})
     ).subscribe()
   }
