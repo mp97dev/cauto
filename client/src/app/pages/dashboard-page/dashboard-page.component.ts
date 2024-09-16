@@ -51,7 +51,7 @@ export class DashboardPageComponent implements AfterViewInit{
   )
 
   distinctMarche = this.ps.preventivi.pipe(
-    map(preventivi => preventivi.map(p => p.macchina_marca)), //! macchina_marca è giusto?
+    map(preventivi => preventivi.map(p => p.marca)),
     map(marche => [...new Set(marche)])
   )
 
@@ -74,7 +74,7 @@ export class DashboardPageComponent implements AfterViewInit{
 
   preventivi = this.ps.preventivi
 
-  displayColumns = [ 'utente', 'acconto', 'data_consegna', 'data_creazione', 'data_scadenza', 'macchina_marca', 'macchina_modello', 'prezzo_finale', 'sconto']
+  displayColumns = [ 'utente', 'acconto', 'data_consegna', 'data_creazione', 'data_scadenza', 'marca', 'modello', 'prezzo_finale', 'sconto']
   columns = [ ...this.displayColumns, 'action']
 
   dataSource = this.filter.valueChanges.pipe(
@@ -92,7 +92,7 @@ export class DashboardPageComponent implements AfterViewInit{
           return preventivi.filter(p => cliente ? p.utente.includes(cliente) : true)
         }),
         map(preventivi => {
-          return preventivi.filter(p => marca ? p.macchina_marca.includes(marca) : true)
+          return preventivi.filter(p => marca ? p.marca.includes(marca) : true)
         }),
         map(preventivi => {
           return preventivi.filter(p => sede ? p.luogo_ritiro.sede.includes(sede.nome) : true)
@@ -141,8 +141,8 @@ export class DashboardPageComponent implements AfterViewInit{
       ['Data Scadenza', this.datePipe.transform(preventivo.data_scadenza)],
       ['ID', preventivo.id.toString()],
       ['Luogo Ritiro', preventivo.luogo_ritiro.sede],
-      ['Marca Macchina', preventivo.macchina_marca],
-      ['Modello Macchina', preventivo.macchina_modello],
+      ['Marca Macchina', preventivo.marca],
+      ['Modello Macchina', preventivo.modello],
       ['Prezzo Finale', preventivo.prezzo_finale.toFixed(2)],
       ['Sconto', preventivo.sconto?.toFixed(2) ?? 'N/A'],
       ['Usato', preventivo.usato?.descrizione ?? 'N/A'],

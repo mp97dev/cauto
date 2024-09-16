@@ -61,8 +61,8 @@ export interface Preventivo {
   luogo_ritiro: {
     sede: string;
   };
-  macchina_marca: string;
-  macchina_modello: string;
+  marca: string;
+  modello: string;
   optionals: Optional[];
   prezzo_finale: number;
   sconto: number | null;
@@ -80,8 +80,8 @@ export const d = [
       "luogo_ritiro": {
           "sede": "Milano"
       },
-      "macchina_marca": "Fiat",
-      "macchina_modello": "500",
+      "marca": "Fiat",
+      "modello": "500",
       "optionals": [
           {
               "nome": "Climatizzatore",
@@ -119,8 +119,8 @@ export const d = [
       "luogo_ritiro": {
           "sede": "Roma"
       },
-      "macchina_marca": "BMW",
-      "macchina_modello": "X3",
+      "marca": "BMW",
+      "modello": "X3",
       "optionals": [
           {
               "nome": "Navigatore satellitare",
