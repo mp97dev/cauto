@@ -62,6 +62,7 @@ export class DashboardPageComponent implements AfterViewInit{
 
   filter = new FormGroup({
     soloScaduti: new FormControl(true as boolean),
+    soloUsato: new FormControl(true as boolean),
     cliente: new FormControl(''),
     marca: new FormControl(''),
     sede: new FormControl('')
@@ -83,10 +84,14 @@ export class DashboardPageComponent implements AfterViewInit{
       const cliente = filters.cliente
       const marca = filters.marca
       const sede = filters.sede
+      const usato = filters.soloUsato
 
       return this.ps.preventivi.pipe(
         map(preventivi => {
           return preventivi.filter(p => scaduti ? new Date(p.data_scadenza) < new Date() : true)
+        }),
+        map(preventivi => {
+          return preventivi.filter(p => usato ? !!p.usato : true)
         }),
         map(preventivi => {
           return preventivi.filter(p => cliente ? p.utente.includes(cliente) : true)

@@ -1,13 +1,18 @@
 <div class="w-full flex justify-between items-center p-2">
     <span class="flex gap-2 flex-row text-purple-700"><mat-icon>list_alt</mat-icon><h1>Dashboard preventivi</h1></span>
 </div>
-<mat-accordion>
-    <mat-expansion-panel hideToggle>
-        <mat-expansion-panel-header>
-            <mat-panel-title>Filtri</mat-panel-title>
+
+    <mat-accordion>
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>Filtri</mat-panel-title>
             <mat-icon>filter_alt</mat-icon>
         </mat-expansion-panel-header>
         <form [formGroup]="filter" class="flex gap-4">
+
+            
+            <mat-slide-toggle formControlName="soloUsato">solo usato mancante</mat-slide-toggle>
+
             <mat-slide-toggle formControlName="soloScaduti">solo preventivi scaduti</mat-slide-toggle>
             
             <mat-form-field>
@@ -19,7 +24,7 @@
                     }
                 </mat-autocomplete>
             </mat-form-field>
-
+            
             <mat-form-field>
                 <mat-label>marca</mat-label>
                 <input type="string" matInput formControlName="marca" [matAutocomplete]="autoMarche">
@@ -29,7 +34,7 @@
                     }
                 </mat-autocomplete>
             </mat-form-field>
-
+            
             <mat-form-field>
                 <mat-label>sede</mat-label>
                 <input type="string" matInput formControlName="sede" [matAutocomplete]="autoSedi">
@@ -37,14 +42,16 @@
                     @for(c of (distinctSedi | async); track c) {
                         <mat-option [value]="c">{{c}}</mat-option>
                     }
-                    </mat-autocomplete>
+                </mat-autocomplete>
             </mat-form-field>
 
         </form>
         
-
+        
     </mat-expansion-panel>
 </mat-accordion>
+
+
 @if((dataSource | async); as data) {
 
     <mat-table [dataSource]="data" class="mat-elevation-z8">
