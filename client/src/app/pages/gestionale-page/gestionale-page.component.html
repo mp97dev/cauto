@@ -20,6 +20,12 @@
         {{ row.prezzo_base | currency : 'EUR' }}
       </mat-cell>
     </ng-container>
+    <ng-container matColumnDef="sconto">
+      <mat-header-cell *matHeaderCellDef>Sconto</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        {{ row.sconto }}%
+      </mat-cell>
+    </ng-container>
 
     <ng-container matColumnDef="motore">
       <mat-header-cell *matHeaderCellDef>Motore</mat-header-cell>

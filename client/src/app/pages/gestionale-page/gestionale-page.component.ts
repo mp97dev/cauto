@@ -27,7 +27,7 @@ export class GestionalePageComponent {
   public cars: Observable<FlattenBrandCars[]> = this.cs.carsAsObservable.pipe(map(cars => this.flattenBrand(cars)))
 
   columns = ['marca', 'modello', 'descrizione']
-  displayColumns = [...this.columns, 'prezzo_base', 'motore', 'dimensioni', 'optionals', 'azioni']
+  displayColumns = [...this.columns, 'prezzo_base', 'sconto', 'motore', 'dimensioni', 'optionals', 'azioni']
 
 
   public addCar() {
