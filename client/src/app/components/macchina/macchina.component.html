@@ -1,4 +1,4 @@
-<mat-card class="p-4 max-w-full text-gray-500">
+<mat-card class="p-4 max-w-full text-gray-500 min-w-72 w-96">
   <h1 matCardTitle>{{brand}} | {{macchina?.modello}}</h1>
   <mat-card-content>
     <div class="w-full max-w-full flex flex-nowrap gap-4 overflow-x-auto">
@@ -7,14 +7,17 @@
       <img height="200px" alt="vista_laterale" [src]="macchina?.immagini?.vista_laterale">
       <img height="200px" alt="vista_posteriore" [src]="macchina?.immagini?.vista_posteriore">
       @for(imgUrl of macchina?.immagini?.colori; track imgUrl) {
-        <img height="200px" [src]="imgUrl" [alt]="imgUrl">
+      <img height="200px" [src]="imgUrl" [alt]="imgUrl">
       }
     </div>
 
     <div class="flex flex-col gap-4">
-      <div class="flex gap-8 justify-between"><span class="w-20">Marca</span><span class="flex-grow">{{brand}}</span></div>
-      <div class="flex gap-8 justify-between"><span class="w-20">Modello</span><span class="flex-grow">{{macchina?.modello}}</span></div>
-      <div class="flex gap-8 justify-between"><span class="w-20">Descrizione</span><span class="flex-grow">{{macchina?.descrizione}}</span></div>
+      <div class="flex gap-8 justify-between"><span class="w-20">Marca</span><span class="flex-grow">{{brand}}</span>
+      </div>
+      <div class="flex gap-8 justify-between"><span class="w-20">Modello</span><span
+          class="flex-grow">{{macchina?.modello}}</span></div>
+      <div class="flex gap-8 justify-between"><span class="w-20">Descrizione</span><span
+          class="flex-grow">{{macchina?.descrizione}}</span></div>
       <div class="flex gap-8 justify-between">
         <span class="w-20">Dimensioni</span>
         <div class="flex-grow">
@@ -24,14 +27,17 @@
           <p>volume bagagliaio: {{macchina?.dimensioni?.volume_bagagliaio}}</p>
         </div>
       </div>
-      <div class="flex gap-8 justify-between"><span class="w-20">Motore</span><span class="flex-grow">{{macchina?.motore?.alimentazione}} {{macchina?.motore?.tipo}}</span></div>
-      <div class="flex gap-8 justify-between"><span class="w-20">Optionals</span><div class="flex-grow">
-        @for(optional of macchina?.optionals; track optional.nome) {
+      <div class="flex gap-8 justify-between"><span class="w-20">Motore</span><span
+          class="flex-grow">{{macchina?.motore?.alimentazione}} {{macchina?.motore?.tipo}}</span></div>
+      <div class="flex gap-8 justify-between"><span class="w-20">Optionals</span>
+        <div class="flex-grow">
+          @for(optional of macchina?.optionals; track optional.nome) {
           <p>{{optional.nome}}</p>
-        }
-      </div></div>
+          }
+        </div>
+      </div>
 
     </div>
-  
+
   </mat-card-content>
 </mat-card>
