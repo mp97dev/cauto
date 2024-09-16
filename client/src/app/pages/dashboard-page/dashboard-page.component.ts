@@ -64,7 +64,7 @@ export class DashboardPageComponent implements AfterViewInit{
     soloScaduti: new FormControl(true as boolean),
     cliente: new FormControl(''),
     marca: new FormControl(''),
-    sede: new FormControl(null as Sede | null)
+    sede: new FormControl('')
   })
 
   constructor(
@@ -95,7 +95,7 @@ export class DashboardPageComponent implements AfterViewInit{
           return preventivi.filter(p => marca ? p.marca.includes(marca) : true)
         }),
         map(preventivi => {
-          return preventivi.filter(p => sede ? p.luogo_ritiro.nome.includes(sede.nome) : true)
+          return preventivi.filter(p => sede ? p.luogo_ritiro.nome.includes(sede) : true)
         })
       )
     })
@@ -136,9 +136,9 @@ export class DashboardPageComponent implements AfterViewInit{
     // Prepara i dati tabellari
     const rows = [
       ['Acconto', preventivo.acconto + ' €'],
-      ['Data Consegna', this.datePipe.transform(preventivo.data_consegna )?? 'N/A'],
-      ['Data Creazione', this.datePipe.transform(preventivo.data_creazione)],
-      ['Data Scadenza', this.datePipe.transform(preventivo.data_scadenza)],
+      ['Data Consegna', preventivo.data_consegna ?? 'N/A'],
+      ['Data Creazione', preventivo.data_creazione ?? 'N/A'],
+      ['Data Scadenza', preventivo.data_scadenza ?? 'N/A'],
       ['ID', preventivo.id.toString()],
       ['Luogo Ritiro', preventivo.luogo_ritiro.nome],
       ['Marca Macchina', preventivo.marca],
