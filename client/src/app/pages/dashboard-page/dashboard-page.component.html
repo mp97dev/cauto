@@ -52,7 +52,7 @@
         @for(c of displayColumns; track c) {
             <ng-container [matColumnDef]="c">
                 <mat-header-cell *matHeaderCellDef>{{c}}</mat-header-cell>
-                <mat-cell *matCellDef="let row">{{ c.includes('data') ? (row[c] | date) : row[c] }}</mat-cell>
+                <mat-cell *matCellDef="let row">{{ row[c] }}</mat-cell>
             </ng-container>
         }
 
