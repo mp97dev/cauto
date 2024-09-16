@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, switchMap, take, tap } from 'rxjs';
 import { ApiService } from './api.service';
 import { Car, CarBrand, FlattenBrandCars } from '../models/macchina.model';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AddCarDialogComponent } from '../components/add-car-dialog/add-car-dialog.component';
 
 @Injectable({

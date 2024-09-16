@@ -43,5 +43,9 @@ export class LoginDialogComponent {
     ).subscribe()
   }
 
+  goToOther() {
+    this.dialogRef.close(this.action === 'login' ? 'signup' : 'login')
+  }
+
 
 }

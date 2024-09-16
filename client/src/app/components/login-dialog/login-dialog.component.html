@@ -13,7 +13,8 @@
     </mat-form-field>
 </div>
 <div matDialogActions>
-    <div class="w-full h-fit flex justify-end">
-        <button mat-button (click)="onSubmit()">Invia</button>
+    <div class="w-full h-fit flex justify-between">
+    <button mat-button (click)="goToOther()"> {{action === 'login' ? 'Registrati' : 'Accedi'}} </button>
+        <button mat-flat-button (click)="onSubmit()">Invia</button>
     </div>
 </div>
