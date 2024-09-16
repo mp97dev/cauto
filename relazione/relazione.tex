@@ -18,7 +18,14 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{array}
+\usepackage{listing}
 
+% metainformazioni
+\title{Configuratore di auto}
+\author{Moretto Mattia}
+
+
+% personalizzazioni
 \newtcolorbox{mybox}[2][]{
     title = #2,#1,breakable,
     colback = black!0!white, 
@@ -29,12 +36,6 @@
     segmentation style={solid, black!100}
 }
 
-% metainformazioni
-\title{Configuratore di auto}
-\author{Moretto Mattia}
-
-
-% personalizzazioni
 \graphicspath{{immagini/}}
 \newcommand{\add}[1]{\import{componenti/}{#1}}
 \newcommand{\spacing}{\par\bigskip\noindent}
@@ -47,9 +48,29 @@
     pdfborderstyle = {/S/U/W 1}
 }
 
+\definecolor{backcolor}{rgb}{0.95,0.95,0.92}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+
+\lstdefinestyle{MyStyle}{
+    backgroundcolor=\color{backcolor},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    keepspaces=true,                 
+    numbers=left,       
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+}
+
+\lstset{style=MyStyle}
+
 \pagestyle{fancy}
 % fine personalizzazioni
-
 
 
 %Inizio Elaborato
@@ -628,7 +649,7 @@
         \item Revisione della desiderata e del documento creato
         \item Verifica della consistenza tra diagrammi e codice prodotto
         \item Ispezione del codice per verificare la corretta struttura e ricerca errori a livello di leggibilità
-        \item Unit test eseguito con l'ausilio di Karma e Jasmine per il Front End e Postaman per il Back End
+        \item Unit test eseguito con l'ausilio di Karma e Jasmine per il Front End e Postman per il Back End
         \item Test da parte degli sviluppatori del software
         \item Test da parte di un utente esterno con raccolta feedback
     \end{enumerate}
@@ -657,6 +678,21 @@
         Una volta conclusa l'attività siamo passati a ricontrollare il codice per controllare che non fossero presenti errori a livello di leggibilità e struttura del software, dopo aver eseguito questo passaggio si può considerare il software quasi completo, i restanti test che abbiamo fatto
         hanno solamento portato a correzzioni o piccole rivisatazioni
     \section{Unit Test}
+        Per la parte di unit test, tramite gli strumenti descritti nel Capitolo 2, abbiamo testato il corretto funzionamento delle implementazioni del Software sviluppato. Partendo dal file main.cpp riportato qui sotto abbiamo provato ad effettuare dei test per la creazione, rimozione e modifica di tutti gli elementi
+        necessari sulla piattaforma.
+        \spacing
+        \lstinputlisting[label={lst:listing-cpp}, language=C++]{file/main.cpp}
+        \spacing
+        I test effettuati hanno utilizzato delle chiamate API che a loro volta erano state precedentemente testate tramite PostMan, i test sono stati eseguiti per ogni singola chiamata API creata. Di seguito riportiamo un esempio per quanto riguarda la creazione del preventivo, è comunque possibile vedere
+        tutte le chiamate dall'apposita applicazione.
+        \begin{figure}[H]
+            \includegraphics[width=\textwidth]{Postman_POST.jpeg}
+            \caption{Postman POST}
+            \label{fig:postman_post}
+        \end{figure}
+        \spacing
+        Oltra ai test sopra riportati abbiamo applicato dei controlli anche sulla Vista utilizzando la suite di Angular (Karma e Jasmine già analizzati nell'apposita sezione) che si occupa di lanciare i test direttamente sul browser, verificando l'integrità dei singoli componenti e il collegamento tra
+        i diversi modelli.
     \section{Test degli Sviluppatori}
         In questa fase abbiamo testato personalmente il sistema per controllare che le funzioni previste dal software funzionassero correttamente. Nello specifico i test che si sono svolti sono i seguenti:
         \begin{itemize}
@@ -671,7 +707,7 @@
             correttamente le immagini per la valutazione e che riuscisse a completare la valutazione. Abbiamo inoltre porvato ad avvisare il cliente quando l'auto fosse pronta per la consegna
             \item \textbf{Segreteria:} Provando ad accedere con un utenza da segreteria abbiamo verificato che vedesse correttamente tutte le pagina ossia la lista dei preventivi e del catalogo. Nella pagina dei preventivi abbiamo controllato che ci fossero tutti e che avesse la possibilità di filtrarli mentre
             nella pagina del catalogo abbiamo controllato che potesse modificare, aggiungere e rimuovere sia auto e preventivi
-            \item \textbf{Acquisto:} Dopo tutte le premesse con un preventivo finalizzato abbiamo testato che il pagamento dell'acconto e la proposta della data di consegna funzionasse correttamente. Come ultimo test abbiamo inoltre verificato che passati i 20 giorni senza che avvenisse il pagamento il preventivo
+            \item \textbf{Acquisto:} Dopo tutte le premesse, con un preventivo finalizzato, abbiamo testato che il pagamento dell'acconto e la proposta della data di consegna funzionasse correttamente. Come ultimo test abbiamo inoltre verificato che passati i 20 giorni senza che avvenisse il pagamento il preventivo
             venga rimosso
         \end{itemize}
     \section{Test degli Utenti}
@@ -697,7 +733,7 @@
     fatto, in questo modo se uno doveva lavorare allo step successivo poteva cominciare a portarsi avanti con il lavoro defininendo almeno gli aspetti base e una volta terminato lo step antecedente poteva completarlo aggiungendo ciò che restava in sospeso.\\
     Per quanto riguardo l'intera implementazione ci siamo suddivisi i ruoli in base alla confidenza dei membri del gruppo sulle parti richieste da sviluppare, ciò ha permesso uno sviluppo più rapido in quanto abbiamo ridotto il rischio di problemi dovuti allo sviluppo simultaneo del codice. L'elemento chiave per la riuscita nello sviluppo del 
     software è stata la pianificazione dettagliata creata all'inizio che abbiamo seguito dall'inizio alla fine. Nell'ottica del team work eravamo comunque pronti a fornire supporto in caso di necessita sulle attività degli altri membri del gruppo.
-
+    \section{Scelte Progettuali}
 
 
 % nono capitolo
@@ -725,8 +761,14 @@
 
 % decimo capitolo
 \chapter{Pattern adottati}
-    I design pattern sono per l'appunto pattern che utilizzano metodi e classi di un linguaggio OO. Durante lo sviluppo del progetto abbiamo utilizzato i seguenti pattern:
+    I design pattern sono per l'appunto pattern che utilizzano metodi e classi di un linguaggio OO. Durante lo progettazione, la maggior parte dello sviluppo è avanzato attraverso la conoscenza dei programmatori dovuta all'esperienza lavorativa, non sono stati quindi stati seguiti consciamente dei particolari pattern. Alla fine dei conti l'unico pattern che alla fine è stato applicato è il \textbf{Data Access Object Pattern} (DAO). \\
+    Questo pattern nello specifico viene utilizzato per separare la logica di accesso ai dati dalla logica delle operazioni, in sostanza agisce come interfaccia tra il programma e la fonte di dati, come per esempio un database, consentendo di eseguire operazioni di CRUD (Create, Read, Update, Delete) senza esporre direttamente
+    i dettagli di implementazione dei meccanismi di persistenza. Il DAO Pattern è strutturato nel seguente modo:
     \begin{itemize}
-        \item 
+        \item \textbf{Interface}(astrazione del DAO): definisce i metodi per l'accesso ai dati come getUsr() e createUser()
+        \item \textbf{Concrete DAO}: Implementa l'interfaccia e cotiene la logica specifica per interagire con il database o altre fonti di dati
+        \item \textbf{Entity Model}: la classe che rappresenta l'entità che mappa i dati(ad esempio User) contenente gli attributi corrispondenti alle colonne del database
+        \item \textbf{Service Layer}: Il livello che utilizza il DAO per accedere e gestire la logica del business
     \end{itemize}
+    
 \end{document}
