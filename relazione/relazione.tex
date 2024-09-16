@@ -423,7 +423,8 @@
         \label{fig:diagramma_delle_classi}
     \end{figure}
     \spacing
-    All'interno del diagramma sono state riportate tutte le classi inserite all'interno del codice. Per completezza abbiamo deciso di mostrare anche tutte le operazioni e gli attributi che abbiamo creato.\\
+    All'interno del diagramma sono state riportate tutte le classi inserite all'interno del codice. Per completezza abbiamo deciso di mostrare anche tutte le operazioni e gli attributi che abbiamo creato, inoltre per scelte progettuali le abbiamo rese tutte
+    pubblico, come si può vedere dal simbolo riportato accanto al nome\\
     Per quanto riguarda invece i tipi di collegamento abbiamo scelto di utilizzare:
     \begin{itemize}
         \item \textbf{<<instanceOf>>:} \'Abbiamo deciso di rappresentare una istanza per la classe utente, dove si va a passare l'attributo "role". questo
@@ -432,7 +433,6 @@
         \item \textbf{Realizzazione:} identificabile dai riquadri che contengono <<interface>> e si tratta di una relazione semantica in cui il fornitore presenta una specifica e il cliente la realizzano
         \item \textbf{Dipendenza:} si tratta di una forma più debole di relazione tra classi e operazioni
         \item \textbf{Aggregazione:} si tratta di una relazione poco forte dove le due parti possono esistere anche da sole ed inoltre ognuna di esse può appartenere a più aggregazioni
-        \item \textbf{Composizione:} relazione molto forte dove le part dipendono dal tutto e non possono esistere al di fuori di esso 
     \end{itemize}
     \spacing
     Dall'immagine si possono vedere dei riquadri leggermente diversi che non sono propriamente elementi del diagramma delle classi per questo motivo abbiamo deciso di rappresentarli solamente con linee tratteggiate.
@@ -605,7 +605,8 @@
         è lo \textbf{stato composito e sincronizzazione} che permette di suddividere la complessità del modello. Dall'esterno si vede un macro-stato al cui interno però ci sono altri stati. Con la sincronizzazione invece si divide lo stato composito in sotto-diagrammi
         e si utilizzano gli operatori fork e join.
     \section{Diagramma di attività}
-        I diagrammi di attività servono per modellare un attività relativa ad un qualsiasi oggetto,tra i suoi usi più comuni troviamo il modellare il flusso di un caso d'uso, modellare il funzionamento di un operatore di classe e modellare un algoritmo e sono composti da tre elementi principali:
+        I diagrammi di attività servono per modellare un attività relativa ad un qualsiasi oggetto,tra i suoi usi più comuni troviamo il modellare il flusso di un caso d'uso, modellare il funzionamento di un operatore di classe e modellare un algoritmo e sono composti da tre elementi 
+        principali:
         \begin{itemize}
             \item Nodi \textbf{azione:} specificano unità di comportamento e possono invocare un'attività, un comportamento o un'operazione
             \item Nodi \textbf{oggetto:} specificano oggetti usati come input e output di azioni
@@ -630,7 +631,7 @@
         \spacing
         Oltre a quanto già riportato, nella creazione del diagramma sopra riportato abbiamo utilizzato dei particolari nodi di controlli ossia:
         \begin{itemize}
-            \item \textbf{nodi iniziali/finali:} classici nodi del diagramma, il disco znero marca l'inizio dell'attività e quindi la generazione del token mentre quello nero bordato indica che l'attività ha termine
+            \item \textbf{nodi iniziali/finali:} classici nodi del diagramma, il disco nero marca l'inizio dell'attività e quindi la generazione del token mentre quello nero bordato indica che l'attività ha termine
             \item \textbf{nodi di decisione:} hanno un input e vari output mutuamente esclusivi
             \item \textbf{nodi fork:} hanno un ingresso e varie uscite, ciò corrisponde al token in ingresso che viene duplicato verso tutte le uscite
             \item \textbf{nodi join:} hanno vari ingressi e una sola uscita, quando sono presenti token su tutti gli ingressi, viene prodotto almeno un token in uscita
@@ -678,7 +679,7 @@
         Una volta conclusa l'attività siamo passati a ricontrollare il codice per controllare che non fossero presenti errori a livello di leggibilità e struttura del software, dopo aver eseguito questo passaggio si può considerare il software quasi completo, i restanti test che abbiamo fatto
         hanno solamento portato a correzzioni o piccole rivisatazioni
     \section{Unit Test}
-        Per la parte di unit test, tramite gli strumenti descritti nel Capitolo 2, abbiamo testato il corretto funzionamento delle implementazioni del Software sviluppato. Partendo dal file main.cpp riportato qui sotto abbiamo provato ad effettuare dei test per la creazione, rimozione e modifica di tutti gli elementi
+        Per la parte di unit test, tramite gli strumenti descritti nel Capitolo 2, abbiamo testato il corretto funzionamento delle implementazioni del Software sviluppato. Partendo dal file main.cpp riportato qui sotto abbiamo provato ad effettuare delle prove per la creazione, rimozione e modifica di tutti gli elementi
         necessari sulla piattaforma.
         \spacing
         \lstinputlisting[label={lst:listing-cpp}, language=C++]{file/main.cpp}
@@ -691,8 +692,14 @@
             \label{fig:postman_post}
         \end{figure}
         \spacing
-        Oltra ai test sopra riportati abbiamo applicato dei controlli anche sulla Vista utilizzando la suite di Angular (Karma e Jasmine già analizzati nell'apposita sezione) che si occupa di lanciare i test direttamente sul browser, verificando l'integrità dei singoli componenti e il collegamento tra
-        i diversi modelli.
+        Oltre ai test sopra riportati abbiamo applicato dei controlli anche sulla Vista utilizzando la suite di Angular (Karma e Jasmine già analizzati nell'apposita sezione) che si occupa di lanciare i test direttamente sul browser, verificando l'integrità dei singoli componenti e il collegamento tra
+        i diversi modelli. Di seguito viene riportato un esempio di quello che viene restituito dall'interfaccia di test, nello specifico riguardante il servizio dedito ad importare i vari moduli per le chiamate http ed effettuare le chiamate alle api.
+        \begin{figure}[H]
+            \includegraphics[width=\textwidth]{Karma_Test.jpeg}
+            \caption{Test con Karma}
+            \label{fig:Karma_test}
+        \end{figure}
+        \spacing
     \section{Test degli Sviluppatori}
         In questa fase abbiamo testato personalmente il sistema per controllare che le funzioni previste dal software funzionassero correttamente. Nello specifico i test che si sono svolti sono i seguenti:
         \begin{itemize}
@@ -712,8 +719,50 @@
         \end{itemize}
     \section{Test degli Utenti}
     Come test finale abbiamo fatto provare l'applicazione a diversi utenti con più o meno dimestichezza con la tecnologia. Per lo svolgimento del test è stata solamente fornita la finalità del software. Nella prima fase abbiamo dato agli utenti piena libertà di navigazione mentre in un secondo momento abbiamo richiesto
-    alcune particolari simulazioni indicando cosa volevamo ottenere per testare in particolare le utenze degli impiegati e delle segreteria. Durante ogni fase del test abbiamo risposto ad eventuali domande e raccolti tutti i feedback ricevuti, in questo modo abbiamo avuto la possibilità di correggere alcuni piccoli problemi e migliorato
+    alcune particolari simulazioni indicando cosa volevamo ottenere per testare in particolare le utenze degli impiegati e delle segreteria. Durante ogni fase del test abbiamo risposto ad eventuali domande e raccolti tutti i feedback ricevuti, in questo modo abbiamo avuto la possibilità di correggere alcuni piccoli 
+    problemi e migliorato
     il software del punto di vista dell'usabilità.
+
+
+
+% ottavo capitolo
+\chapter{Pattern Architetturali}
+    Un pattern architetturale è una soluzione collaudata e riutilizzabile per affrontare problemi comuni nella progettazione dell'architettura del software. Esso definisce una struttura organizzativa generale per un sistema fornendo linee guida su come suddividere il software in componenti, moduli e livelli e su come questi 
+    interagiscono tra loro. Questa tipologia di pattern aiutano a garantire che il software sia scalabile, manutenibile e flessibile e la sua adozione consente ai progettisti di beneficiare delle esperienze accumulate nella risoluzione di problemi simili, migliorando l'efficienza e la qualità del progetto.
+    \begin{figure}[H]
+        \centering
+        \includegraphics[scale=0.75]{Architettura MVC.png}
+        \caption{Architettura MVC}
+        \label{fig:architettura_mvc}
+    \end{figure}
+    \spacing
+    Per il nostro progetto abbiamo scelto di utilizzare il \textbf{pattern MVC}. Come dice il nome, questo modello è caratterizzato da tre elementi:
+    \begin{itemize}
+        \item \textbf{Modello:} Rappresenta la logica di gestione dei dati. Esso gestisce i dati dell'applicazione, risponde alle richieste della View per l'accesso ai dati e risponde alle istruzioni del Controller per modificare i dati
+        \item \textbf{Vista:} Si occupa della presentazione dei dati all'utente. Essa visualizza i dati che riceve dal Modello e riflette eventuali cambiamenti nei dati. E' responsabile dell'interfaccia utente e di come i dati vengono presentati all'utente finale
+        \item \textbf{Controllore:} Funziona come intermediario tra il Modello e la Vista. Esso riceve l'input dell'utente attraverso la Vista, elabora tale input (eventualmente interagendo con il Modello) e aggiorna la Vista di conseguenza.
+    \end{itemize}
+    Le azioni dell'utente saranno catturate dai listener del controllore, quest'ultimi sono pensati per reagire di conseguenza andando a modificare le informazioni contenute nel Modello e di conseguenza aggiornetà la vista che rappresenta il Modello\\
+    \'E stato scelto questo modello in quanto si adatta bene a quello che abbiamo progettato, i componenti dei modelli e del controllore possono essere riutilizzati con diverse viste il che aumenta l'efficenza nello sviluppo di nuove funzionalità o versioni dell'applicazione. Il modello MVC è una scelta popolare per lo sviluppo 
+    di applicazioni web e software, soprattutto in contesti in cui la manutenibilità, la modularità e la collaborazione sono essenziali.
+    \spacing
+    
+
+% nono capitolo
+\chapter{Pattern adottati}
+    I design pattern sono per l'appunto pattern che utilizzano metodi e classi di un linguaggio OO. Durante lo progettazione, la maggior parte dello sviluppo è avanzato attraverso la conoscenza dei programmatori dovuta all'esperienza lavorativa, non sono stati quindi stati seguiti consciamente dei particolari pattern. Alla fine dei conti 
+    l'unico con il quale ci siamo allineati è il \textbf{Data Access Object Pattern} (DAO).\\
+    Questo pattern nello specifico viene utilizzato per separare la logica di accesso ai dati dalla logica delle operazioni, in sostanza agisce come interfaccia tra il programma e la fonte di dati, come per esempio un database, consentendo di eseguire operazioni di CRUD (Create, Read, Update, Delete) senza esporre direttamente
+    i dettagli di implementazione dei meccanismi di persistenza. Il DAO Pattern è strutturato nel seguente modo:
+    \begin{itemize}
+        \item \textbf{Interface}(astrazione del DAO): definisce i metodi per l'accesso ai dati come getUsr() e createUser()
+        \item \textbf{Concrete DAO}: Implementa l'interfaccia e cotiene la logica specifica per interagire con il database o altre fonti di dati
+        \item \textbf{Entity Model}: la classe che rappresenta l'entità che mappa i dati(ad esempio User) contenente gli attributi corrispondenti alle colonne del database
+        \item \textbf{Service Layer}: Il livello che utilizza il DAO per accedere e gestire la logica del business
+    \end{itemize}
+    Questo particolare pattern è stato leggermente riaddatato secondo le nostre esigenze, infatti all'interno della nostra struttura non è presente l'interface in quanto abbiamo deciso di non creare alcuna classe astratta.
+    Abbiamo deciso di utilizzarlo in linea generale nella costruzione delle API e comprende ottenimento, creazione, aggiornamento e rimozione di tutte le entità in gioco in questo progetto
+
 
 
 % ottavo capitolo
@@ -734,41 +783,15 @@
     Per quanto riguardo l'intera implementazione ci siamo suddivisi i ruoli in base alla confidenza dei membri del gruppo sulle parti richieste da sviluppare, ciò ha permesso uno sviluppo più rapido in quanto abbiamo ridotto il rischio di problemi dovuti allo sviluppo simultaneo del codice. L'elemento chiave per la riuscita nello sviluppo del 
     software è stata la pianificazione dettagliata creata all'inizio che abbiamo seguito dall'inizio alla fine. Nell'ottica del team work eravamo comunque pronti a fornire supporto in caso di necessita sulle attività degli altri membri del gruppo.
     \section{Scelte Progettuali}
-
-
-% nono capitolo
-\chapter{Pattern Architetturali}
-    Un pattern architetturale è una soluzione collaudata e riutilizzabile per affrontare problemi comuni nella progettazione dell'architettura del software. Esso definisce una struttura organizzativa generale per un sistema fornendo linee guida su come suddividere il software in componenti, moduli e livelli e su come questi interagiscono tra loro.
-    Questa tipologia di pattern aiutano a garantire che il software sia scalabile, manutenibile e flessibile e la sua adozione consente ai progettisti di beneficiare delle esperienze accumulate nella risoluzione di problemi simili, migliorando l'efficienza e la qualità del progetto.
-    \begin{figure}[H]
-        \centering
-        \includegraphics[scale=0.75]{Architettura MVC.png}
-        \caption{Architettura MVC}
-        \label{fig:architettura_mvc}
-    \end{figure}
-    \spacing
-    Per il nostro progetto abbiamo scelto di utilizzare il \textbf{pattern MVC}. Come dice il nome, questo modello è caratterizzato da tre elementi:
-    \begin{itemize}
-        \item \textbf{Modello:} Rappresenta la logica di gestione dei dati. Esso gestisce i dati dell'applicazione, risponde alle richieste della View per l'accesso ai dati e risponde alle istruzioni del Controller per modificare i dati
-        \item \textbf{Vista:} Si occupa della presentazione dei dati all'utente. Essa visualizza i dati che riceve dal Modello e riflette eventuali cambiamenti nei dati. E' responsabile dell'interfaccia utente e di come i dati vengono presentati all'utente finale
-        \item \textbf{Controllore:} Funziona come intermediario tra il Modello e la Vista. Esso riceve l'input dell'utente attraverso la Vista, elabora tale input (eventualmente interagendo con il Modello) e aggiorna la Vista di conseguenza.
-    \end{itemize}
-    Le azioni dell'utente saranno catturate dai listener del controllore, quest'ultimi sono pensati per reagire di conseguenza andando a modificare le informazioni contenute nel Modello e di conseguenza aggiornetà la vista che rappresenta il Modello\\
-    \'E stato scelto questo modello in quanto si adatta bene a quello che abbiamo progettato, i componenti dei modelli e del controllore possono essere riutilizzati con diverse viste il che aumenta l'efficenza nello sviluppo di nuove funzionalità o versioni dell'applicazione. Il modello MVC è una scelta popolare per lo sviluppo di applicazioni web 
-    e software, soprattutto in contesti in cui la manutenibilità, la modularità e la collaborazione sono essenziali.
-    \spacing
-    
-
-% decimo capitolo
-\chapter{Pattern adottati}
-    I design pattern sono per l'appunto pattern che utilizzano metodi e classi di un linguaggio OO. Durante lo progettazione, la maggior parte dello sviluppo è avanzato attraverso la conoscenza dei programmatori dovuta all'esperienza lavorativa, non sono stati quindi stati seguiti consciamente dei particolari pattern. Alla fine dei conti l'unico pattern che alla fine è stato applicato è il \textbf{Data Access Object Pattern} (DAO). \\
-    Questo pattern nello specifico viene utilizzato per separare la logica di accesso ai dati dalla logica delle operazioni, in sostanza agisce come interfaccia tra il programma e la fonte di dati, come per esempio un database, consentendo di eseguire operazioni di CRUD (Create, Read, Update, Delete) senza esporre direttamente
-    i dettagli di implementazione dei meccanismi di persistenza. Il DAO Pattern è strutturato nel seguente modo:
-    \begin{itemize}
-        \item \textbf{Interface}(astrazione del DAO): definisce i metodi per l'accesso ai dati come getUsr() e createUser()
-        \item \textbf{Concrete DAO}: Implementa l'interfaccia e cotiene la logica specifica per interagire con il database o altre fonti di dati
-        \item \textbf{Entity Model}: la classe che rappresenta l'entità che mappa i dati(ad esempio User) contenente gli attributi corrispondenti alle colonne del database
-        \item \textbf{Service Layer}: Il livello che utilizza il DAO per accedere e gestire la logica del business
-    \end{itemize}
-    
+        Come già possibile intuire da quanto presentato il software è stato sviluppato con linguaggi diversi da quelli presentati al corso inoltre la struttura del codice non è composta da classi astratte, protette o private come quanto studiato dal linguaggio Java quest'anno. Tutto è stato creato come pubblico.\\
+        Inoltre nonostante i vari test che abbiamo effettuato e le diverse release rilasciate siamo consapevoli che il software in fin dei conti è ancora in fase di sviluppo. Abbiamo implementato tutte le richieste derivanti dalla desiderata ma ci sono alcuni aspetti non presenti ad oggi alla presentazione per poterla definire completa. Ciò che manca viene inteso 
+        come sviluppo futuro, e nello specifico si tratterebbe di:
+        \begin{itemize}
+            \item \textbf{Integration test:} Questo specifico test si riferisce al processo di verifica delle interfaccie tra due moduli software per verificare come i dati vengono trasferiti tra di loro, nel nostro caso andrebbe applicato per testare lo scambio tra la vista ed il controllore
+            \item \textbf{Sicurezza e Crittografia:} In questo momento sul software non è stata implementata alcuna misura di sicurezza, essendo un qualcosa che deve essere pubblicata sul Web, al giorno d'oggi è di vitale importanza che vengano applicati degli accorgimenti per quanto riguarda la sicurezza. Prendiamo per esempio il login, in questo momento questi dati vengono
+            passati da un modulo all'altro senza che vengano criptati, in questo stato chiunque sappia interciettare la chiamata può vedere tranquillamente i dati sensibili degli utenti, lo stesso vale per i possibili dati inseriti durante il pagamento
+            \item \textbf{Sistemi di pagamenti:} Al momento della presentazione viene simulato l'inserimento del pagamento, però, per rendere il software veramente completo andrebbero implementati dei veri metodi di pagamento, almeno quelli classici come la carta di credito o PayPal.
+            \item \textbf{Email per la conferma:} Si tratta di una possibile implementazione che ci è venuta in mente durante le fasi di revisione. Nella desiderata è stato fatto presente che l'impiegato si occupa anche di avvisare gli utenti nel momento in cui l'auto da lui ordinata è pronta per il ritiro, non è stato fatto però presente come avviene ciò. Ad oggi è stato deciso
+            che si tratta di un qualcosa che avviene al di fuori del funzionamento del software per esempio tramite chiamata telefonica. Abbiamo ritenuto comunque interessante considerare il fatto di poter implementare una funzione che si occupa in automatico di avvisare un email all'utente utilizzando quella che ci ha fornito in fase di registrazione
+        \end{itemize}
 \end{document}

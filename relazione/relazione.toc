@@ -25,9 +25,9 @@
 \contentsline {chapter}{\numberline {7}Test del Software}{28}{chapter.7}%
 \contentsline {section}{\numberline {7.1}Revisione e Ispezione}{28}{section.7.1}%
 \contentsline {section}{\numberline {7.2}Unit Test}{29}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Test degli Sviluppatori}{30}{section.7.3}%
-\contentsline {section}{\numberline {7.4}Test degli Utenti}{31}{section.7.4}%
-\contentsline {chapter}{\numberline {8}Note sul processo di sviluppo}{32}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Scelte Progettuali}{32}{section.8.1}%
-\contentsline {chapter}{\numberline {9}Pattern Architetturali}{33}{chapter.9}%
-\contentsline {chapter}{\numberline {10}Pattern adottati}{35}{chapter.10}%
+\contentsline {section}{\numberline {7.3}Test degli Sviluppatori}{31}{section.7.3}%
+\contentsline {section}{\numberline {7.4}Test degli Utenti}{32}{section.7.4}%
+\contentsline {chapter}{\numberline {8}Pattern Architetturali}{33}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Pattern adottati}{35}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Note sul processo di sviluppo}{36}{chapter.10}%
+\contentsline {section}{\numberline {10.1}Scelte Progettuali}{36}{section.10.1}%
