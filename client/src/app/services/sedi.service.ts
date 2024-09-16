@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { BehaviorSubject, finalize, Observable, of, switchMap, tap } from 'rxjs';
-import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'

@@ -58,9 +58,7 @@ export interface Preventivo {
   data_creazione: string;
   data_scadenza: string;
   id: number;
-  luogo_ritiro: {
-    sede: string;
-  };
+  luogo_ritiro: Sede;
   marca: string;
   modello: string;
   optionals: Optional[];
