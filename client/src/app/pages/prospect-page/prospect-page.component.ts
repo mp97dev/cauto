@@ -131,7 +131,7 @@ export class ProspectPageComponent implements OnInit {
         if(user) {
           return this.api.post(`/preventivi`, value)
           .pipe(
-            tap(() => this.router.navigate(['/preventivi']))
+            tap(() => this.router.navigate(['/dashboard']))
           )
         }
         else return this.auth.loginWithPopup("login").pipe(tap(() => this.send()))

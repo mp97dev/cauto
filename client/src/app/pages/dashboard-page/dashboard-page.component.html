@@ -93,7 +93,7 @@
             <mat-cell *matCellDef="let row">{{ row.usato ? row.usato.descrizione : 'no' }}</mat-cell>
         </ng-container>
 
-        <ng-container [matColumnDef]="'valutazione usato'">
+        <ng-container [matColumnDef]="'valutazione'">
             <mat-header-cell *matHeaderCellDef>Valutazione</mat-header-cell>
             <mat-cell *matCellDef="let row">{{ row.usato ? (row.usato.valutazione ?? '-'): 'non richiesta' }}</mat-cell>
         </ng-container>
