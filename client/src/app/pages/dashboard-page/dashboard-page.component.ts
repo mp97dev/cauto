@@ -135,7 +135,7 @@ export class DashboardPageComponent implements AfterViewInit{
 
     // Prepara i dati tabellari
     const rows = [
-      ['Acconto', preventivo.acconto],
+      ['Acconto', preventivo.acconto + ' €'],
       ['Data Consegna', this.datePipe.transform(preventivo.data_consegna )?? 'N/A'],
       ['Data Creazione', this.datePipe.transform(preventivo.data_creazione)],
       ['Data Scadenza', this.datePipe.transform(preventivo.data_scadenza)],
@@ -143,8 +143,8 @@ export class DashboardPageComponent implements AfterViewInit{
       ['Luogo Ritiro', preventivo.luogo_ritiro.nome],
       ['Marca Macchina', preventivo.marca],
       ['Modello Macchina', preventivo.modello],
-      ['Prezzo Finale', preventivo.prezzo_finale],
-      ['Sconto', preventivo.sconto ?? 'N/A'],
+      ['Prezzo Finale', preventivo.prezzo_finale + ' €'],
+      ['Sconto', (preventivo.sconto  + '%') ?? 'N/A'],
       ['Usato', preventivo.usato?.descrizione ?? 'N/A'],
       ['Utente', preventivo.utente]
     ];
