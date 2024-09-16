@@ -23,5 +23,15 @@
         "password": "123",
         "role": "",
         "username": "ale"
+    },
+    {
+        "password": "123",
+        "role": "",
+        "username": "michele"
+    },
+    {
+        "password": "123",
+        "role": "",
+        "username": "ciccio"
     }
 ]

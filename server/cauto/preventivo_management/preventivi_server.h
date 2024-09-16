@@ -71,8 +71,7 @@ namespace rest_server
                 newPreventivo.fromJson(body);
                 auto now = std::chrono::system_clock::now();
                 newPreventivo.id = static_cast<int>(std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count());
-                newPreventivo.sconto = rand() % 30;
-                if (!newPreventivo.usato.has_value())
+                if (!newPreventivo.usato.has_value() || (newPreventivo.usato.value().descrizione == "" && newPreventivo.usato.value().immagini.size() == 0))
                 {
                     newPreventivo.prezzo_finale = database.calcolaPrezzoFinale(body["marca"].get<std::string>(), body["modello"].get<std::string>(), newPreventivo.optionals, newPreventivo.sconto.value());
                     if (newPreventivo.prezzo_finale == 0)

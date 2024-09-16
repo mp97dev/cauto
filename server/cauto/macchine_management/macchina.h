@@ -11,14 +11,16 @@ namespace cauto
     public:
         std::string modello;
         std::string descrizione;
+        int sconto;
         double prezzo_base;
 
         struct Dimensioni
         {
-            std::string altezza;
-            std::string lunghezza;
-            std::string peso;
-            std::string volume_bagagliaio;
+            double altezza;
+            double lunghezza;
+            double larghezza;
+            double peso;
+            double volume_bagagliaio;
         } dimensioni;
 
         struct Motore
@@ -42,11 +44,14 @@ namespace cauto
             json opt = json::array();
             modello = j.at("modello").get<std::string>();
             descrizione = j.at("descrizione").get<std::string>();
-            prezzo_base = j.at("prezzo_base").get<double>();
-            dimensioni.altezza = j.at("dimensioni").at("altezza").get<std::string>();
-            dimensioni.lunghezza = j.at("dimensioni").at("lunghezza").get<std::string>();
-            dimensioni.peso = j.at("dimensioni").at("peso").get<std::string>();
-            dimensioni.volume_bagagliaio = j.at("dimensioni").at("volume_bagagliaio").get<std::string>();
+            descrizione = j.at("descrizione").get<std::string>();
+            prezzo_base = j.at("prezzo_base").get<int>();
+            sconto = j.at("sconto").get<int>();
+            dimensioni.altezza = j.at("dimensioni").at("altezza").get<double>();
+            dimensioni.lunghezza = j.at("dimensioni").at("lunghezza").get<double>();
+            dimensioni.larghezza = j.at("dimensioni").at("larghezza").get<double>();
+            dimensioni.peso = j.at("dimensioni").at("peso").get<double>();
+            dimensioni.volume_bagagliaio = j.at("dimensioni").at("volume_bagagliaio").get<double>();
             motore.tipo = j.at("motore").at("tipo").get<std::string>();
             motore.alimentazione = j.at("motore").at("alimentazione").get<std::string>();
             immagini.vista_frontale = j.at("immagini").at("vista_frontale").get<std::string>();
@@ -69,8 +74,9 @@ namespace cauto
             return json{
                 {"modello", modello},
                 {"descrizione", descrizione},
+                {"sconto", sconto},
                 {"prezzo_base", prezzo_base},
-                {"dimensioni", {{"altezza", dimensioni.altezza}, {"lunghezza", dimensioni.lunghezza}, {"peso", dimensioni.peso}, {"volume_bagagliaio", dimensioni.volume_bagagliaio}}},
+                {"dimensioni", {{"altezza", dimensioni.altezza}, {"lunghezza", dimensioni.lunghezza}, {"larghezza", dimensioni.larghezza}, {"peso", dimensioni.peso}, {"volume_bagagliaio", dimensioni.volume_bagagliaio}}},
                 {"motore", {{"tipo", motore.tipo}, {"alimentazione", motore.alimentazione}}},
                 {"immagini", {{"vista_frontale", immagini.vista_frontale}, {"vista_laterale", immagini.vista_laterale}, {"vista_posteriore", immagini.vista_posteriore}, {"colori", immagini.colori}}},
                 {"optionals", opt}};

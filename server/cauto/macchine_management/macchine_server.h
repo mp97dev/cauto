@@ -19,6 +19,7 @@ namespace rest_server
         {
             Rest::Routes::Get(router, "/api/macchine", Rest::Routes::bind(&macchine_server::_api_get_macchine, this));
             Rest::Routes::Post(router, "/api/macchine", Rest::Routes::bind(&macchine_server::_api_post_macchine, this));
+            Rest::Routes::Put(router, "/api/macchine/sconto", Rest::Routes::bind(&macchine_server::_api_put_macchine, this));
             Rest::Routes::Delete(router, "/api/macchine", Rest::Routes::bind(&macchine_server::_api_delete_macchine, this));
         }
 
@@ -96,6 +97,47 @@ namespace rest_server
                 response.send(Http::Code::No_Content, {});
                 return;
             }
+            database.save();
+            response.send(Http::Code::Ok, {});
+        }
+
+        void _api_put_macchine(const Rest::Request &request, Http::ResponseWriter response)
+        {
+            std::vector<std::string>  user_data;
+            if (!kernel::get_user_from_access_token(request, user_data))
+            {
+                response.send(Http::Code::Bad_Request, {});
+                return;
+            }
+
+            if (user_data[1] != "segreteria")
+            {
+                response.send(Http::Code::Unauthorized, {});
+                return;
+            }
+
+            json body;
+            if (!kernel::valid_body(request, body))
+            {
+                response.send(Http::Code::Bad_Request, {});
+                return;
+            }
+
+            cauto::macchine_management database;
+            database.get_all();
+            cauto::macchina macchina;
+            if (!database.find_modello(body["marca"].get<std::string>(), body["modello"].get<std::string>(), macchina))
+            {
+                response.send(Http::Code::No_Content, {});
+                return;
+            }
+            macchina.sconto = body["sconto"].get<int>();
+            if (!database.remove(body["marca"].get<std::string>(), body["modello"].get<std::string>()))
+            {
+                response.send(Http::Code::No_Content, {});
+                return;
+            }
+            database.marche_auto[body["marca"].get<std::string>()].push_back(macchina);
             database.save();
             response.send(Http::Code::Ok, {});
         }

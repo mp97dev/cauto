@@ -1,34 +1,76 @@
 {
-    "Ford": [
+    "Dodge": [
         {
-            "descrizione": "Compatta e dinamica, perfetta per la città.",
+            "descrizione": "Macchina sportiva",
             "dimensioni": {
-                "altezza": "1476 mm",
-                "lunghezza": "4068 mm",
-                "peso": "1140 kg",
-                "volume_bagagliaio": "292 L"
+                "altezza": 146.0,
+                "larghezza": 123.0,
+                "lunghezza": 503.0,
+                "peso": 1835.0,
+                "volume_bagagliaio": 458.0
             },
             "immagini": {
-                "colori": [
-                    "fiesta_giallo.jpg",
-                    "fiesta_rosso.jpg",
-                    "fiesta_grigio.jpg"
-                ],
-                "vista_frontale": "fiesta_frontale.jpg",
-                "vista_laterale": "fiesta_laterale.jpg",
-                "vista_posteriore": "fiesta_posteriore.jpg"
+                "colori": [],
+                "vista_frontale": "https://cdn-img.automoto.it/images/37272405/3000x/image.jpeg",
+                "vista_laterale": "https://cdn-img.automoto.it/images/37272396/3000x/image.jpeg",
+                "vista_posteriore": "https://cdn-img.automoto.it/images/37272397/3000x/image.jpeg"
             },
+            "modello": "Challenger",
             "motore": {
                 "alimentazione": "Benzina",
-                "tipo": "1.0L EcoBoost"
+                "tipo": "6 cilindri a V"
             },
-            "modello": "Ford Fiesta 2024",
             "optionals": [
                 {
                     "nome": "colore",
                     "opzioni": [
-                        "Rosso",
-                        "Giallo",
+                        "Nero",
+                        "Rosso"
+                    ],
+                    "prezzo": 2000.0
+                },
+                {
+                    "nome": "ruote maggiorate",
+                    "opzioni": [
+                        "18\"",
+                        "19\""
+                    ],
+                    "prezzo": 3500.0
+                }
+            ],
+            "prezzo_base": 53450.0,
+            "sconto": 4
+        }
+    ],
+    "Ford": [
+        {
+            "descrizione": "Compatta e dinamica, perfetta per la città.",
+            "dimensioni": {
+                "altezza": 1476.0,
+                "larghezza": 123.0,
+                "lunghezza": 4068.0,
+                "peso": 1140.0,
+                "volume_bagagliaio": 292.0
+            },
+            "immagini": {
+                "colori": [
+                    "https://imgs.search.brave.com/DHlwoy-uINFkhRiuqIxqwFpNsamo243i3ppVfKhbHvE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/YXV0b3Njb3V0MjQu/aXQvY21zLWNvbnRl/bnQtYXNzZXRzLzRW/NTVab09LQUNUaU04/Z1NRTVNoSk8tYzk4/M2Q4YTc2MjdkYzMz/ZmExNTA1Zjc4MGU1/ZTE5ZTAtRm9yZC1G/b2N1cy1TVC1FZGl0/aW9uLTIwMjRfXzZf/LTExMDAuanBn"
+                ],
+                "vista_frontale": "https://imgcdn.zigwheels.us/large/gallery/exterior/1/1/ford-fiesta-full-front-view-683380.jpg",
+                "vista_laterale": "https://imgcdn.zigwheels.us/large/gallery/exterior/1/1/ford-fiesta-side-view-160757.jpg",
+                "vista_posteriore": "https://imgcdn.zigwheels.us/large/gallery/exterior/1/1/ford-fiesta-rear-cross-side-view-530209.jpg"
+            },
+            "modello": "Ford Fiesta 2024",
+            "motore": {
+                "alimentazione": "Benzina",
+                "tipo": "1.0L EcoBoost"
+            },
+            "optionals": [
+                {
+                    "nome": "colore",
+                    "opzioni": [
+                        "Arancione",
+                        "Blu",
                         "Bianco",
                         "Grigio"
                     ],
@@ -54,33 +96,33 @@
                     "prezzo": 150.0
                 }
             ],
-            "prezzo_base": 21000.0
+            "prezzo_base": 23000.0,
+            "sconto": 6
         }
     ],
     "Toyota": [
         {
             "descrizione": "Berlina compatta con ottima efficienza energetica e affidabilità.",
             "dimensioni": {
-                "altezza": "1455 mm",
-                "lunghezza": "4630 mm",
-                "peso": "1315 kg",
-                "volume_bagagliaio": "470 L"
+                "altezza": 1455.0,
+                "larghezza": 123.0,
+                "lunghezza": 4630.0,
+                "peso": 1315.0,
+                "volume_bagagliaio": 470.0
             },
             "immagini": {
                 "colori": [
-                    "corolla_rosso.jpg",
-                    "corolla_blu.jpg",
-                    "corolla_bianco.jpg"
+                    "https://imgs.search.brave.com/S_Otd9ukeEkBKhXjO33rYjfPR3daVLohBQgknC53wf8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kaW1h/Z2VzMi5nYXp6ZXR0/YW9iamVjdHMuaXQv/ZmlsZXMvaW1hZ2Vf/NjQwXzM2MC9maWxl/cy9mcC91cGxvYWRz/LzIwMjMvMDIvMjAv/NjNmMzI5Mzk0YmIw/MS5yX2QuMTYxMi03/NzMtMjg2MS5qcGVn"
                 ],
-                "vista_frontale": "corolla_frontale.jpg",
-                "vista_laterale": "corolla_laterale.jpg",
-                "vista_posteriore": "corolla_posteriore.jpg"
+                "vista_frontale": "https://immagini.alvolante.it/sites/default/files/styles/anteprima_lunghezza_640_jpg/public/serie_auto_galleria/2022/09/toyota_corolla_ant_0.png",
+                "vista_laterale": "https://imgs.search.brave.com/Y_emmvcX0806kH8VPuwQKt4qf2CaP1gglZr3Y0AbEgg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cGF0ZW50YXRpLml0/L2ltZ19hdXRvL3Rv/eW90YS90b3lvdGEl/MjBjb3JvbGxhLmpw/Zw",
+                "vista_posteriore": "https://immagini.alvolante.it/sites/default/files/styles/anteprima_lunghezza_640_jpg/public/serie_auto_galleria/2022/09/toyota_corolla_post_0.png"
             },
+            "modello": "Toyota Corolla 2024",
             "motore": {
                 "alimentazione": "Ibrida",
                 "tipo": "1.8L 4 cilindri"
             },
-            "modello": "Toyota Corolla 2024",
             "optionals": [
                 {
                     "nome": "colore",
@@ -122,38 +164,39 @@
                     "prezzo": 150.0
                 }
             ],
-            "prezzo_base": 33000.0
+            "prezzo_base": 30000.0,
+            "sconto": 12
         },
         {
             "descrizione": "SUV spazioso con trazione integrale e tecnologia avanzata.",
             "dimensioni": {
-                "altezza": "1690 mm",
-                "lunghezza": "4600 mm",
-                "peso": "1630 kg",
-                "volume_bagagliaio": "580 L"
+                "altezza": 1690.0,
+                "larghezza": 123.0,
+                "lunghezza": 4600.0,
+                "peso": 1630.0,
+                "volume_bagagliaio": 580.0
             },
             "immagini": {
                 "colori": [
-                    "rav4_nero.jpg",
-                    "rav4_argento.jpg",
-                    "rav4_verde.jpg"
+                    "https://imgs.search.brave.com/hxjZDYs1CosQbbsHhRvYDKvhA9hW3SBucNCJDnEqzJ0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4t/aW1nLmF1dG9tb3Rv/Lml0L2ltYWdlcy8z/MTYyMjYzNi9IT1Jf/U1RELzQwMHgvcmF2/NHBoZXZkcGwyMDIw/LWR5bmFtaWMtMDEz/LWpwZy5qcGVn",
+                    "https://imgs.search.brave.com/AotwKtf3OgBmBxtWfdIkYZsHUkdSQFPVZQIvt1ojuYQ/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9wbGF0/Zm9ybS5jc3RhdGlj/LWltYWdlcy5jb20v/eHhsYXJnZS9pbi92/Mi9zdG9ja19waG90/b3MvOTc1Njk2OGQt/MTE3YS00ZTM2LWJk/NDktZGFiNWU5ZTUx/ODZhL2EwN2VmNDc5/LTQ5Y2YtNGUyNC1i/YmRjLTljNmU2ZmUy/ZTdiMC5wbmc",
+                    "https://imgs.search.brave.com/-FVljJARU7p-QTfbXPxu8NlQ663PKth5yCocCNgiBME/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9oaXBz/LmhlYXJzdGFwcHMu/Y29tL2htZy1wcm9k/L2ltYWdlcy8yMDI0/LWhvbmRhLWNyLXYt/ZXgtbC12cy0yMDI0/LXRveW90YS1yYXYt/NC10cmQtb2ZmLXJv/YWQtMTAyLTY1Zjg4/ODk4NThhMTUuanBn/P2Nyb3A9MC4zNzh4/dzowLjM0N3hoOzAu/MDg1MHh3LDAuNDI2/eGgmcmVzaXplPTk4/MDoq"
                 ],
-                "vista_frontale": "rav4_frontale.jpg",
-                "vista_laterale": "rav4_laterale.jpg",
-                "vista_posteriore": "rav4_posteriore.jpg"
+                "vista_frontale": "https://www.patentati.it/listini-auto/foto/toyota-rav4-hybrid-32843_suv-vp-5-doors-toyota-rav4-hybrid-2019-high-side-view.jpg",
+                "vista_laterale": "https://www.patentati.it/listini-auto/foto/toyota-rav4-hybrid-32843_suv-vp-5-doors-toyota-rav4-hybrid-2019-side-view.jpg",
+                "vista_posteriore": "https://www.patentati.it/listini-auto/foto/toyota-rav4-hybrid-32843_suv-vp-5-doors-toyota-rav4-hybrid-2019-back-side-view.jpg"
             },
+            "modello": "Toyota RAV4 2024",
             "motore": {
                 "alimentazione": "Ibrida",
                 "tipo": "2.5L 4 cilindri"
             },
-            "modello": "Toyota RAV4 2024",
             "optionals": [
                 {
                     "nome": "colore",
                     "opzioni": [
                         "Nero",
                         "Argento",
-                        "Verde",
                         "Bianco Perla"
                     ],
                     "prezzo": 200.0
@@ -183,7 +226,8 @@
                     "prezzo": 500.0
                 }
             ],
-            "prezzo_base": 41700.0
+            "prezzo_base": 32000.0,
+            "sconto": 2
         }
     ]
 }
