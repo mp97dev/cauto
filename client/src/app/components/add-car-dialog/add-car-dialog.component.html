@@ -124,6 +124,11 @@
       @if(form.get('prezzo_base')?.hasError('required')) {<mat-error>Il campo prezzo base è obbligatorio</mat-error> }
     </mat-form-field>
 
+    <mat-form-field>
+      <mat-label>Sconto</mat-label>
+      <input type="number" matInput placeholder="Sconto" formControlName="sconto">
+    </mat-form-field>
+
     <mat-divider />
     <h2>Optionals</h2>
     <ng-container formArrayName="optionals">

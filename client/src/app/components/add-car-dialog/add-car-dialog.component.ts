@@ -60,6 +60,7 @@ export class AddCarDialogComponent {
     modello: new FormControl('', [Validators.required]),
     optionals: new FormArray([]),
     prezzo_base: new FormControl('', [Validators.required]),
+    sconto: new FormControl(0),
   })
 
   get dimensioni() {

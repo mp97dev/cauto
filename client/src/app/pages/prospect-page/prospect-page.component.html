@@ -46,6 +46,8 @@
                 <p>{{selectedModel.descrizione}}</p>
                 <strong>prezzo</strong>
                 <p>{{selectedModel.prezzo_base.toLocaleString('it-IT')}} €</p>
+                <strong class="text-green-700 tracking-wider">sconto</strong>
+                <p class="font-semibold text-green-700 tracking-wider">{{selectedModel.sconto}} %</p>
                 <strong>motore</strong>
                 <p>{{selectedModel.motore.alimentazione}} - {{selectedModel.motore.tipo}}</p>
                 } @else {
