@@ -15,7 +15,7 @@
                 <input type="string" matInput formControlName="cliente" [matAutocomplete]="autoCliente">
                 <mat-autocomplete #autoCliente="matAutocomplete">
                     @for(c of (distinctClienti | async); track c) {
-                        <mat-option [value]="c">{{c}}</mat-option>
+                        <mat-option [value]="c">{{c ?? '-'}}</mat-option>
                     }
                 </mat-autocomplete>
             </mat-form-field>
