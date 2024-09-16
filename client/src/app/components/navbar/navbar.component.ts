@@ -22,10 +22,10 @@ export class NavbarComponent {
   user = this.auth.user
 
   login() {
-    this.auth.loginWithPopup()
+    this.auth.loginWithPopup().subscribe()
   }
   signup() {
-    this.auth.loginWithPopup('signup')
+    this.auth.loginWithPopup('signup').subscribe()
   }
 
   logout() {

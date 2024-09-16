@@ -128,14 +128,16 @@ export class ProspectPageComponent implements OnInit {
 
     this.auth.user.pipe(
       switchMap((user: User | null) => {
-        if(user) return this.api.post(`/preventivi`, value)
-        else return this.auth.loginWithPopup("login")
+        if(user) {
+          return this.api.post(`/preventivi`, value)
+          .pipe(
+            tap(() => this.router.navigate(['/preventivi']))
+          )
+        }
+        else return this.auth.loginWithPopup("login").pipe(tap(() => this.send()))
       }),
       take(1)
-    ).subscribe({
-      complete: () => this.router.navigate(['/dashboard']),
-      error: (err) => console.error(err)
-    })
+    ).subscribe()
 
 
   }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, Observable, of, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
 import { Roles, User } from '../models/user.model';
 import { ApiService } from './api.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -28,9 +28,11 @@ export class AuthService {
   }
 
 
-  loginWithPopup(action: 'login' | 'signup' = 'login') {
+  loginWithPopup(action: 'login' | 'signup' = 'login'): Observable<unknown> {
     const d = this.dialog.open(LoginDialogComponent, {data: {action}})
-    return d.afterClosed()
+    return d.afterClosed().pipe(
+      switchMap((res: 'signup' | 'login' | null | undefined) => res ? this.loginWithPopup(res) : of(null))
+    )
   }
   
   login(username: string, password: string ): Observable<User | null> {
