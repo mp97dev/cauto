@@ -4,9 +4,7 @@
     <a routerLink="/" routerLinkActive="active">Cauto</a>
     <a routerLink="preventivo" class="hover:cursor-pointer hover:underline" >Nuovo preventivo</a>
     @if(user | async; as user) {
-        @if(!user.role || user.role === 'impiegato') {
-            <a routerLink="dashboard" class="hover:cursor-pointer hover:underline" >Dashboard</a> 
-        }
+        <a routerLink="dashboard" class="hover:cursor-pointer hover:underline" >Dashboard</a> 
         
         @if (user.role === 'segreteria') {
             <a routerLink="sedi" class="hover:cursor-pointer hover:underline" >Sedi</a> 

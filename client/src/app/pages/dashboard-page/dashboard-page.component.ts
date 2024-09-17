@@ -16,6 +16,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { Roles, User } from '../../models/user.model';
 
 
 @Component({
@@ -69,12 +70,16 @@ export class DashboardPageComponent implements AfterViewInit{
 
   constructor(
     private dialog: MatDialog,
-  ) {}
+  ) {
+    this.user.pipe(switchMap(
+      (u: User | null) => (u && (u.role === Roles.IMPIEGATI || u.role === Roles.SEGRETERIA)) ? this.ps.getAllPreventivi() : this.ps.getUserPreventivi()  
+    )).subscribe()
+  }
 
   preventivi = this.ps.preventivi
 
-  displayColumns = [ 'utente', 'acconto', 'data_consegna', 'data_creazione', 'data_scadenza', 'marca', 'modello', 'prezzo_finale', 'sconto', 'preventivo']
-  columns = [ ...this.displayColumns, 'usato', 'valutazione', 'action']
+  displayColumns = [ 'utente', 'acconto', 'data_consegna', 'data_creazione', 'data_scadenza', 'marca', 'modello', 'prezzo_finale', 'sconto']
+  columns = [ ...this.displayColumns, 'luogo_ritiro', 'usato', 'valutazione', 'action']
 
   dataSource = this.filter.valueChanges.pipe(
     switchMap(filters => {
@@ -89,7 +94,7 @@ export class DashboardPageComponent implements AfterViewInit{
           return preventivi.filter(p => scaduti ? new Date(p.data_scadenza) < new Date() : true)
         }),
         map(preventivi => {
-          return preventivi.filter(p => usato ? !!p.usato : true )
+          return preventivi.filter(p => usato ? (p.usato?.descrizione || (p.usato?.immagini || []).length > 0) : true )
         }),
         map(preventivi => {
           return preventivi.filter(p => cliente ? p.utente.includes(cliente) : true)

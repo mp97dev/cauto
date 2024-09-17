@@ -1,114 +1,5 @@
 [
     {
-        "acconto": 2000.0,
-        "data_consegna": "27-10-2024",
-        "data_creazione": "16-09-2024",
-        "data_scadenza": "06-10-2024",
-        "id": 1726507575,
-        "luogo_ritiro": {
-            "id": 2,
-            "indirizzo": "Corso Vittorio Emanuele 101, Torino",
-            "nome": "TopCars Torino"
-        },
-        "marca": "Dodge",
-        "modello": "Challenger",
-        "optionals": [
-            {
-                "nome": "colore",
-                "opzioni": [
-                    "Nero"
-                ],
-                "prezzo": 2000.0
-            }
-        ],
-        "prezzo_finale": 48241.5,
-        "sconto": 13,
-        "usato": {
-            "descrizione": "",
-            "immagini": []
-        },
-        "utente": "michele"
-    },
-    {
-        "data_creazione": "16-09-2024",
-        "data_scadenza": "06-10-2024",
-        "id": 1726508166,
-        "luogo_ritiro": {
-            "id": 5,
-            "indirizzo": "Via Toledo 10, Napoli",
-            "nome": "FastAuto Napoli"
-        },
-        "marca": "Ford",
-        "modello": "Ford Fiesta 2024",
-        "optionals": [
-            {
-                "nome": "ruota di scorta",
-                "opzioni": [],
-                "prezzo": 300.0
-            }
-        ],
-        "prezzo_finale": 17892.0,
-        "sconto": 16,
-        "usato": {
-            "descrizione": "",
-            "immagini": []
-        },
-        "utente": "ale"
-    },
-    {
-        "data_creazione": "16-09-2024",
-        "data_scadenza": "06-10-2024",
-        "id": 1726508323,
-        "luogo_ritiro": {
-            "id": 5,
-            "indirizzo": "Via Toledo 10, Napoli",
-            "nome": "FastAuto Napoli"
-        },
-        "marca": "Toyota",
-        "modello": "Toyota RAV4 2024",
-        "optionals": [
-            {
-                "nome": "ruote_maggiorate",
-                "opzioni": [
-                    "19\""
-                ],
-                "prezzo": 400.0
-            },
-            {
-                "nome": "vetri oscurati",
-                "opzioni": [],
-                "prezzo": 500.0
-            }
-        ],
-        "prezzo_finale": 31098.0,
-        "sconto": 27,
-        "usato": {
-            "descrizione": "Fiat 500 Topolino in ottimo stato. Una bellissima macchina",
-            "immagini": []
-        },
-        "utente": "ale"
-    },
-    {
-        "data_creazione": "16-09-2024",
-        "data_scadenza": "06-10-2024",
-        "id": 1726512353,
-        "luogo_ritiro": {
-            "id": 1,
-            "indirizzo": "Via Roma 123, Milano",
-            "nome": "AutoStar Milano"
-        },
-        "marca": "Fiat",
-        "modello": "Panda",
-        "optionals": [],
-        "usato": {
-            "descrizione": "bellissima macchina",
-            "immagini": [
-                "https://imgs.search.brave.com/7ysx8uhtAt4w7c0tgS6Jwgw7GgZPF2tEsAUiwxoifxI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9oaXBz/LmhlYXJzdGFwcHMu/Y29tL2htZy1wcm9k/L2ltYWdlcy83Njgy/NDctNnQzcTZheTVl/eC02NDc3NmUwOWM3/NmIzLmpwZz9jcm9w/PTEuMDB4dzowLjg3/NHhoOzAsMC4wODcy/eGgmcmVzaXplPTk4/MDoq"
-            ]
-        },
-        "utente": "michele"
-    },
-    {
         "data_creazione": "17-09-2024",
         "data_scadenza": "07-10-2024",
         "id": 1726575125,
@@ -127,5 +18,68 @@
             "immagini": []
         },
         "utente": "ale"
+    },
+    {
+        "acconto": 10000.0,
+        "data_consegna": "17-11-2024",
+        "data_creazione": "17-09-2024",
+        "data_scadenza": "07-10-2024",
+        "id": 1726590478,
+        "luogo_ritiro": {
+            "id": 7,
+            "indirizzo": "Piazza San Marco 5, Venezia",
+            "nome": "AutoElite Venezia"
+        },
+        "marca": "Toyota",
+        "modello": "Toyota Corolla 2024",
+        "optionals": [
+            {
+                "nome": "colore",
+                "opzioni": [
+                    "Blu"
+                ],
+                "prezzo": 200.0
+            },
+            {
+                "nome": "interni in pelle",
+                "opzioni": [],
+                "prezzo": 2000.0
+            },
+            {
+                "nome": "ruotino di scorta",
+                "opzioni": [],
+                "prezzo": 150.0
+            }
+        ],
+        "prezzo_finale": 28468.0,
+        "sconto": 12,
+        "usato": {
+            "descrizione": "",
+            "immagini": []
+        },
+        "utente": "pippo"
+    },
+    {
+        "data_creazione": "17-09-2024",
+        "data_scadenza": "07-10-2024",
+        "id": 1726591106,
+        "luogo_ritiro": {
+            "id": 3,
+            "indirizzo": "Piazza della Repubblica 1, Firenze",
+            "nome": "DriveNow Firenze"
+        },
+        "marca": "Dodge",
+        "modello": "Challenger",
+        "optionals": [],
+        "prezzo_finale": 50112.0,
+        "sconto": 4,
+        "usato": {
+            "descrizione": "Fiat 500 Topolino, una bellissima macchina",
+            "immagini": [
+                "https://imgs.search.brave.com/7ysx8uhtAt4w7c0tgS6Jwgw7GgZPF2tEsAUiwxoifxI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9oaXBz/LmhlYXJzdGFwcHMu/Y29tL2htZy1wcm9k/L2ltYWdlcy83Njgy/NDctNnQzcTZheTVl/eC02NDc3NmUwOWM3/NmIzLmpwZz9jcm9w/PTEuMDB4dzowLjg3/NHhoOzAsMC4wODcy/eGgmcmVzaXplPTk4/MDoq"
+            ],
+            "valutazione": 1200.0
+        },
+        "utente": "michele"
     }
 ]

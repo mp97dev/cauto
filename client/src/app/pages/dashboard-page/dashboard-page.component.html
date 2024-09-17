@@ -73,6 +73,7 @@
                 <mat-menu #menu="matMenu">
                     <!--tutti-->
                     <button mat-menu-item (click)="esporta(row)"><mat-icon>download</mat-icon>Scarica .pdf</button>
+                    <button mat-menu-item (click)="elimina(row)"><mat-icon>delete</mat-icon> Elimina</button>
                     
                     <!--solo utente-->
                     @if(!(user | async)?.role) {
@@ -81,8 +82,7 @@
 
                     <!--solo impiegato-->
                     @if((user | async)?.role === 'impiegato') {
-                        <button mat-menu-item (click)="valutaUsato(row)" [disabled]="!row.usato"><mat-icon>recycling</mat-icon>Valutazione usato </button>
-                        <button mat-menu-item (click)="elimina(row)"><mat-icon>delete</mat-icon> Elimina</button>
+                        <button mat-menu-item (click)="valutaUsato(row)" [disabled]="!row.usato.descrizione && !(row.usato && row.usato.immagini.length > 0)"><mat-icon>recycling</mat-icon>Valutazione usato </button>
                     }
                 </mat-menu>
             </mat-cell>
@@ -93,8 +93,13 @@
             <mat-cell *matCellDef="let row">{{ row.usato ? row.usato.descrizione : 'no' }}</mat-cell>
         </ng-container>
 
+        <ng-container [matColumnDef]="'luogo_ritiro'">
+            <mat-header-cell *matHeaderCellDef>ritiro</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.luogo_ritiro?.nome }}</mat-cell>
+        </ng-container>
+
         <ng-container [matColumnDef]="'valutazione'">
-            <mat-header-cell *matHeaderCellDef>Valutazione</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>valutazione</mat-header-cell>
             <mat-cell *matCellDef="let row">{{ row.usato ? (row.usato.valutazione ?? '-'): 'non richiesta' }}</mat-cell>
         </ng-container>
         

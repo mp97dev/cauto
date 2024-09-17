@@ -74,7 +74,7 @@ namespace rest_server
                 if (!newPreventivo.usato.has_value() || (newPreventivo.usato.value().descrizione == "" && newPreventivo.usato.value().immagini.size() == 0))
                 {
                     newPreventivo.prezzo_finale = database.calcolaPrezzoFinale(newPreventivo);
-                    if (newPreventivo.prezzo_finale == 0)
+                    if (newPreventivo.prezzo_finale < 0)
                     {
                         response.send(Http::Code::Expectation_Failed, {});
                         return;

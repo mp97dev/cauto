@@ -22,15 +22,15 @@ export class MacchineService {
     return this.cars$.asObservable().pipe(
       take(1),
       switchMap(
-      res => res ? of(res) : this.getCars()
-    ))
+        res => res ? of(res) : this.getCars()
+      ))
   }
 
   getCars() {
     return this.api.get<CarBrand>(`/macchine`).pipe(
       tap(x => { if (x) this.cars$.next(x) })
-      )
-      // return of(mockData as unknown as CarBrand)
+    )
+    // return of(mockData as unknown as CarBrand)
 
   }
 
@@ -46,16 +46,24 @@ export class MacchineService {
 
   addCar(car: Car | FlattenBrandCars, brand?: keyof CarBrand) {
     const body = brand ? { ...car, marca: brand } : car
-    return this.api.post('/macchine', body)
+    return this.api.post('/macchine', body).pipe(
+      tap(
+        () => this.getCars()
+      )
+    )
   }
 
   deleteCar(car: Car, brand: keyof CarBrand) {
-    return this.api.delete('/macchine', { marca: brand, modello: car.modello})
+    return this.api.delete<any>('/macchine', { marca: brand, modello: car.modello }).pipe(
+      tap(
+        () => this.getCars()
+      )
+    )
   }
 
   updateScontoWithDialog(car: Car, brand: keyof CarBrand) {
 
-    const a = this.dialog.open(UpdateScontoDialogComponent, {data: car.sconto})
+    const a = this.dialog.open(UpdateScontoDialogComponent, { data: car.sconto })
     return a.afterClosed().pipe(
       switchMap(sconto => sconto ? this.updateSconto(car, brand, sconto) : of(null)),
       tap(() => this.getCars())
@@ -64,7 +72,11 @@ export class MacchineService {
 
 
   updateSconto(car: Car, brand: keyof CarBrand, sconto: number) {
-    return this.api.put('/macchine/sconto', { marca: brand, modello: car.modello, sconto: sconto})
+    return this.api.put('/macchine/sconto', { marca: brand, modello: car.modello, sconto: sconto }).pipe(
+      tap(
+        () => this.getCars()
+      )
+    )
   }
 }
 

@@ -1,7 +1,7 @@
-<mat-card class="p-4 max-w-full text-gray-500 min-w-72 w-96">
+<mat-card class="p-4 max-w-full text-gray-500 min-w-72 w-[40em]">
   <h1 matCardTitle>{{brand}} | {{macchina?.modello}}</h1>
   <mat-card-content>
-    <div class="w-full max-w-full flex flex-nowrap gap-4 overflow-x-auto">
+    <div class="w-full max-w-full h-80 items-center justify-center  flex-row flex-nowrap gap-4 overflow-x-auto my-4">
 
       <img height="200px" alt="vista_frontale" [src]="macchina?.immagini?.vista_frontale">
       <img height="200px" alt="vista_laterale" [src]="macchina?.immagini?.vista_laterale">
