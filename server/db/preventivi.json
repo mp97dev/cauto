@@ -107,5 +107,25 @@
             ]
         },
         "utente": "michele"
+    },
+    {
+        "data_creazione": "17-09-2024",
+        "data_scadenza": "07-10-2024",
+        "id": 1726575125,
+        "luogo_ritiro": {
+            "id": 2,
+            "indirizzo": "Corso Vittorio Emanuele 101, Torino",
+            "nome": "TopCars Torino"
+        },
+        "marca": "Dodge",
+        "modello": "Challenger",
+        "optionals": [],
+        "prezzo_finale": 51312.0,
+        "sconto": 4,
+        "usato": {
+            "descrizione": "",
+            "immagini": []
+        },
+        "utente": "ale"
     }
 ]

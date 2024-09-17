@@ -73,7 +73,7 @@ namespace rest_server
                 newPreventivo.id = static_cast<int>(std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count());
                 if (!newPreventivo.usato.has_value() || (newPreventivo.usato.value().descrizione == "" && newPreventivo.usato.value().immagini.size() == 0))
                 {
-                    newPreventivo.prezzo_finale = database.calcolaPrezzoFinale(body["marca"].get<std::string>(), body["modello"].get<std::string>(), newPreventivo.optionals, newPreventivo.sconto.value());
+                    newPreventivo.prezzo_finale = database.calcolaPrezzoFinale(newPreventivo);
                     if (newPreventivo.prezzo_finale == 0)
                     {
                         response.send(Http::Code::Expectation_Failed, {});
@@ -178,7 +178,7 @@ namespace rest_server
             }
 
             prev.usato.value().valutazione = body["valutazione"].get<double>();
-            prev.prezzo_finale = database.calcolaPrezzoFinale(prev.marca, prev.modello, prev.optionals, prev.sconto.value());
+            prev.prezzo_finale = database.calcolaPrezzoFinale(prev);
             if (prev.prezzo_finale == 0)
             {
                 response.send(Http::Code::Expectation_Failed, {});

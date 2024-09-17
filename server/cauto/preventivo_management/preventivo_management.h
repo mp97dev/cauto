@@ -35,16 +35,16 @@ namespace cauto
             }
         }
 
-        double calcolaPrezzoFinale(const std::string &marca, const std::string &modello, const std::vector<cauto::optional> &optionals, int &sconto)
+        double calcolaPrezzoFinale(cauto::preventivo &preventivo)
         {
             cauto::macchina macchina;
             cauto::macchine_management management;
             management.get_all();
-            if (!management.find_modello(marca, modello, macchina))
+            if (!management.find_modello(preventivo.marca, preventivo.modello, macchina))
                 return 0;
 
             double prezzo_optionals = 0.0;
-            for (const cauto::optional &opt : optionals)
+            for (const cauto::optional &opt : preventivo.optionals)
             {
                 for (const cauto::optional& o : macchina.optionals)
                     if (o.nome == opt.nome)
@@ -52,8 +52,8 @@ namespace cauto
             }
 
             double prezzo_totale = macchina.prezzo_base + prezzo_optionals;
-            sconto = macchina.sconto;
-            prezzo_totale *= (1.0 - (double)sconto / 100.0);
+            preventivo.sconto = macchina.sconto;
+            prezzo_totale *= (1.0 - (double)preventivo.sconto.value() / 100.0);
             return prezzo_totale;
         }
 
