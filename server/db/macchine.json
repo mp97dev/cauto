@@ -229,5 +229,31 @@
             "prezzo_base": 32000.0,
             "sconto": 2
         }
+    ],
+    "a": [
+        {
+            "descrizione": "a",
+            "dimensioni": {
+                "altezza": 2.0,
+                "larghezza": 2.0,
+                "lunghezza": 2.0,
+                "peso": 2.0,
+                "volume_bagagliaio": 2.0
+            },
+            "immagini": {
+                "colori": [],
+                "vista_frontale": "s",
+                "vista_laterale": "s",
+                "vista_posteriore": "s"
+            },
+            "modello": "a",
+            "motore": {
+                "alimentazione": "d",
+                "tipo": "d"
+            },
+            "optionals": [],
+            "prezzo_base": 23.0,
+            "sconto": 3
+        }
     ]
 }
