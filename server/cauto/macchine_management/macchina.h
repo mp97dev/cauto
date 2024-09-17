@@ -58,12 +58,15 @@ namespace cauto
             immagini.vista_laterale = j.at("immagini").at("vista_laterale").get<std::string>();
             immagini.vista_posteriore = j.at("immagini").at("vista_posteriore").get<std::string>();
             immagini.colori = j.at("immagini").at("colori").get<std::vector<std::string>>();
-            for (const auto &item : j.at("optionals"))
-            {
-                cauto::optional opt;
-                opt.fromJson(item);
-                optionals.push_back(opt);
-            }
+            if (j.at("optionals").size() == 0)
+                optionals = {};
+            else
+                for (const auto &item : j.at("optionals"))
+                {
+                    cauto::optional opt;
+                    opt.fromJson(item);
+                    optionals.push_back(opt);
+                }
         }
 
         json toJson() const
