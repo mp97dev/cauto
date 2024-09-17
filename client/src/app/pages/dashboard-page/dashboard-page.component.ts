@@ -89,7 +89,7 @@ export class DashboardPageComponent implements AfterViewInit{
           return preventivi.filter(p => scaduti ? new Date(p.data_scadenza) < new Date() : true)
         }),
         map(preventivi => {
-          return preventivi.filter(p => (usato && p.usato) )
+          return preventivi.filter(p => usato ? !!p.usato : true )
         }),
         map(preventivi => {
           return preventivi.filter(p => cliente ? p.utente.includes(cliente) : true)
