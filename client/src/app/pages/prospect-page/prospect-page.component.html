@@ -163,10 +163,11 @@
     </div>
 
     <div class="flex justify-center">
-        <button mat-fab extended (click)="send()" [disabled]="this.form.invalid"><mat-icon>send</mat-icon>Invia
-            preventivo</button>
+        <button mat-fab extended (click)="send()" [disabled]="this.form.invalid"><mat-icon>send</mat-icon>Invia preventivo</button>
     </div>
-    <p>Devi ancora completare il form</p>
+    @if (this.form.invalid) {
+        <p>Devi ancora completare il form</p>
+    }
 </div>
 
 } @else {
