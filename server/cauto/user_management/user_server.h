@@ -38,7 +38,7 @@ namespace rest_server
                 return;
             }
 
-            response.send(Http::Code::Ok, (json{"username", body["username"].get<std::string>()}).dump());
+            response.send(Http::Code::Ok, (json{{"username", body["username"].get<std::string>()}, {"role", ""}}).dump());
             return;
         }
 
