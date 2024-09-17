@@ -13,7 +13,6 @@ import jsPDF from "jspdf";
 import autoTable from 'jspdf-autotable'
 import { MatExpansionModule } from '@angular/material/expansion';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Sede } from '../../services/sedi.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import {MatAutocompleteModule} from '@angular/material/autocomplete';

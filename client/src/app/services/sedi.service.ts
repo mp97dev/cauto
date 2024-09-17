@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { BehaviorSubject, finalize, Observable, of, switchMap, tap } from 'rxjs';
+import { Sede } from '../models/sede.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +21,8 @@ export class SediService {
   }
 
   updateSedi(): Observable<Sede[]> {
-    return this.api.get<Sede[]>(`/sedi`).pipe(tap(res => this.sedi$.next(res)))
     // return of(d)
+    return this.api.get<Sede[]>(`/sedi`).pipe(tap(res => this.sedi$.next(res)))
   }
 
   deleteSede(sede: Sede) {
@@ -31,12 +32,6 @@ export class SediService {
   aggiungiSede(sede: Sede) { //! unused
     return this.api.post<Sede>(`/sedi`, sede).pipe(finalize(() => this.updateSedi()))
   }
-}
-
-export interface Sede {
-  id?: number
-  indirizzo: string
-  nome: string
 }
 
 const d = [

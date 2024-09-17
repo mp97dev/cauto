@@ -37,11 +37,12 @@ export class AuthService {
   
   login(username: string, password: string ): Observable<User | null> {
     
-    return this.api.post<User>(`/login`, {username, password}).pipe(tap(x => this.user$.next(new User(x))))
     // return of(new User({username, role: Roles.IMPIEGATI})).pipe(tap(x => this.user$.next(x)))
+    return this.api.post<User>(`/login`, {username, password}).pipe(tap(x => this.user$.next(new User(x))))
   }
 
   register(username: string, password: string): Observable<User | null> {
+    // return of(new User({username, role: Roles.IMPIEGATI})).pipe(tap(x => this.user$.next(x)))
     return this.api.post<User>(`/signup`, {username, password}).pipe(tap(x => this.user$.next(new User(x))))
   }
 

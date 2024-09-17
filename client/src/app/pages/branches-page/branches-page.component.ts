@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Sede, SediService } from '../../services/sedi.service';
+import { SediService } from '../../services/sedi.service';
 import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { AggiungiSedeComponent } from '../../components/aggiungi-sede/aggiungi-sede.component';
 import { AsyncPipe } from '@angular/common';
+import { Sede } from '../../models/sede.model';
 
 @Component({
   selector: 'app-branches-page',

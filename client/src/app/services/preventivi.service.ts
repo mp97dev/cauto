@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, of, switchMap, take, tap } from 'rxjs';
 import { Optional } from '../models/macchina.model';
 import { AuthService } from './auth.service';
 import { Roles } from '../models/user.model';
-import { Sede } from './sedi.service';
+import { Sede } from '../models/sede.model';
 
 @Injectable({
   providedIn: 'root'

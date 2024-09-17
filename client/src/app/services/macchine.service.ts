@@ -24,13 +24,14 @@ export class MacchineService {
       switchMap(
       res => res ? of(res) : this.getCars()
     ))
-    // return of(mockData)
   }
 
   getCars() {
     return this.api.get<CarBrand>(`/macchine`).pipe(
       tap(x => { if (x) this.cars$.next(x) })
-    )
+      )
+      // return of(mockData as unknown as CarBrand)
+
   }
 
   addCarWithDialog() {
@@ -74,6 +75,7 @@ const mockData = {
       "dimensioni": {
         "altezza": "1476 mm",
         "lunghezza": "4068 mm",
+        "larghezza": "1780 mm",
         "peso": "1140 kg",
         "volume_bagagliaio": "292 L"
       },
@@ -123,7 +125,8 @@ const mockData = {
           "prezzo": 150
         }
       ],
-      "prezzo_base": 21000
+      "prezzo_base": 21000,
+      "sconto": 0
     }
   ],
   "Toyota": [
@@ -132,6 +135,7 @@ const mockData = {
       "dimensioni": {
         "altezza": "1455 mm",
         "lunghezza": "4630 mm",
+        "larghezza": "1780 mm",
         "peso": "1315 kg",
         "volume_bagagliaio": "470 L"
       },
@@ -191,13 +195,15 @@ const mockData = {
           "prezzo": 150
         }
       ],
-      "prezzo_base": 33000
+      "prezzo_base": 33000,
+      "sconto": 0
     },
     {
       "descrizione": "SUV spazioso con trazione integrale e tecnologia avanzata.",
       "dimensioni": {
         "altezza": "1690 mm",
         "lunghezza": "4600 mm",
+        "larghezza": "1780 mm",
         "peso": "1630 kg",
         "volume_bagagliaio": "580 L"
       },
@@ -252,7 +258,8 @@ const mockData = {
           "prezzo": 500
         }
       ],
-      "prezzo_base": 41700
+      "prezzo_base": 41700,
+      "sconto": 0
     }
   ]
 }

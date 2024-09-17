@@ -13,7 +13,7 @@ import { MatListModule } from "@angular/material/list";
 import { WithOptionsPipe } from '../../pipes/with-options.pipe';
 import { ApiService } from '../../services/api.service';
 import { SumOptionalsPipe } from '../../pipes/sum-optionals.pipe';
-import { Sede, SediService } from '../../services/sedi.service';
+import { SediService } from '../../services/sedi.service';
 import {MatChipInputEvent, MatChipsModule} from '@angular/material/chips';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AuthService } from '../../services/auth.service';
@@ -21,6 +21,7 @@ import { User } from '../../models/user.model';
 import { Router } from '@angular/router';
 import { IncludedInArrayPipe } from '../../pipes/included-in-array.pipe';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { Sede } from '../../models/sede.model';
 
 
 
