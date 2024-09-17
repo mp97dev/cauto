@@ -1,6 +1,6 @@
 # Fdb version 4
-["pdflatex"] 1726515753.53545 "/home/elmoro/Documenti/Univr/IngegneriaDelSoftware/cauto/relazione/relazione.tex" "relazione.pdf" "relazione" 1726515755.65757 0
-  "/home/elmoro/Documenti/Univr/IngegneriaDelSoftware/cauto/relazione/relazione.tex" 1726515753.30753 62510 a320b92d8bd9b20fdf9481017f4a4064 ""
+["pdflatex"] 1726604031.25522 "/home/elmoro/Documenti/Univr/IngegneriaDelSoftware/cauto/relazione/relazione.tex" "relazione.pdf" "relazione" 1726604033.48512 0
+  "/home/elmoro/Documenti/Univr/IngegneriaDelSoftware/cauto/relazione/relazione.tex" 1726604031.01898 62306 c1a2a82632fa02d3ef1bf301c71ec98a ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1714953600 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -237,7 +237,7 @@
   "immagini//Karma_Test.jpeg" 1726512060.67194 96567 926e35454435688014587e6a3fb35c93 ""
   "immagini//Logo.jpg" 1716396470.37745 30636 9ff4c2f0ee195b8d9bbec7bbef210cf8 ""
   "immagini//Postman_POST.jpeg" 1726297872.72497 119743 54b3295626330f5f2c0251e1c70c6126 ""
-  "immagini//diagramma di attività.png" 1725457817.17408 96950 2f373d90ea60cad1d2b910234d8ab00e ""
+  "immagini//diagramma di attività.png" 1726603983.0401 95652 1d4168d9d284c7bb78aa62dda8bd3382 ""
   "immagini//diagramma di stato_autenticazione.png" 1725445179.74001 23054 c5c4e080818d199ea2f0f7059e955740 ""
   "immagini//diagramma di stato_preventivo.png" 1725445209.98513 54156 bea5d635665baffe2d3af596d64884be ""
   "immagini//diagramma_delle_classi.png" 1726511194.38959 173088 d8261c7dac258c5689a07f408d5d932d ""
@@ -247,11 +247,11 @@
   "immagini//sequence_diagram_rif_autenticazione.png" 1725283162.49879 15920 1ff1497474dc30d6bac260b3cbcc4f80 ""
   "immagini//sequence_diagram_rif_pagamento.png" 1725283201.69872 29478 321fc5f37cba8236a71ff48050c8911e ""
   "immagini//sequence_diagram_sistema.png" 1725283227.70667 101921 e74a32dc95766e4b40fca104e2254c43 ""
-  "relazione.aux" 1726515755.49453 8878 c09e742a405cfdb6058ba064295cae3f "pdflatex"
-  "relazione.lof" 1726515755.49653 1854 8efed3c180fb6f02f9e49a12e477f09e "pdflatex"
-  "relazione.out" 1726515755.49653 4015 c7e7c6723ee371ea29a3d81ae1b61c42 "pdflatex"
-  "relazione.tex" 1726515753.30753 62510 a320b92d8bd9b20fdf9481017f4a4064 ""
-  "relazione.toc" 1726515755.49653 2406 d5e5bd8eefda59cb8c9c02053a12aa7a "pdflatex"
+  "relazione.aux" 1726604033.28497 8878 c09e742a405cfdb6058ba064295cae3f "pdflatex"
+  "relazione.lof" 1726604033.28697 1854 8efed3c180fb6f02f9e49a12e477f09e "pdflatex"
+  "relazione.out" 1726604033.28597 4015 c7e7c6723ee371ea29a3d81ae1b61c42 "pdflatex"
+  "relazione.tex" 1726604031.01898 62306 c1a2a82632fa02d3ef1bf301c71ec98a ""
+  "relazione.toc" 1726604033.28697 2406 d5e5bd8eefda59cb8c9c02053a12aa7a "pdflatex"
   (generated)
   "relazione.aux"
   "relazione.lof"
