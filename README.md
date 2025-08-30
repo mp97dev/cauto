@@ -1,4 +1,6 @@
-# UI
+# C-AUTO
+Applicazione web di un configuratore auto sviluppato come progetto per il corso di Programmazione II per il corso di laurea in Informatica presso Università degli studi di Verona
+## UI
 - PAGINA LOGIN
 	- ruoli: 
 		- visitatore
